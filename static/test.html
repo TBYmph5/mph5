@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body >
+<div class="" id="ap">
+  edfjuir3jv ru958bigjtm imtjui
+  <button id="btn" @click="get">路由测试</button>
+</div>
+</body>
+<script src="https://cdn.bootcss.com/jquery/3.4.1/jquery.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.min.js"></script>
+
+<script>
+
+  var app = new Vue({
+    el: '#ap',
+    data() {
+
+    },
+
+    mounted() {
+      console.log('2222222222')
+     // parent.window.h5EditorRenderData('111')
+    },
+    methods:{
+      get(){
+        parent.window.h5EditorRenderData('hotel')
+
+      }
+    }
+    })
+
+
+</script>
+</html>
