@@ -1351,7 +1351,7 @@
   .contact-wrap {
     width: 100%;
     height: auto;
-    padding: 0.28rem 0.42rem 0.28rem;
+    padding: 0.28rem  0.3rem  0.28rem 0.42rem ;
     box-sizing: border-box;
     background: rgba(255, 255, 255, 1);
     margin-bottom: 0.28rem;
@@ -1366,10 +1366,9 @@
     color: rgba(51, 51, 51, 1);
     margin: 0.14rem 0.28rem;
   }
-
   .choose-from-contact-list {
     display: inline-block;
-    width: 1.1rem;
+    width: 1.2rem;
     height: 1rem;
     font-size: 0.34rem;
     position: absolute;
@@ -1380,7 +1379,6 @@
     color: rgba(65, 159, 255, 1);
     text-align: center;
   }
-
   .choose-from-contact-list img {
     width: 0.58rem;
     height: 0.58rem;

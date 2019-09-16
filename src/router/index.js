@@ -9,8 +9,8 @@ export default new Router({
       path: '/',
       name: 'index',
       component: index,
-      // redirect: '/hometab',
-      redirect: '/fillOrder',
+      redirect: '/hometab',
+      // redirect: '/fillOrder',
       meta: {
         title: '营销平台',
       },
