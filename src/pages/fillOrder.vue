@@ -1574,6 +1574,7 @@
 
   .conatct-input {
     height: 0.57rem;
+    line-height: 0.57rem;
     width: 4.28rem;
     position: absolute;
     margin: auto;
