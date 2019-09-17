@@ -4,7 +4,7 @@
     <div class='tabs-wrap'>
       <span class='title'>热门活动</span>
       <div class='tabs-item-wrap'>
-        <div v-for="(item,index) in activityOptimization" v-key='index'
+        <div v-for="(item,index) in config" :key='index'
              :class="activeTabIndex==index? 'active' : 'tabs-item'" @click='setActiveKey(index)'>
           {{item.name}}
         </div>
@@ -15,7 +15,7 @@
     <!-- tab完 -->
     <div class='tabs-content-wrap'>
       <!-- 今日必抢 -->
-      <div class='tabs-content' v-for="(ActiveItem,index) in activityOptimization"
+      <div class='tabs-content' v-for="(ActiveItem,index) in activityOptimization" :key="index"
            v-show='activeTabIndex==index'>
         <div class='figure' v-for="(productItem,index) in ActiveItem.productList" :key='index'
              @click="getGoodDetail(productItem)">
@@ -31,34 +31,6 @@
           </div>
         </div>
       </div>
-      <!-- 品质优选 -->
-      <!--<div class='tabs-content' v-show='activeTabIndex ==1'>-->
-      <!--<div class='figure' v-for="(item,index) in optimization" v-key='index'>-->
-      <!--<div class='img-wrap'>-->
-      <!--<img :src='item.img'></img>-->
-      <!--</div>-->
-      <!--<div class='figcaption'>-->
-      <!--<div class='good-name'>{{item.goodName}}</div>-->
-      <!--<div class='good-discribe'>{{item.goodDiscribe}}</div>-->
-      <!--<span class='price'>￥{{item.price}}起</span>-->
-      <!--</div>-->
-      <!--</div>-->
-      <!--</div>-->
-      <!-- 餐饮 -->
-      <!--<div class='tabs-content' v-show='activeTabIndex ==2'>-->
-      <!--<div class='tabs-content'>-->
-      <!--<div class='figure' v-for="(item,index) in foods" v-key='index'>-->
-      <!--<div class='img-wrap'>-->
-      <!--<img :src='item.img'>-->
-      <!--</div>-->
-      <!--<div class='figcaption'>-->
-      <!--<div class='good-name'>{{item.goodName}}</div>-->
-      <!--<div class='good-discribe'>{{item.goodDiscribe}}</div>-->
-      <!--<span class='price'>￥{{item.price}}起</span>-->
-      <!--</div>-->
-      <!--</div>-->
-      <!--</div>-->
-      <!--</div>-->
     </div>
   </div>
 </template>
@@ -66,9 +38,10 @@
 <script>
     export default {
         name: "activity",
-      props:['activityOptimization'],
+      props:['config'],
       data(){
           return{
+            qiniu: 'https://image.supconit.net',
             activeTabIndex:0
           }
 
@@ -77,6 +50,15 @@
         setActiveKey(index) {
           this.activeTabIndex = index
         },
+        getGoodDetail(item){
+          this.$router.push({
+                path: '/goodDetails',
+                query:{
+                  id:item.id,
+                  name:item.name
+                }
+              })
+        }
       }
 
 

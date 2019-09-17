@@ -3,8 +3,8 @@
   <div class='swiper-container'>
     <div class='swiper-cont'>
       <van-swipe :autoplay="3000" indicator-color="white">
-        <van-swipe-item v-for="(item,index) in imgUrls">
-          <img :src="item" class="slide-img"/>
+        <van-swipe-item v-for="(item,index) in config" :key="index">
+          <img :src="qiniu+'/'+item" class="slide-img"/>
         </van-swipe-item>
       </van-swipe>
       <div class='search-wrap'>
@@ -31,7 +31,7 @@
 
   export default {
     name: "gallery",
-    props: ['imgUrls'],
+    props: ['config'],
     data() {
       return {
         qiniu: 'https://image.supconit.net',
@@ -40,6 +40,9 @@
         areaList: areaJson,
         inputValue: ''
       }
+    },
+    mounted(){
+      console.log(this.config)
     },
     methods: {
       /**

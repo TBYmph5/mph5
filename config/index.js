@@ -40,7 +40,11 @@ module.exports = {
         changeOrigin: true,
         pathRewrite: {}
       },
-
+      '/api': {
+        target: "http://www.supconit.net",
+        changeOrigin: true,
+        pathRewrite: {}
+      },
 
     },
     // Various Dev Server settings
@@ -49,6 +53,7 @@ module.exports = {
     autoOpenBrowser: false,
     errorOverlay: true,
     notifyOnErrors: true,
+    useEslint:false,
     poll: false, // https://webpack.js.org/configuration/dev-server/#devserver-watchoptions-
     /**
      * Source Maps

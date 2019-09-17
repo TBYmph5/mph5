@@ -1,11 +1,14 @@
 <template>
   <div class="wrap">
-    <!--轮播图-->
-    <gallery :imgUrls="bannerArray" ></gallery>
-    <!--guide-->
-    <guide :guideItemArray="guideItemArray"></guide>
-    <activitys :activityOptimization="activityOptimization"></activitys>
-    <recommended :hotHotel="hotHotel"></recommended>
+    <!--&lt;!&ndash;轮播图&ndash;&gt;-->
+    <!--<gallery :imgUrls="bannerArray" ></gallery>-->
+    <!--&lt;!&ndash;guide&ndash;&gt;-->
+    <!--<guide :guideItemArray="guideItemArray"></guide>-->
+    <!--<activitys :activityOptimization="activityOptimization"></activitys>-->
+    <!--<recommended :hotHotel="hotHotel"></recommended>-->
+<div class="" v-for="(item,index) in configComponentArray">
+  <div :is="item.content" :config="item.config" ></div>
+</div>
   </div>
 </template>
 <script>
@@ -19,10 +22,17 @@
     name: "hometab",
     data() {
       return {
-        bannerArray: [],
+        componentsArray:[
+          {content: gallery, key: 'gallery',prop:'imgUrls'},
+          {content: guide, key: 'guide',prop:'guideItemArray'},
+          {content: activitys, key: 'activitys',prop:'activityOptimization'},
+          {content: recommended, key: 'recommended',prop:'hotHotel'}
+        ],
+        imgUrls: [],
         guideItemArray: [],
         activityOptimization: [],
         hotHotel: [],
+        configComponentArray:[]
 
       }
 
@@ -32,35 +42,46 @@
     },
     filters: {},
     mounted() {
-      this.getBanner();
-      this.getGuide();
-      this.getActivityOptimization();
-      this.getHotHotel();
-      //     console.log(this.$refs['mainPage'])
-      //     this.frame();
-      // //    挂载路由方法到window
-      //   // 将h5RenderData方法绑定到window下面，提供给外部调用
-      //   /**
-      //    * 挂载gobalSearch
-      //    * */
-      //   window['gobalsearch']= data =>{
-      //     this.goGobalSearch(data);
-      //   }
-      //   window['routerGo'] = data => {
-      //     this.routerPush(data);
-      //   }
-      //   /**
-      //    * 挂载点击获取详情的方法
-      //    */
-      //   window['setChooseQualificationObj']=data=>{
-      //     this.setChooseQualification(data)
-      //   },
-      //     window['setChooseGoodObj']=data=>{
-      //       this.setChooseGood(data)
-      //     }
-
+      this.getConfigArray().then(val => {
+        this.getBanner();
+        this.getGuide();
+        this.getActivityOptimization();
+        this.getHotHotel();
+      })
     },
     methods: {
+      getConfigArray(){
+        let configList=[
+          {
+            name: 'gallery',
+            config: '["banner.png","banner.png"]'
+          },
+          {
+            name: 'guide',
+            config: '[ {"div": "HOT","img":"https://image.supconit.net/recommend1.png","type":"hot"},' +
+            '{"div": "景区","img":"https://image.supconit.net/recommend2.png","type":"scenic"},' +
+            '{"div": "酒店","img": "https://image.supconit.net/recommend3.png","type":"hotel"},' +
+            '{"div": "餐饮","img": "https://image.supconit.net/recommend4.png","type":"food"},' +
+            '{"div": "自助游","img": "https://image.supconit.net/recommend5.png","type":"travelSelf"},' +
+            '{"div": "旅游+","img": "https://image.supconit.net/recommend6.png","type":"travelPlus"}]'},
+          {
+            name: 'recommended',
+            config: '["1","2"]'
+          },
+      ]
+        let needComponentArray=[];
+        configList.forEach((item)=>{
+          let  matchedComponent=this.componentsArray.filter((matchItem,index)=>{
+            return item.name==matchItem.key
+          })
+          matchedComponent[0].config=JSON.parse(item.config)
+          needComponentArray.push(matchedComponent[0])
+
+        });
+        console.log(needComponentArray);
+        this.configComponentArray=needComponentArray
+        return Promise.resolve(/* 这里是需要返回的数据*/)
+      },
 
       /**
        * 全局搜索
@@ -141,9 +162,9 @@
        * 获取轮播
        */
       getBanner() {
-        http.get('https://www.supconit.net/maintenance/banner/list').then(res => {
+        http.get('/maintenance/banner/list').then(res => {
           var imgArray = res.obj;
-          this.bannerArray = imgArray;
+          this.imgUrls = imgArray;
         })
       },
       /**
@@ -181,11 +202,11 @@
               div: '旅游+',
               img: 'https://image.supconit.net/recommend6.png',
               type: 'travelPlus'
-            },
+      },
           ]
       },
       getActivityOptimization() {
-        let _vm = this;
+        let that = this;
         http.get('/shop/activity/page4C?size=4&&page=0', '').then(res => {
           console.log(res.obj.records);
           // this.activityOptimization = res.obj.records;
@@ -210,23 +231,13 @@
                   if (todayPriceItem.length > 0) {
                     item['minPrice'] = todayPriceItem[0].price;
                   }
-                  // priceList.forEach(function (priceDaliyItem,
-                  //                             index) {
-                  //     dailPriceArray.push(priceDaliyItem
-                  //         .price)
-                  // })
-                  // if (dailPriceArray.length > 0) {
-                  //     item['minPrice'] = Math.min.apply(null,
-                  //         dailPriceArray);
-                  // }
-
                 })
               }
               activityContactArray.push(ActivityItem)
             })
           })
-          _vm.activityOptimization = activityContactArray;
-          console.log(_vm.activityOptimization)
+          that.activityOptimization = activityContactArray;
+          console.log(that.activityOptimization)
 
         })
       },
@@ -234,8 +245,8 @@
        * 获取推荐酒店
        */
       getHotHotel() {
-        var qiNiu = this.$store.getters.getQiNiuLink;
-        let _vm = this;
+
+        let that = this;
         http.get('/search/aptitudeHotel?size=4&&page=0', '').then(res => {
           // console.log(res.obj)
           let HotViewArray = res.obj.content;
@@ -251,19 +262,10 @@
               })
               item['minPrice'] = Math.min.apply(null, dailPriceArray);
             })
-            item['cover'] = qiNiu + '/' + item.cover.split(',')[0];
-            if (_vm.userCollectionArray.length > 0) {
-              item['collectionShow'] = true
-              if (_vm.userCollectionArray.includes(item.id)) {
-                item['collection'] = true;
-              } else {
-                item['collection'] = false;
-              }
-            } else {
-              item['collectionShow'] = false
-            }
+            item['cover'] = item.cover.split(',')[0];
+
           });
-          _vm.hothotel = HotViewArray;
+          that.hotHotel= HotViewArray;
           // console.log(this.hothotel)
         })
       },

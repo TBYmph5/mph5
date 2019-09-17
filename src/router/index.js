@@ -12,7 +12,7 @@ export default new Router({
       redirect: '/hometab',
       // redirect: '/fillOrder',
       meta: {
-        title: '营销平台',
+        title: '上渚山奇幻谷',
       },
       children: [
         {
@@ -20,7 +20,7 @@ export default new Router({
           name: 'hometab',
           component: resolve => require(["@/pages/hometab"], resolve),
           meta: {
-            title: '营销平台',
+            title: '上渚山奇幻谷',
             keepAlive:true
           },
         },
@@ -29,7 +29,7 @@ export default new Router({
           name: 'searchtab',
           component: resolve => require(["@/pages/searchtab"], resolve),
           meta: {
-            title: '营销平台',
+            title: '上渚山奇幻谷',
             keepAlive: false
           },
         },
@@ -38,7 +38,7 @@ export default new Router({
           name: 'ordertab',
           component: resolve => require(["@/pages/ordertab"], resolve),
           meta: {
-            title: '营销平台',
+            title: '上渚山奇幻谷',
             keepAlive: false
           },
         },
@@ -47,7 +47,7 @@ export default new Router({
           name: 'mytab',
           component: resolve => require(["@/pages/mytab"], resolve),
           meta: {
-            title: '营销平台',
+            title: '上渚山奇幻谷',
             keepAlive: false
           },
         },
@@ -192,7 +192,7 @@ export default new Router({
       name: 'searchResult',
       component: resolve => require(["@/pages/searchResult"], resolve),
       meta: {
-        title: '营销平台',
+        title: '上渚山奇幻谷',
         keepAlive:true
       }
     },

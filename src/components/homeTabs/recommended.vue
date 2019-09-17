@@ -1,36 +1,101 @@
 <template>
-  <div class='hot-activity ' style='margin-top:0.5rem;margin-bottom:1.6rem;'>
-    <div class='item-title'>热门酒店</div>
+  <div style='margin-top:0.5rem;margin-bottom:1.6rem;'>
+  <div class='hot-activity '  v-for="(item,index) in recommendeds" :key="index">
+    <div class='item-title'>{{item.name}}</div>
     <div class='tabs-content-wrap-hotel'>
       <div class='tabs-content'>
-        <div class='figure' v-for="(item,index) in hotHotel" v-key='index'
-             @click="getQualificationDetail(item)">
+        <div class='figure' v-for="(recommendedsitem,recommendedsindex) in item.hotHotel" :key='recommendedsindex'
+             @click="getQualificationDetail(recommendedsitem)">
           <div class='img-wrap'>
-            <img :src='item.cover'>
+            <img :src="qiniu+'/'+recommendedsitem.cover">
           </div>
           <div class='figcaption'>
-            <div class='good-name'>{{item.name}}</div>
-            <div class='good-discribe' style='white-space:pre-line;'>{{item.description}}</div>
-            <span class='price' v-if="item.minPrice!==undefined">￥{{item.minPrice}}起</span>
+            <div class='good-name'>{{recommendedsitem.name}}</div>
+            <div class='good-discribe' style='white-space:pre-line;'>{{recommendedsitem.description}}</div>
+            <span class='price' v-if="recommendedsitem.minPrice!==undefined">￥{{recommendedsitem.minPrice}}起</span>
             <span class='price' v-else></span>
           </div>
         </div>
       </div>
     </div>
   </div>
+  </div>
 </template>
 
 <script>
-
+  import http from '../../api/public'
     export default {
         name: "recommended",
-      props:['hotHotel'],
+      props:['config'],
       data(){
           return{
-
-
+            qiniu: 'https://image.supconit.net',
+            recommendeds:[]
           }
-      }
+      },
+      mounted(){
+          let that=this;
+          console.log(that.config)
+        that.config.forEach((item,index)=>{
+          that.getHotHotel(item)
+
+          })
+      },
+      methods:{
+        getQualificationDetail(item){
+            this.$router.push({
+              path: '/qualificationDetails',
+              query:{
+                type:item.type,
+                id:item.id,
+                name:item.name
+              }
+            })
+
+        },
+        /**
+         * 获取推荐酒店
+         */
+        getHotHotel(type){
+          let arrayitem={};
+          switch (type) {
+            case '1':
+              arrayitem['name']='热门酒店';
+              break;
+            case '2':
+              arrayitem['name']='热门景区';
+              break;
+          }
+
+          let that = this;
+          http.get('/search/aptitude?size=8&page=0&type='+type, '').then(res => {
+            // console.log(res.obj)
+            let HotViewArray = res.obj.hits;
+
+            //资质商品列表 计算 最小价格
+            HotViewArray.forEach(item => {
+              let itemProductArray = item.productList;
+              // console.log(itemProductArray);
+              let dailPriceArray = [];
+              itemProductArray.forEach(goodItem => {
+                let priceList = goodItem.productDailyList;
+                priceList.forEach((priceDaliyItem) => {
+                  dailPriceArray.push(priceDaliyItem.price)
+                })
+                item['minPrice'] = Math.min.apply(null, dailPriceArray);
+              })
+              item['cover'] = item.cover.split(',')[0];
+
+            });
+            arrayitem['hotHotel']= HotViewArray;
+            that.recommendeds.push(arrayitem);
+          })
+          console.log( that.recommendeds)
+        },
+
+      },
+
+
     }
 </script>
 

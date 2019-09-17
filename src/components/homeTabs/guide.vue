@@ -1,8 +1,8 @@
 <template>
   <div class='guide-wrap'>
-    <div class='guide-item' v-for='(item,index) in guideItemArray' :key='index'
+    <div class='guide-item' v-for='(item,index) in config' :key='index'
          @click='routerChange(item)'>
-      <img :src=item.img>
+      <img :src='item.img'>
       <div>{{item.div}}</div>
     </div>
   </div>
@@ -11,7 +11,7 @@
 <script>
     export default {
         name: "guide",
-    props:['guideItemArray'],
+    props:['config'],
       data(){
           return{
 
