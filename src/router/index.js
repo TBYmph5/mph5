@@ -4,8 +4,7 @@ import index from '@/pages/index'
 
 Vue.use(Router)
 export default new Router({
-  routes: [
-    {
+  routes: [{
       path: '/',
       name: 'index',
       component: index,
@@ -14,14 +13,13 @@ export default new Router({
       meta: {
         title: '上渚山奇幻谷',
       },
-      children: [
-        {
+      children: [{
           path: '/hometab',
           name: 'hometab',
           component: resolve => require(["@/pages/hometab"], resolve),
           meta: {
             title: '上渚山奇幻谷',
-            keepAlive:true
+            keepAlive: true
           },
         },
         {
@@ -102,8 +100,7 @@ export default new Router({
 
       },
       redirect: '/myContacts/contactList',
-      children: [
-        {
+      children: [{
           path: '/myContacts/contactList',
           name: 'contactList',
           component: resolve => require(["@/components/contact/contactList"], resolve)
@@ -126,8 +123,7 @@ export default new Router({
         keepAlive: false
       },
       redirect: '/myAddress/addressList',
-      children: [
-        {
+      children: [{
           path: '/myAddress/addressList',
           name: 'addressList',
           component: resolve => require(["@/components/address/addressList"], resolve)
@@ -165,7 +161,7 @@ export default new Router({
       component: resolve => require(["@/pages/fillOrder"], resolve),
       meta: {
         title: '订单填写',
-        keepAlive:false
+        keepAlive: false
       }
     },
 
@@ -175,7 +171,7 @@ export default new Router({
       component: resolve => require(["@/pages/hotel"], resolve),
       meta: {
         title: '酒店',
-        keepAlive:true
+        keepAlive: true
       }
     },
     {
@@ -184,7 +180,7 @@ export default new Router({
       component: resolve => require(["@/pages/scenic"], resolve),
       meta: {
         title: '景区',
-        keepAlive:true
+        keepAlive: true
       }
     },
     {
@@ -193,7 +189,7 @@ export default new Router({
       component: resolve => require(["@/pages/searchResult"], resolve),
       meta: {
         title: '上渚山奇幻谷',
-        keepAlive:true
+        keepAlive: true
       }
     },
     {
@@ -202,7 +198,7 @@ export default new Router({
       component: resolve => require(["@/pages/qualificationDetails"], resolve),
       meta: {
         title: '详情',
-        keepAlive:false
+        keepAlive: false
       }
     },
     {
@@ -211,7 +207,7 @@ export default new Router({
       component: resolve => require(["@/pages/payment"], resolve),
       meta: {
         title: '付款',
-        keepAlive:false
+        keepAlive: false
       }
     },
     {
@@ -220,7 +216,7 @@ export default new Router({
       component: resolve => require(["@/pages/paymentSucess"], resolve),
       meta: {
         title: '付款成功',
-        keepAlive:true
+        keepAlive: true
       }
     },
     {
@@ -229,7 +225,7 @@ export default new Router({
       component: resolve => require(["@/pages/serverResponseFailed"], resolve),
       meta: {
         title: '服务器响应失败',
-        keepAlive:true
+        keepAlive: true
       }
     },
     {
@@ -238,7 +234,7 @@ export default new Router({
       component: resolve => require(["@/pages/pay"], resolve),
       meta: {
         title: '',
-        keepAlive:false
+        keepAlive: false
       }
     },
     {
@@ -247,7 +243,7 @@ export default new Router({
       component: resolve => require(["@/pages/classificationQueryResult"], resolve),
       meta: {
         title: '',
-        keepAlive:false
+        keepAlive: false
       }
     },
     {
@@ -256,7 +252,7 @@ export default new Router({
       component: resolve => require(["@/pages/globalSearch"], resolve),
       meta: {
         title: '搜索',
-        keepAlive:false
+        keepAlive: false
       }
     },
     {
@@ -265,7 +261,7 @@ export default new Router({
       component: resolve => require(["@/pages/goodDetails"], resolve),
       meta: {
         title: '商品详情',
-        keepAlive:false
+        keepAlive: false
       }
     },
     {
@@ -274,7 +270,7 @@ export default new Router({
       component: resolve => require(["@/pages/goodPicture"], resolve),
       meta: {
         title: '产品图片',
-        keepAlive:false
+        keepAlive: false
       }
     },
     {
@@ -283,7 +279,16 @@ export default new Router({
       component: resolve => require(["@/pages/avtivities"], resolve),
       meta: {
         title: '热门活动',
-        keepAlive:false
+        keepAlive: false
+      }
+    },
+    {
+      path: '/avtivitiesDetailPage',
+      name: 'avtivitiesDetailPage',
+      component: resolve => require(["@/pages/avtivitiesDetailPage"], resolve),
+      meta: {
+        title: '热门活动',
+        keepAlive: false
       }
     },
 
