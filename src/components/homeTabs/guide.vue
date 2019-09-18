@@ -19,7 +19,7 @@ export default {
       switch (item.type) {
         case "hot":
           this.$router.push({
-            path: "/avtivitiesDetailPage?id=" + item.id
+            path: "/avtivitiesDetailPage"
           });
           break;
         default:

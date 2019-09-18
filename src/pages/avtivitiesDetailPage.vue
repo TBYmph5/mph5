@@ -195,10 +195,10 @@ export default {
   },
   mounted() {
     // this.id = parent.window.qualificationId;
-    this.optionsId = this.$route.query.id;
+    this.optionsId = '1161471317242769409';
     this.type = 2;
     this.getInfo(this.optionsId);
-    this.getCurrentUserInfo();
+    // this.getCurrentUserInfo();
   },
   methods: {
     // 获取商品详情信息
@@ -915,7 +915,7 @@ export default {
   width: 90%;
   height: 100%;
   margin-left: 5%;
-  border-top: 1px solid #f3f3f3;
+  /* border-top: 1px solid #f3f3f3; */
 }
 
 .GoodListsCenter {
@@ -923,6 +923,7 @@ export default {
   height: 1.94rem;
   position: relative;
   display: flex;
+  border-bottom: 1px solid #f8f8f8;
 }
 .GoodImage{
   width: 1.94rem;
