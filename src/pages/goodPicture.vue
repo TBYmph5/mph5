@@ -21,7 +21,7 @@ height: 100%;"></iframe>
       },
       mounted(){
           console.log(this.$route.query);
-              this.src='https://www.supconit.net/h5/Inpression.html?type='+this.$route.query.type+'&id='+this.$route.query.id
+              this.src='/h5/Inpression.html?type='+this.$route.query.type+'&id='+this.$route.query.id
 
         this.frame();
       },

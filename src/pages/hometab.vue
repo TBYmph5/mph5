@@ -54,7 +54,7 @@
         let configList=[
           {
             name: 'gallery',
-            config: '["banner.png","banner.png"]'
+            config: '["https://image.supconit.net/banner.png","https://image.supconit.net/banner.png"]'
           },
           {
             name: 'guide',
@@ -68,13 +68,13 @@
             name: 'recommended',
             config: '["1","2"]'
           },
-      ]
+      ];
         let needComponentArray=[];
         configList.forEach((item)=>{
           let  matchedComponent=this.componentsArray.filter((matchItem,index)=>{
             return item.name==matchItem.key
-          })
-          matchedComponent[0].config=JSON.parse(item.config)
+          });
+          matchedComponent[0].config=JSON.parse(item.config);
           needComponentArray.push(matchedComponent[0])
 
         });

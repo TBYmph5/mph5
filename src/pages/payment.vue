@@ -103,18 +103,18 @@
         </div>
       </van-popup>
       <!-- 支付方式选择 -->
-      <div class='payment-type-wrap'>
-        <span class='choose-payment-title'>请选择支付方式</span>
-        <div class='payment-item' v-for="(item,index) in paymentType" :key='index'>
-          <div class='payment-img-wrap'>
-            <img :src='item.img'>
-          </div>
-          {{item.text}}
-          <div class='payment-check-wrap' @click='checkPayment(item,index)'>
-            <div class='check-circle' :class="item.check? 'active':''"></div>
-          </div>
-        </div>
-      </div>
+      <!--<div class='payment-type-wrap'>-->
+        <!--<span class='choose-payment-title'>请选择支付方式</span>-->
+        <!--<div class='payment-item' v-for="(item,index) in paymentType" :key='index'>-->
+          <!--<div class='payment-img-wrap'>-->
+            <!--<img :src='item.img'>-->
+          <!--</div>-->
+          <!--{{item.text}}-->
+          <!--<div class='payment-check-wrap' @click='checkPayment(item,index)'>-->
+            <!--<div class='check-circle' :class="item.check? 'active':''"></div>-->
+          <!--</div>-->
+        <!--</div>-->
+      <!--</div>-->
       <button class='go-pay' @click="pay">立即支付</button>
 
 
@@ -135,7 +135,7 @@
       return {
         orderId: '',
         prciePay: 0.1,
-        channel: '',
+        channel: '2',
         orderSnapshot: {},
         paymentType: [
           {

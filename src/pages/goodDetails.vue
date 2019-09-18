@@ -1,6 +1,6 @@
 <template>
   <div class="wrap">
-    <iframe src="https://www.supconit.net/h5/MPH5/index/goodDetailPage.html" scrolling="yes"
+    <iframe src="/h5/MPH5/index/goodDetailPage.html" scrolling="yes"
             frameborder="0"
             wicket:id="goodPage"
             id="goodPage"
