@@ -42,7 +42,7 @@
         <div class="GoodListsCenterScroll" scroll-y>
           <div class="GoodListsCenter" v-for="(item, index) in productList" :key="index">
             <div class="GoodImage">
-              <img :src="'https://image.supconit.net' + '/' + item.cover.split(',')[0]" alt="">
+              <img :src="'https://image.supconit.net' + '/' + item.cover.split(',')[0]" alt />
             </div>
             <div class="GoodName" :title="item.name">
               <div v-for="(saleItem, index) in item.saleList" v-for-item="saleItem" :key="index">
@@ -73,7 +73,7 @@
               <div class="GoodKind" v-if="item.type == 3">家庭套房</div>
               <div class="GoodKind" v-if="item.type == 4">总统套房</div>
             </div>
-            <div class="GoodPrice">¥{{item.minPrice}}</div> -->
+            <div class="GoodPrice">¥{{item.minPrice}}</div>-->
             <div class="TakeGood" @click="ReservePop(item)">
               <div class="TakeGood_ding">订</div>
               <div class="TakeGood_daodianfu">在线付</div>
@@ -90,10 +90,10 @@
         <!-- <div class="Collection" @click="CollectionOrNot">
           <span :class=' Collection ? "iconfont icon-hongxin":"iconfont icon-shoucang"'></span>
           <div style="display:inline-block">收藏</div>
-        </div> -->
+        </div>-->
         <div class="Reserve">
           <button @click="SureBuy()">
-            <a style="color: #fff;" :href='show?"#GoodLists":"javascript:;"'>{{showPop?'订购':'立即预订'}}</a>
+            <a style="color: #fff;">{{showPop?'订购':'立即预订'}}</a>
           </button>
         </div>
       </div>
@@ -158,7 +158,7 @@
   </div>
 </template>
 <script>
-import { Toast } from 'vant';
+import { Toast } from "vant";
 import http from "../api/public";
 var DATE_YEAR = new Date().getFullYear();
 var DATE_MONTH = new Date().getMonth() + 1;
@@ -195,7 +195,7 @@ export default {
   },
   mounted() {
     // this.id = parent.window.qualificationId;
-    this.optionsId = '1161471317242769409';
+    this.optionsId = "1161471317242769409";
     this.type = 2;
     this.getInfo(this.optionsId);
     // this.getCurrentUserInfo();
@@ -208,7 +208,6 @@ export default {
       http.get("/search/aptitude/byActivityId/" + id, "").then(res => {
         console.log(res, "info");
         let qualificationObj = res.obj;
-
 
         //资质商品列表 计算商品最小价格
         //资质最小价格
@@ -256,7 +255,7 @@ export default {
           }
         });
         (that.productList = qualificationObj["productList"]),
-        that.loading = false;
+          (that.loading = false);
       });
     },
     getCurrentUserInfo() {
@@ -264,87 +263,83 @@ export default {
       var that = this;
       http.get("/customer/info/getCurrentInfo", "").then(res => {
         console.log(res, "resssss");
-        http.get("/customer/store/list", "").then(res => {
-          console.log(res, "resssaaa");
-          let collectionArray = [];
-          let responseCollectionArray = res.obj;
-          responseCollectionArray.forEach(item => {
-            collectionArray.push(item.aptitudeId);
-          });
-          that.userCollectionArray = collectionArray;
-          if (that.userCollectionArray.length > 0) {
-            if (that.userCollectionArray.includes(that.optionsId)) {
-              that.Collection = true;
-            } else {
-              that.Collection = false;
-            }
-          } else {
-            that.Collection = false;
-          }
-        });
         that.login = true;
       });
     },
     goBack() {
       this.$router.go(-1);
     },
-    CollectionOrNot() {
-      let that = this;
-      if (that.login) {
-        if (that.Collection) {
-          http.delete("/customer/store/" + that.optionsId).then(res => {
-            that.Collection = false;
-          });
-        } else {
-          let parmars = JSON.stringify({
-            aptitudeId: that.optionsId
-          });
-          http.post("/customer/store/save", parmars).then(res => {
-            that.Collection = true;
-          });
-        }
-      } else {
-        Toast.fail("暂未登录");
-        this.$router.push('/bindphone')
-      }
-    },
     SureBuy() {
       this.show = true;
       if (this.showPop) {
         let that = this;
         that.show = false;
-        if (that.login) {
-          let a = {
-            choooseValenceList: that.checkDate,
-            chooseNumber: that.chooseNumber,
-            goodId: that.ChooseGoodId
-          };
-          if (that.type == 1) {
-            if (that.checkDate.length < 2) {
-              Toast.fail("请选择离店日期");
-              return;
-            } else {
-              // parent.window.setChoose(a);
-              this.$store.commit('setChooseGoodJson', a);
-              this.$router.push({
-                path: '/fillOrder',
-              })
+        http.get("/customer/info/getCurrentInfo", "").then(res => {
+          if (res.msg == "操作成功") {
+            let a = {
+              choooseValenceList: that.checkDate,
+              chooseNumber: that.chooseNumber,
+              goodId: that.ChooseGoodId
+            };
+            if (that.type == 1) {
+              if (that.checkDate.length < 2) {
+                Toast.fail("请选择离店日期");
+                return;
+              } else {
+                // parent.window.setChoose(a);
+                this.$store.commit("setChooseGoodJson", a);
+                this.$router.push({
+                  path: "/fillOrder"
+                });
+              }
+            } else if (that.type == 2) {
+              if (that.checkDate.length < 1) {
+                Toast.fail("请选择门票日期");
+                return;
+              } else {
+                // parent.window.setChoose(a);
+                this.$store.commit("setChooseGoodJson", a);
+                this.$router.push({
+                  path: "/fillOrder"
+                });
+              }
             }
-          } else if (that.type == 2) {
-            if (that.checkDate.length < 1) {
-              Toast.fail("请选择门票日期");
-              return;
-            } else {
-              // parent.window.setChoose(a);
-              this.$store.commit('setChooseGoodJson', a);
-              this.$router.push({
-                path: '/fillOrder',
-              })
-            }
+          } else {
+            this.$router.push("/bindphone");
           }
-        } else {
-          this.$router.push('/bindphone')
-        }
+        });
+        // if (that.login) {
+        //   let a = {
+        //     choooseValenceList: that.checkDate,
+        //     chooseNumber: that.chooseNumber,
+        //     goodId: that.ChooseGoodId
+        //   };
+        //   if (that.type == 1) {
+        //     if (that.checkDate.length < 2) {
+        //       Toast.fail("请选择离店日期");
+        //       return;
+        //     } else {
+        //       // parent.window.setChoose(a);
+        //       this.$store.commit("setChooseGoodJson", a);
+        //       this.$router.push({
+        //         path: "/fillOrder"
+        //       });
+        //     }
+        //   } else if (that.type == 2) {
+        //     if (that.checkDate.length < 1) {
+        //       Toast.fail("请选择门票日期");
+        //       return;
+        //     } else {
+        //       // parent.window.setChoose(a);
+        //       this.$store.commit("setChooseGoodJson", a);
+        //       this.$router.push({
+        //         path: "/fillOrder"
+        //       });
+        //     }
+        //   }
+        // } else {
+        //   this.$router.push("/bindphone");
+        // }
       }
     },
     ReservePop(item) {
@@ -618,7 +613,7 @@ export default {
 
     renderPressStyle(year, month, day, amount, choseIndex) {
       var days = this.days;
-      console.log(days,'days')
+      console.log(days, "days");
       //渲染点击样式
       for (var j = 0; j < days.length; j++) {
         var tempDay = days[j].day;
@@ -630,28 +625,28 @@ export default {
             day = "0" + day;
           }
           var date = year + "-" + month + "-" + day;
-          console.log(date,'date')
+          console.log(date, "date");
           var obj = {
             day: date,
             amount: amount,
             index: choseIndex
           };
           var checkDateJson = this.checkDate;
-          console.log(checkDateJson,'checkDateJson')
+          console.log(checkDateJson, "checkDateJson");
           var index = this.checkItemExist(checkDateJson, date);
           if (index == -1) {
             checkDateJson.push(obj);
-            console.log('111111')
-            console.log(this.type,'type')
+            console.log("111111");
+            console.log(this.type, "type");
             if (this.type == "2") {
-            console.log('222222')
+              console.log("222222");
               //景区
               let NewCheckDateJson = checkDateJson.slice(-1);
               for (let i = 0; i < NewCheckDateJson.length; i++) {
                 days[NewCheckDateJson[i]["index"]].class =
                   days[NewCheckDateJson[i]["index"]].class + " active";
-                  console.log(days,'class')
-                  console.log(days[NewCheckDateJson[i]["index"]].class,'class')
+                console.log(days, "class");
+                console.log(days[NewCheckDateJson[i]["index"]].class, "class");
                 if (checkDateJson.length >= 1) {
                   for (
                     let i = 0;
@@ -925,11 +920,11 @@ export default {
   display: flex;
   border-bottom: 1px solid #f8f8f8;
 }
-.GoodImage{
+.GoodImage {
   width: 1.94rem;
   height: 1.94rem;
 }
-.GoodImage>img{
+.GoodImage > img {
   width: 100%;
   height: 100%;
 }
@@ -1187,16 +1182,16 @@ export default {
   font-size: 0.29rem;
 }
 .step {
-    width: 100%;
-    height: 1.28rem;
-    display: flex;
-    justify-content: space-between;
+  width: 100%;
+  height: 1.28rem;
+  display: flex;
+  justify-content: space-between;
 }
 .van-popup--bottom {
-    bottom: 1.3rem !important;
-    border-radius: 10px 10px 0 0;
+  bottom: 1.3rem !important;
+  border-radius: 10px 10px 0 0;
 }
 /deep/ .van-overlay {
-    z-index: 1000 !important;
+  z-index: 1000 !important;
 }
 </style>
