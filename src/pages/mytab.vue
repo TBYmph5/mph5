@@ -6,7 +6,7 @@
         <div class='user-info-content'>
           <span class='username'>{{userInfo.nickName}}</span>
           <div class='user-introduction'>
-            这是一段用户介绍这是一段用户介绍这是一段用户介绍这是一段用户介绍这是一段用户介绍这是一段用户介绍这是一段用户介绍这是一段用户介绍绍这是一段用户介绍这绍这是一段用户介绍这
+           暂无个人简介
           </div>
           <div class='avtar'>
             <div class='avtar-content'>
@@ -19,10 +19,10 @@
               <span class='gender-content'>0</span> 优惠券
             </div>
             <div class='user-gender-item'>
-              <span class='gender-content'>3800</span> 积分
+              <span class='gender-content'>0</span> 积分
             </div>
             <div class='user-gender-item'>
-              <span class='gender-content'>V4</span> 会员等级
+              <span class='gender-content'>V1</span> 会员等级
             </div>
           </div>
         </div>

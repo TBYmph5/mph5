@@ -125,14 +125,14 @@
     height:0.66rem;
   }
   .van-tabbar-item:nth-child(2) .icon{
-    background: url("../../src/assets/images/search.png") center no-repeat;
+    background: url("../../src/assets/images/my.png") center no-repeat;
     background-size: 100% 100%;
     display: block;
     width: 0.66rem;
     height:0.66rem;
   }
   .van-tabbar-item:nth-child(2).van-tabbar-item--active   .icon{
-    background: url("../../src/assets/images/search_active.png") center no-repeat;
+    background: url("../../src/assets/images/my_active.png") center no-repeat;
     background-size: 100% 100%;
     display: block;
     width: 0.66rem;

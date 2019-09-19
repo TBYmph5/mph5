@@ -202,8 +202,9 @@
           /**
            * 微信支付
            * */
-          http.post('/order/info/beginCharge_min/' + this.orderId + '/' + this.channel + '/opfEv5SrfRIMl422LhKbG19agAyQ', {}).then(res => {
+          http.post('/order/info/beginCharge_min/' + this.orderId + '/' + this.channel + '/oJJM44zbmaGesSAwEtnjlUM0kuDc', {}).then(res => {
 // this.jsSdk(res.obj)
+
             let path = '/pages/payment/index?key=' + res.obj + '&orderSnapshot=' + JSON.stringify(this.$store.state.orderSnapshot) + '&feeDetail=' + JSON.stringify(this.$store.state.feeDetail)+'&time='+this.$store.state.creatOrderTime;
             wx.miniProgram.redirectTo({url: path});
 
