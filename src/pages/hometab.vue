@@ -9,6 +9,23 @@
     <div class v-for="(item,index) in configComponentArray" :key="index">
       <div :is="item.content" :config="item.config"></div>
     </div>
+    <div class="buyTickets">
+      <div class="TicketsTitle">
+        <div>热销门票</div>
+        <!-- <div>查看更多</div> -->
+      </div>
+      <div v-for="(item, index) in tickets" :key="index">
+        <div class="TicketsKinds">
+          <div class="TicketsLeft">
+            {{item.ticketsKind}}
+          </div>
+          <div class="TicketsRight">
+            <div class="nowMoney">￥{{item.nowMoney}}</div>
+            <div :class="item.buy ?'buy':'notbuy'" @click="buyTicket(item)">购买</div>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
 </template>
 <script>
@@ -32,7 +49,39 @@ export default {
       guideItemArray: [],
       activityOptimization: [],
       hotHotel: [],
-      configComponentArray: []
+      configComponentArray: [],
+      tickets: [
+        {
+          ticketsKind: "活动门票",
+          time: "预定一小时后可用",
+          nowMoney: "0",
+          buy:true,
+        },
+        {
+          ticketsKind: "园区门票",
+          time: "预定一小时后可用",
+          nowMoney: "价格待定",
+          buy:false,
+        },
+        {
+          ticketsKind: "园区通票",
+          time: "预定一小时后可用",
+          nowMoney: "价格待定",
+          buy:false,
+        },
+        {
+          ticketsKind: "户外公园通票",
+          time: "预定一小时后可用",
+          nowMoney: "价格待定",
+          buy:false,
+        },
+        {
+          ticketsKind: "年卡",
+          time: "预定一小时后可用",
+          nowMoney: "价格待定",
+          buy:false,
+        }
+      ]
     };
   },
   components: {
@@ -52,39 +101,62 @@ export default {
   },
   methods: {
     getConfigArray() {
-      let configList = [
-        {
-          name: "gallery",
-          config: '["banner.png","banner.png"]'
-        },
-        {
-          name: "guide",
-          config:
-            '[ {"div": "HOT","img":"https://image.supconit.net/recommend1.png","type":"hot","id":"1161471317242769409"},' +
-            '{"div": "景区","img":"https://image.supconit.net/recommend2.png","type":"scenic"},' +
-            '{"div": "酒店","img": "https://image.supconit.net/recommend3.png","type":"hotel"},' +
-            '{"div": "餐饮","img": "https://image.supconit.net/recommend4.png","type":"food"},' +
-            '{"div": "自助游","img": "https://image.supconit.net/recommend5.png","type":"travelSelf"},' +
-            '{"div": "旅游+","img": "https://image.supconit.net/recommend6.png","type":"travelPlus"}]'
-        },
-        {
-          name: "recommended",
-          config: '["1","2"]'
-        }
-      ];
-      let needComponentArray = [];
-      configList.forEach(item => {
-        let matchedComponent = this.componentsArray.filter(
-          (matchItem, index) => {
-            return item.name == matchItem.key;
-          }
-        );
-        matchedComponent[0].config = JSON.parse(item.config);
-        needComponentArray.push(matchedComponent[0]);
+      http.get("/maintenance/component-config/list", "").then(res => {
+        console.log(res);
+        let a = res.obj[0].config;
+        console.log(JSON.parse(a), "aaaaa ");
+        let configList = res.obj;
+        let needComponentArray = [];
+        configList.forEach(item => {
+          let matchedComponent = this.componentsArray.filter(
+            (matchItem, index) => {
+              return item.name == matchItem.key;
+            }
+          );
+          matchedComponent[0].config = JSON.parse(item["config"]);
+          needComponentArray.push(matchedComponent[0]);
+          console.log(needComponentArray);
+          this.configComponentArray = needComponentArray;
+          return Promise.resolve(/* 这里是需要返回的数据*/);
+        });
       });
-      console.log(needComponentArray);
-      this.configComponentArray = needComponentArray;
-      return Promise.resolve(/* 这里是需要返回的数据*/);
+      // let configList = [
+      //   {
+      //     name: "gallery",
+      //     config: '["banner.png","banner.png"]'
+      //   },
+      //   {
+      //     name: "guide",
+      //     config:
+      //       '[ {"div": "景区概况","img":"https://image.supconit.net/gaikuang.png","type":"hot","href":"https://tby.kidzzn.xyz/public/#/"},' +
+      //       '{"div": "在线购票","img":"https://image.supconit.net/goupiao.png","type":"scenic","href":"https://www.supconit.net/wechat/dist/index.html#/classificationQueryResult?type=scenic"},' +
+      //       '{"div": "导游导览","img": "https://image.supconit.net/daolan.png","type":"hotel","href":"https://dqtour.xuanyantech.com/"},' +
+      //       '{"div": "酒店预订","img": "https://image.supconit.net/jiudian.png","type":"food","href":"https://www.supconit.net/wechat/dist/index.html#/classificationQueryResult?type=hotel"},' +
+      //       '{"div": "找停车","img": "https://image.supconit.net/tingche.png","type":"travelSelf","href":"null"},' +
+      //       '{"div": "游记攻略","img": "https://image.supconit.net/gonglue.png","type":"travelPlus","href":"https://tby.kidzzn.xyz/public/#/Travelnotes"},' +
+      //       '{"div": "资讯动态","img": "https://image.supconit.net/zixun.png","type":"travelPlus","href":"null"},' +
+      //       '{"div": "停车缴费","img": "https://image.supconit.net/jiaofei.png","type":"travelPlus","href":"null"},' +
+      //       '{"div": "景交车查询","img": "https://image.supconit.net/gongche.png","type":"travelPlus","href":"null"},' +
+      //       '{"div": "找厕所","img": "https://image.supconit.net/cesuo.png","type":"travelPlus","href":"null"}]'
+      //   },
+      //   {
+      //     name: "recommended",
+      //     config: '["1","2"]'
+      //   }
+      // ];
+      // let needComponentArray = [];
+      // configList.forEach(item => {
+      //   let matchedComponent = this.componentsArray.filter(
+      //     (matchItem, index) => {
+      //       return item.name == matchItem.key;
+      //     }
+      //   );
+      //   matchedComponent[0].config = JSON.parse(item.config);
+      //   needComponentArray.push(matchedComponent[0]);
+      // });
+      // console.log(needComponentArray);
+      // this.configComponentArray = needComponentArray;
+      // return Promise.resolve(/* 这里是需要返回的数据*/);
     },
 
     /**
@@ -254,9 +326,9 @@ export default {
       let that = this;
       http.get("/search/aptitudeHotel?size=4&&page=0", "").then(res => {
         // console.log(res.obj)
-        let HotViewArray = res.obj.content;
+        let HotdivArray = res.obj.content;
         //资质商品列表 计算 最小价格
-        HotViewArray.forEach(item => {
+        HotdivArray.forEach(item => {
           let itemProductArray = item.productList;
           // console.log(itemProductArray);
           let dailPriceArray = [];
@@ -269,9 +341,14 @@ export default {
           });
           item["cover"] = item.cover.split(",")[0];
         });
-        that.hotHotel = HotViewArray;
+        that.hotHotel = HotdivArray;
         // console.log(this.hothotel)
       });
+    },
+    buyTicket(item){
+      if(item.buy){
+        this.$router.push('/avtivitiesDetailPage')
+      }
     }
   }
 };
@@ -294,5 +371,101 @@ iframe {
   position: absolute;
   width: 100%;
   height: 100%;
+}
+
+.buyTickets {
+  width: 100%;
+  height: auto;
+  background-color: #fff;
+  margin-top: 0.26rem;
+  padding-bottom: 1.4rem;
+}
+.TicketsTitle {
+  width: 100%;
+  height: 1.306rem;
+  display: flex;
+  justify-content: space-between;
+  line-height: 1.306rem;
+  background-color: #fff;
+}
+.TicketsTitle > div:nth-child(1) {
+  font-size: 0.4rem;
+  font-family: PingFang SC;
+  font-weight: bold;
+  color: rgba(51, 51, 51, 1);
+  text-indent: 0.4rem;
+}
+.TicketsTitle > div:nth-child(2) {
+  font-size: 0.293rem;
+  font-family: PingFang SC;
+  font-weight: 400;
+  color: rgba(102, 102, 102, 1);
+  margin-right: 0.4rem;
+}
+.TicketsKinds {
+  width: 100%;
+  height: 1.706rem;
+  border-top: 1px solid #f4f4f4;
+  display: flex;
+}
+.TicketsLeft {
+  width: 40%;
+  font-size: 0.373rem;
+  font-family: PingFang SC;
+  font-weight: bold;
+  text-align: center;
+  line-height: 1.706rem;
+}
+.TicketsRight {
+  width: 50%;
+  position:relative;
+}
+.TicketsRight > div {
+  display: inline-block;
+}
+.nowMoney{
+  font-size:0.48rem;
+  font-family:PingFang SC;
+  font-weight:500;
+  color:rgba(251,90,79,1);line-height: 1.706rem;
+}
+.beforeMoney{
+  font-size:0.226rem;
+  font-family:PingFang SC;
+  font-weight:400;
+  text-decoration:line-through;
+  color:rgba(153,153,153,1);line-height: 1.706rem;
+  position: relative;
+  margin-left: 0.213rem;
+}
+.buy{
+  width:1.226rem;
+  height:0.613rem;
+  background:rgba(251,90,79,1);
+  border-radius:4px;
+  position: absolute;
+  top: 0.546rem;
+  right: 0;
+  line-height: 0.613rem;
+  font-size:0.32rem;
+  font-family:PingFang SC;
+  font-weight:400;
+  color:rgba(255,255,255,1);
+  text-align: center;
+}
+.notbuy{
+  width:1.226rem;
+  height:0.613rem;
+  background:rgba(153, 153, 153, 1);
+  border-radius:4px;
+  position: absolute;
+  top: 0.546rem;
+  right: 0;
+  line-height: 0.613rem;
+  font-size:0.32rem;
+  font-family:PingFang SC;
+  font-weight:400;
+  color:rgba(255,255,255,1);
+  text-align: center;
 }
 </style>

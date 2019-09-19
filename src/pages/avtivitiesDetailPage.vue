@@ -10,18 +10,18 @@
         <div class="header-swiper-container">
           <van-swipe :autoplay="3000" indicator-color="white">
             <van-swipe-item>
-              <img src="https://image.supconit.net/hotBanner.png" alt />
-            </van-swipe-item>
-            <van-swipe-item>
-              <img src="https://image.supconit.net/hotBanner.png" alt />
-            </van-swipe-item>
-            <van-swipe-item>
-              <img src="https://image.supconit.net/hotBanner.png" alt />
+              <img src="../assets/images/acticity_logo.png" alt />
             </van-swipe-item>
           </van-swipe>
         </div>
       </div>
-      <div class="MerContent">
+      <div class="introduce"> 
+        <div>活动详情</div>
+        <div class="introduce_content">
+          上渚山奇幻谷打造的首届“奇幻彩色跑”来了！！现场有时尚high翻天的主流乐队，有劲爆狂欢的DANCE，还有hold全场的DJ。在这个爽朗的秋日，让我们忘记城市工作的压力，放下辅导孩子作业的忧愁，共聚上渚山，畅游奇幻谷，尽情释放吧！！
+        </div>
+      </div>
+      <!-- <div class="MerContent">
         <div class="ContentTitle">{{qualificationObj.name}}</div>
         <div class="ContentInfo">
           <div class="ContentInfo_neirongTitle" v-if="type==1">酒店介绍：</div>
@@ -37,7 +37,7 @@
           <div>联系电话：</div>
           <div>{{qualificationObj.phone}}</div>
         </div>
-      </div>
+      </div> -->
       <div class="GoodLists" id="GoodLists">
         <div class="GoodListsCenterScroll" scroll-y>
           <div class="GoodListsCenter" v-for="(item, index) in productList" :key="index">
@@ -757,14 +757,19 @@ export default {
 };
 </script>
 <style scoped>
+.wrap{
+  background-image: url('../assets/images/acticity_background.png');
+  background-size: cover;
+  background-repeat: no-repeat;
+}
 .header {
   width: 100%;
   height: 4.106rem;
+  padding-top: 1.5rem;
 }
 .header-swiper-container {
   width: 100%;
   height: 100%;
-  padding-top: 0.4rem;
   border: 1px solid transparent;
   -webkit-box-sizing: border-box;
   -moz-box-sizing: border-box;
@@ -772,8 +777,8 @@ export default {
 }
 
 .van-swipe {
-  width: 92%;
-  height: 100%;
+  width: 7.76rem;
+  height: 3.68rem;
   margin: 0 auto;
 }
 
@@ -819,7 +824,7 @@ export default {
 .container {
   width: 100%;
   height: 100%;
-  background: #f3f3f3;
+  /* background: #f3f3f3; */
 }
 .MerPictures {
   width: 100%;
@@ -845,9 +850,34 @@ export default {
   bottom: 0.61rem;
   background: rgba(0, 0, 0, 0.6);
 }
-.MerContent {
+.introduce{
+  width: 8.7rem;height: 3.58rem;
+  margin: 0 auto;
+  background-image: url('../assets/images/activity_introdduce_background.png');
+  background-size: cover;
+  background-repeat: no-repeat;
+  margin-top: 1rem;
+  padding: 0.25rem;
+}
+.introduce>div:nth-child(1){
+  font-size:0.436rem;
+  font-family:PingFang SC;
+  font-weight:bold;
+  color:rgba(255,255,255,1);
+  text-align: center;
+}
+.introduce_content{
+  font-size:0.32rem;
+  font-family:PingFang SC;
+  font-weight:400;
+  color:rgba(255,255,255,1);
+  line-height:0.48rem;
+  text-indent: 1rem;
+  text-align: justify;
+  margin-top: .2rem;
+}
+/* .MerContent {
   width: calc(100% - 0.8rem);
-  /* height:230rpx; */
   padding: 0.4rem;
   background-color: #fff;
   border-radius: 0.21rem;
@@ -896,7 +926,7 @@ export default {
   font-family: PingFang-SC-Regular;
   font-weight: 400;
   color: rgba(96, 98, 102, 1);
-}
+} */
 .GoodLists {
   width: 100%;
   max-height: 7.78rem;
