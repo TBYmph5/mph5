@@ -758,7 +758,7 @@ export default {
 </script>
 <style scoped>
 .wrap{
-  background-image: url('../assets/images/acticity_background.png');
+  background-image: url('https://image.supconit.net/acticity_background.png');
   background-size: cover;
   background-repeat: no-repeat;
   width: 100% !important;
