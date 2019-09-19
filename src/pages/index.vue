@@ -11,7 +11,7 @@
           <span class="icon"></span>
           首页
         </van-tabbar-item>
-        <van-tabbar-item
+        <!-- <van-tabbar-item
           replace
           to="/searchtab"
         >
@@ -25,7 +25,7 @@
         >
           <span class="icon"></span>
           订单
-        </van-tabbar-item>
+        </van-tabbar-item> -->
         <van-tabbar-item
           replace
           to="/mytab"

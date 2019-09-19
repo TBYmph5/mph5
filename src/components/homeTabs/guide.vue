@@ -8,6 +8,7 @@
 </template>
 
 <script>
+import { Toast } from "vant";
 export default {
   name: "guide",
   props: ["config"],
@@ -16,20 +17,26 @@ export default {
   },
   methods: {
     routerChange(item) {
-      switch (item.type) {
-        case "hot":
-          this.$router.push({
-            path: "/avtivitiesDetailPage?id=" + item.id
-          });
-          break;
-        default:
-          this.$router.push({
-            path: "/classificationQueryResult",
-            query: {
-              type: item.type
-            }
-          });
+      console.log(item,'item')
+      if(item.href != 'null'){
+        window.location.href = item.href
+      }else{
+        Toast.fail('正在建设中')
       }
+      // switch (item.type) {
+      //   case "hot":
+      //     this.$router.push({
+      //       path: "/avtivitiesDetailPage"
+      //     });
+      //     break;
+      //   default:
+      //     this.$router.push({
+      //       path: "/classificationQueryResult",
+      //       query: {
+      //         type: item.type
+      //       }
+      //     });
+      // }
     }
   }
 };
@@ -49,14 +56,15 @@ export default {
 }
 
 .guide-item {
-  width: 33.3%;
+  /* width: 33.3%; */
+  width: 20%;
   height: auto;
   font-size: 0.32rem;
   font-weight: 400;
   color: rgba(102, 102, 102, 1);
   text-align: center;
   line-height: 0.4rem;
-  padding: 0 1rem;
+  /* padding: 0 1rem; */
   margin-bottom: 0.33rem;
   float: left;
   border: 1px solid transparent;
