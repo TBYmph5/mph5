@@ -18,10 +18,18 @@ export default {
   methods: {
     routerChange(item) {
       console.log(item,'item')
-      if(item.href != 'null'){
-        window.location.href = item.href
-      }else{
-        Toast.fail('正在建设中')
+      if(item.type == 2){
+        if(item.href != 'null'){
+          window.location.href = item.href
+        }else{
+          Toast.fail('正在建设中')
+        }
+      }else if(item.type == 1){
+        if(item.href != 'null'){
+          this.$router.push(item.href)
+        }else{
+          Toast.fail('正在建设中')
+        }
       }
       // switch (item.type) {
       //   case "hot":
