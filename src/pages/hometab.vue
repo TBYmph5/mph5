@@ -347,7 +347,7 @@ export default {
     },
     buyTicket(item){
       if(item.buy){
-        this.$router.push('/avtivitiesDetailPage')
+        this.$router.push('/goodDetails?id=1161471317242769409')
       }
     }
   }
