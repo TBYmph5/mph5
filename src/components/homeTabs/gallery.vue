@@ -68,7 +68,7 @@
       goGlobalSearch() {
 
         this.$router.push({
-          path: '/globalSearch',
+          path: '/classificationQueryResult',
           query: {
             keyWords: this.inputValue,
             area: this.areaValue
