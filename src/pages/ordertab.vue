@@ -13,8 +13,8 @@
           <van-tabs>
             <van-tab title="全部">
               <div class='order-content-wrap' :style="{'height':height}">
-                <van-list class='van-list allOrderScroll' :style="{'height':height}" @load='loadMoreAllOrder'
-                          :offset="offset" :finished="finished" direction="down">
+                <van-list class='van-list allOrderScroll' style="height: 500px;" @load='loadMoreAllOrder'
+                          :offset="offset" :finished="finished" direction="down" :immediate-check="immediatCheck">
                   <div class='order-item-wrap' v-for="(item,index) in allOrderRecods" :key="index" @click='getDetail'>
                     <div class='order-info-wrap'>
                       <div class='order-icon-wrap'>
@@ -43,68 +43,8 @@
                 </van-list>
               </div>
             </van-tab>
-            <!-- 全部订单 -->
-            <van-tab title="未完成">
-              <div class='order-content-wrap' :style='{height:height}'>
-                <van-list scroll-y class='van-list allOrderScroll' :style='height'>
-                  <div class='order-item-wrap' v-for="(item,index) in untravelRecods" :key="index" @click='getDetail'>
-                    <div class='order-info-wrap'>
-                      <div class='order-icon-wrap'>
-                        <img :src='item.icon'>
-                      </div>
-                      <div class='order-info-content'>
-                        <span class='order-name'>{{item.productSnapshot.name}}</span>
-                        <span class='order-number'>订单编号:{{item.id}}</span>
-                        <span class='order-effective-date'>行程有效期：{{item.effectiveDate}}</span>
-                        <div class='order-price'>
-                          <span class='unit'>¥</span>{{item.price}}
-                        </div>
-                        <div class='order-state'> {{item.completed| judgeSate}}</div>
-                      </div>
-                    </div>
-                    <div class='order-option-wrap'>
-                      <button>重发短信</button>
-                      <button>立即抢购</button>
-                    </div>
-                    <!-- 半圆修饰 -->
-                    <div class='circle-decoration left'></div>
-                    <div class='circle-decoration right'></div>
-                  </div>
-                </van-list>
-              </div>
-            </van-tab>
-            <!-- 未出行订单 -->
-            <van-tab title="已完成">
-              <div class='order-content-wrap' :style='{height:height}'>
-                <van-list class='van-list allOrderScroll' :style='height'>
-                  <div class='order-item-wrap' v-for="(item,index) in finishRecods" @click='getDetail'>
-                    <div class='order-info-wrap'>
-                      <div class='order-icon-wrap'>
-                        <img :src='item.icon'>
-                      </div>
-                      <div class='order-info-content'>
-                        <span class='order-name'>{{item.productSnapshot.name}}</span>
-                        <span class='order-number'>订单编号：{{item.id}}</span>
-                        <span class='order-effective-date'>行程有效期：{{item.effectiveDate}}</span>
-                        <div class='order-price'>
-                          <span class='unit'>¥</span>{{item.price}}
-                        </div>
-                        <div class='order-state'> {{filter.judgeSate(item.completed)}}</div>
-                      </div>
 
-                    </div>
-                    <div class='order-option-wrap'>
-                      <button>重发短信</button>
-                      <button>立即抢购</button>
-                    </div>
-                    <!-- 半圆修饰 -->
-                    <div class='circle-decoration left'></div>
-                    <div class='circle-decoration right'></div>
-                  </div>
-                </van-list>
-              </div>
-            </van-tab>
-            <!-- 待支付订单 -->
+
 
           </van-tabs>
 
@@ -131,6 +71,7 @@
     name: "ordertab",
     data() {
       return {
+        immediatCheck:false,
         height: 0,
         allOrderPages: 1,
         currntPageRecods: [],
@@ -138,7 +79,7 @@
         untravelRecods: [],
         finishRecods: [],
         loading: true,
-        offset: 300,
+        offset: 50,
         finished: false,
         total:0,
         hasRecord:true,
@@ -172,7 +113,7 @@
         let currentPages = this.allOrderPages;
         this.allOrderPages = currentPages + 1;
         debugger
-        if(this.allOrderPages.length <this.total){
+        if(this.allOrderPages<this.total){
           this.getAllorders()
         }else{
           console.log('到底了')
@@ -184,7 +125,7 @@
       getAllorders() {
         let parmas = {};
         var that = this;
-        http.post('/order/info/page?current='+that.allOrderPages+'&size=5', parmas).then(res => {
+        http.post('/order/info/page?current='+that.allOrderPages+'&size=10', parmas).then(res => {
           let recodesArray = res.obj.records;
             recodesArray.forEach((item, index) => {
               switch (item.type) {

@@ -60,7 +60,7 @@
                 <div class="number-option-item" @click="addRoomNumber">
                   <span class="iconfont icon-jia"></span>
                 </div>
-                <div class="number-option-item" @click="minusRoomNUmber" >
+                <div class="number-option-item" @click="minusRoomNUmber">
                   <span class="iconfont icon-jian1"></span>
                 </div>
               </div>
@@ -152,12 +152,12 @@
               门票数量
               <div class="room-number-span">{{ticketNumber}}</div>
               <div class="number-option">
-                <div class="number-option-item" @click="addTicketNumber">
-                  <span class="iconfont icon-jia"></span>
-                </div>
-                <div class="number-option-item" @click="minusTicketNUmber">
-                  <span class="iconfont icon-jian1"></span>
-                </div>
+                <!--<div class="number-option-item" @click="addTicketNumber">-->
+                  <!--<span class="iconfont icon-jia"></span>-->
+                <!--</div>-->
+                <!--<div class="number-option-item" @click="minusTicketNUmber">-->
+                  <!--<span class="iconfont icon-jian1"></span>-->
+                <!--</div>-->
               </div>
             </div>
           </div>
@@ -230,15 +230,15 @@
       </div>
 
       <!-- 出行须知 -->
-      <div class="travel-information">
-        <span class="good-type-title" style="margin-bottom:0.42rem;display:block;">出行须知</span>
-        <span class="good-type-title" style="margin-bottom:0.14rem;">注意事项</span>
-        <div
-          class="matters-attention"
-        >
-          根据上海市《公共场所吸烟控制条例》，自2017年3月1日起酒店不能安排吸烟房，并禁止在酒店室内区域吸烟。根据上海市《公共场所吸烟控制条例》，自2017年3月1日起酒店不能安排吸烟房，并禁止在酒店室内区域吸烟。根据上海市《公共场所吸烟控制条例》，自2017年3月1日起酒店不能安排吸烟房，并禁止在酒店室内区域吸烟。根据上海市《公共场所吸烟控制条例》，自2017年3月1日起酒店不能安排吸烟房，并禁止在酒店室内区域吸烟.
-        </div>
-      </div>
+      <!--<div class="travel-information">-->
+        <!--<span class="good-type-title" style="margin-bottom:0.42rem;display:block;">出行须知</span>-->
+        <!--<span class="good-type-title" style="margin-bottom:0.14rem;">注意事项</span>-->
+        <!--<div-->
+          <!--class="matters-attention"-->
+        <!--&gt;-->
+          <!--根据上海市《公共场所吸烟控制条例》，自2017年3月1日起酒店不能安排吸烟房，并禁止在酒店室内区域吸烟。根据上海市《公共场所吸烟控制条例》，自2017年3月1日起酒店不能安排吸烟房，并禁止在酒店室内区域吸烟。根据上海市《公共场所吸烟控制条例》，自2017年3月1日起酒店不能安排吸烟房，并禁止在酒店室内区域吸烟。根据上海市《公共场所吸烟控制条例》，自2017年3月1日起酒店不能安排吸烟房，并禁止在酒店室内区域吸烟.-->
+        <!--</div>-->
+      <!--</div>-->
 
       <!-- 支付金额 -->
       <div class="pay-ment-wrap">
@@ -1024,13 +1024,21 @@
               //  let path = '/pages/payment/index?orderSnapshot=' + JSON.stringify(res.obj) + "feeDetail" + JSON.stringify(this.$store.state.feeDetail);
               //  wx.miniProgram.navigateTo({url: path});
               this.$store.commit('setcreatorderTime', moment(new Date()).valueOf());
+              if (this.priceOrder == 0) {
+                Toast.success('门票预定成功');
+                this.$router.push({
+                  path: '/orderTab',
 
-              this.$router.push({
-                path: '/payment',
-                query: {
-                  orderSnapshot: res.obj
-                }
-              })
+                })
+              } else {
+                this.$router.push({
+                  path: '/payment',
+                  query: {
+                    orderSnapshot: res.obj
+                  }
+                })
+              }
+
               // wx.navigateTo({
               // 	url: '/pages/paymentH5/index?orderId=' + res.obj + '&cookie=' + wx.getStorageSync("sessionid"),
               // })
@@ -1351,7 +1359,7 @@
   .contact-wrap {
     width: 100%;
     height: auto;
-    padding: 0.28rem  0.3rem  0.28rem 0.42rem ;
+    padding: 0.28rem 0.3rem 0.28rem 0.42rem;
     box-sizing: border-box;
     background: rgba(255, 255, 255, 1);
     margin-bottom: 0.28rem;
@@ -1366,6 +1374,7 @@
     color: rgba(51, 51, 51, 1);
     margin: 0.14rem 0.28rem;
   }
+
   .choose-from-contact-list {
     display: inline-block;
     width: 1.2rem;
@@ -1379,6 +1388,7 @@
     color: rgba(65, 159, 255, 1);
     text-align: center;
   }
+
   .choose-from-contact-list img {
     width: 0.58rem;
     height: 0.58rem;
@@ -1568,7 +1578,7 @@
   }
 
   .conatct-item-wrap .conatct-input {
-    right:0.5rem;
+    right: 0.5rem;
 
   }
 

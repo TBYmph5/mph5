@@ -27,16 +27,16 @@ height: 100%;"></iframe>
       // 将数据绑定到window下面，提供给外部调用
       // window['qualificationId'] = this.qualificationId;
       window['qualificationId'] = this.qualificationId;
-      let type = 1;
-      switch (this.type) {
-        case 'hotel':
-          type = 1;
-          break;
-        case 'scenic':
-          type = 2;
-          break
-      }
-      window['type'] = type;
+      // let type = 1;
+      // switch (this.type) {
+      //   case 'hotel':
+      //     type = 1;
+      //     break;
+      //   case 'scenic':
+      //     type = 2;
+      //     break
+      // }
+      window['type'] = this.type;
       this.frame();
       //  未登录挂载方法到window
       window['returnLogin'] = this.goLogion,
