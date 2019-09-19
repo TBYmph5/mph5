@@ -73,7 +73,7 @@
               <div class="GoodKind" v-if="item.type == 3">家庭套房</div>
               <div class="GoodKind" v-if="item.type == 4">总统套房</div>
             </div>
-            <div class="GoodPrice">¥{{item.minPrice}}</div>-->
+            <div class="GoodPrice">¥{{item.minPrice}}</div> -->
             <div class="TakeGood" @click="ReservePop(item)">
               <div class="TakeGood_ding">订</div>
               <div class="TakeGood_daodianfu">在线付</div>
@@ -207,7 +207,7 @@ export default {
       let that = this;
       http.get("/search/aptitude/byActivityId/" + id, "").then(res => {
         console.log(res, "info");
-        let qualificationObj = res.obj;
+        let qualificationObj = res.obj
 
         //资质商品列表 计算商品最小价格
         //资质最小价格
@@ -254,8 +254,8 @@ export default {
             });
           }
         });
-        (that.productList = qualificationObj["productList"]),
-          (that.loading = false);
+        that.productList = qualificationObj["productList"]
+        that.loading = false
       });
     },
     getCurrentUserInfo() {
@@ -761,6 +761,9 @@ export default {
   background-image: url('../assets/images/acticity_background.png');
   background-size: cover;
   background-repeat: no-repeat;
+  width: 100% !important;
+  height: auto !important;
+  padding-bottom: 2rem;
 }
 .header {
   width: 100%;
@@ -823,7 +826,7 @@ export default {
 }
 .container {
   width: 100%;
-  height: 100%;
+  height: auto !important;
   /* background: #f3f3f3; */
 }
 .MerPictures {
@@ -928,11 +931,15 @@ export default {
   color: rgba(96, 98, 102, 1);
 } */
 .GoodLists {
-  width: 100%;
-  max-height: 7.78rem;
+  width: 92%;
+  /* max-height: 7.78rem; */
   height: auto;
   background-color: #fff;
   overflow-y: scroll;
+  margin: 0 auto; 
+  margin-top: .5rem;
+  box-shadow:0px 4px 18px 0px rgba(205,17,109,0.16);
+  border-radius:10px;
   -webkit-overflow-scrolling: touch;
 }
 
@@ -1073,11 +1080,11 @@ export default {
   font-size: 0.37rem;
   text-align: center;
   line-height: 1.3rem;
-  color: #409eff;
+  color: RGBA(205, 17, 109, 1);
   position: relative;
 }
 .iconfont.icon-hongxin {
-  color: #409eff;
+  color: RGBA(205, 17, 109, 1);
 }
 .Collection span.iconfont {
   position: relative;
@@ -1099,7 +1106,7 @@ export default {
   top: 0.02rem;
 }
 .Collection {
-  color: #409eff;
+  color: RGBA(205, 17, 109, 1);
   width: 25%;
   height: 1.3rem;
   float: left;
@@ -1116,12 +1123,12 @@ export default {
   width: 69%;
   height: 1.3rem;
   float: right;
-  background-color: #409eff;
+  background-color: RGBA(205, 17, 109, 1);
 }
 .Reserve button {
   width: 100%;
   height: 100%;
-  background-color: #409eff;
+  background-color: RGBA(205, 17, 109, 1);
   outline: none;
   border: none;
   text-align: center;
@@ -1165,7 +1172,7 @@ export default {
 }
 
 .date-day.active {
-  background: rgba(64, 158, 255, 1);
+  background: RGBA(205, 17, 109, 1);
   border-radius: 0.19rem;
   color: #fff;
   display: inline-block;
@@ -1190,8 +1197,8 @@ export default {
 }
 
 .week {
-  color: #409eff;
-  color: #409eff;
+  color: RGBA(205, 17, 109, 1);
+  color: RGBA(205, 17, 109, 1);
 }
 
 .row {
