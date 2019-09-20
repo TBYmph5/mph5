@@ -200,13 +200,15 @@
          * 微信支付
          * */
         let  paykey='11111'
-        if(getStore('openId')!=undefined || getStore('openId')!=''){
-          /** 
+          console.log('getStore',getStore('openId'))
+          console.log('getStore',typeof (getStore('openId')))
+        if(getStore('openId')!=="undefined"){
+          /**
            * 小程序支付
           **/
           http.post('/order/info/beginCharge_min/' + this.orderId + '/' + this.channel + '/'+paykey, {}).then(res => {
             let path = '/pages/payment/index?key=' + res.obj + '&orderSnapshot=' + JSON.stringify(this.$store.state.orderSnapshot) + '&feeDetail=' + JSON.stringify(this.$store.state.feeDetail)+'&time='+this.$store.state.creatOrderTime+'&channel='+this.channel+'&orderId='+this.orderId;
-            wx.miniProgram.redirectTo({url: path});
+            // wx.miniProgram.redirectTo({url: path});
           })
         } else {
         /**

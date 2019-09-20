@@ -5,13 +5,13 @@
         <div class='bind-wrap'>
           <div class='bind-item'>手机号
             <div class='input-wrap'>
-              <input placeholder="请输入手机号"  v-model="phoneNumber" />
+              <input placeholder="请输入手机号"  v-model="phoneNumber"  />
               <span class='iconfont icon-guanbi' @click='clearInput'></span>
             </div>
           </div>
           <div class='bind-item'>验证码
             <div class='input-wrap'>
-              <input placeholder="请输入验证码"   v-model='verification'  placeholder-style="color:#ADADAD; font-size:32rpx;" v-if='!countdownShow'  />
+              <input placeholder="请输入验证码"   v-model='verification'  maxlength='6' placeholder-style="color:#ADADAD; font-size:32rpx;" v-if='!countdownShow'  />
               <div class='getVerificationCode' v-if='countdownShow' @click="getCode">获取验证码</div>
               <div class='countdown' v-else>重新获取({{countdown}}s)</div>
             </div>
@@ -38,7 +38,7 @@
           return{
             countdownShow:true,
             countdown:60,
-            phoneNumber:'17326033529',
+            phoneNumber:'',
             verification:''
           }
       },
