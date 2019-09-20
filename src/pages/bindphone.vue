@@ -62,7 +62,8 @@
           params['phoneNumber']=this.phoneNumber;
           params['verificationCode']=this.verification;
           params['openId']=getStore('openId');
-          http.post('/customer/auth/login',params).then(res=>{
+          // params['openId']='111';
+          http.post('/customer/login',params).then(res=>{
             this.$router.back(-1)
           })
           // wx:wx.request({

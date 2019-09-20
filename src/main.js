@@ -21,11 +21,11 @@ Vue.use(VueCookies)
 import { Swipe, SwipeItem } from 'vant';
 
 Vue.use(Swipe).use(SwipeItem);
-import VConsole from 'vconsole'
-
-const vConsole = new VConsole()
-
-console.log(vConsole.version)
+// import VConsole from 'vconsole'
+//
+// const vConsole = new VConsole()
+//
+// console.log(vConsole.version)
 /**
  * 图片压缩
  */

@@ -8,8 +8,8 @@ export default new Router({
       path: '/',
       name: 'index',
       component: index,
-      redirect: '/hometab',
-      // redirect: '/fillOrder',
+      // redirect: '/hometab',
+      redirect: '/bindphone',
       meta: {
         title: '上渚山奇幻谷',
       },
