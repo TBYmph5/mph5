@@ -82,21 +82,7 @@
         </div>
       </div>
 
-      <div class="CollectionAndReserve" v-if="!loading">
-        <div class="goHistoryRoute" @click="goBack">
-          <i class="iconfont icon-zuoyoujiantou"></i>
-          返回
-        </div>
-        <!-- <div class="Collection" @click="CollectionOrNot">
-          <span :class=' Collection ? "iconfont icon-hongxin":"iconfont icon-shoucang"'></span>
-          <div style="display:inline-block">收藏</div>
-        </div>-->
-        <div class="Reserve">
-          <button @click="SureBuy()">
-            <a style="color: #fff;">{{showPop?'订购':'立即预订'}}</a>
-          </button>
-        </div>
-      </div>
+      
 
       <van-popup
         v-model="showPop"
@@ -153,6 +139,21 @@
             </div>
           </div>
         </div>
+        <div class="CollectionAndReserve" v-if="!loading">
+        <div class="goHistoryRoute" @click="goBack">
+          <i class="iconfont icon-zuoyoujiantou"></i>
+          返回
+        </div>
+        <!-- <div class="Collection" @click="CollectionOrNot">
+          <span :class=' Collection ? "iconfont icon-hongxin":"iconfont icon-shoucang"'></span>
+          <div style="display:inline-block">收藏</div>
+        </div>-->
+        <div class="Reserve">
+          <button @click="SureBuy()">
+            <a style="color: #fff;">{{showPop?'订购':'立即预订'}}</a>
+          </button>
+        </div>
+      </div>
       </van-popup>
     </div>
   </div>
@@ -1079,9 +1080,9 @@ export default {
 .CollectionAndReserve {
   width: 100%;
   height: 1.3rem;
-  position: fixed;
+  /* position: fixed;
   bottom: 0;
-  left: 0;
+  left: 0; */
   display: flex;
   z-index: 1001;
   box-shadow: 0px -0.026rem 0.053rem 0px rgba(88, 88, 88, 0.15);
@@ -1240,7 +1241,7 @@ export default {
   justify-content: space-between;
 }
 .van-popup--bottom {
-  bottom: 1.3rem !important;
+  /* bottom: 1.3rem !important; */
   border-radius: 10px 10px 0 0;
 }
 /deep/ .van-overlay {
