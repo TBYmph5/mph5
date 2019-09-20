@@ -196,21 +196,30 @@
       },
       pay() {
         if (this.channel !== '') {
+          // if(this.prciePay>0){
+
+
         /**
          * 微信支付
          * */
         let  paykey='11111'
           console.log('getStore',getStore('openId'))
           console.log('getStore',typeof (getStore('openId')))
-        // if(getStore('openId')!=="undefined" || getStore('openId') !== null){
+        if(getStore('openId')!=="undefined" || getStore('openId') !== null){
           /**
            * 小程序支付
           **/
-        //   http.post('/order/info/beginCharge_min/' + this.orderId + '/' + this.channel + '/'+paykey, {}).then(res => {
-        //     let path = '/pages/payment/index?key=' + res.obj + '&orderSnapshot=' + JSON.stringify(this.$store.state.orderSnapshot) + '&feeDetail=' + JSON.stringify(this.$store.state.feeDetail)+'&time='+this.$store.state.creatOrderTime+'&channel='+this.channel+'&orderId='+this.orderId;
-        //     wx.miniProgram.redirectTo({url: path});
-        //   })
-        // } else {
+          http.post('/order/info/beginCharge_min/' + this.orderId + '/' + this.channel + '/'+paykey, {}).then(res => {
+           console.log(res)
+            if(res.obj.code==''){
+              Toast.success('支付成功')
+            }else{
+              let path = '/pages/payment/index?key=' + res.obj + '&orderSnapshot=' + JSON.stringify(this.$store.state.orderSnapshot) + '&feeDetail=' + JSON.stringify(this.$store.state.feeDetail)+'&time='+this.$store.state.creatOrderTime+'&channel='+this.channel+'&orderId='+this.orderId;
+              wx.miniProgram.redirectTo({url: path});
+            }
+
+          })
+        } else {
         /**
         * H5支付
         */
@@ -229,8 +238,11 @@
                 window.location.replace(res.obj)
               })
             }
-          // }
+          }
         }
+        // }else {
+        //   Toast.success('请点击右上角选择原生浏览器打开并进行支付')
+        // }
       },
       // 准备好微信sdk部分
       jsSdk(key){
