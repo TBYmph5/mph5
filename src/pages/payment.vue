@@ -205,7 +205,8 @@
         let  paykey='11111'
           console.log('getStore',getStore('openId'))
           console.log('getStore',typeof (getStore('openId')))
-        if(getStore('openId')!=="undefined" || getStore('openId') !== null){
+          alert(getStore('openId'))
+        if(getStore('openId') !== null && getStore('openId')!=="undefined" ){
           /**
            * 小程序支付
           **/
