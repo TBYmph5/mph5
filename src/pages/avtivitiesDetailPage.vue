@@ -130,14 +130,14 @@
               </div>
             </div>
           </div>
-          <div class="step">
+          <!-- <div class="step">
             <div
               style="font-size:0.4rem;font-family:PingFang-SC-Regular;font-weight:bold;color:rgba(51,51,51,1);padding-left:0.28rem;line-height:1.26rem;"
             >购买份数</div>
             <div style="padding-right:0.28rem;margin-top:0.2rem;">
               <van-stepper v-model="chooseNumber" @change="onChange" />
             </div>
-          </div>
+          </div> -->
         </div>
         <div class="CollectionAndReserve" v-if="!loading">
         <div class="goHistoryRoute" @click="goBack">
