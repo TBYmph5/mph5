@@ -479,7 +479,7 @@
         let that = this;
         http.get("/customer/contacts/list").then(res => {
           that.chooseContactList = res.obj;
-          debugger
+          // debugger
           if (res.obj.length > 0) {
             that.hasContacts = true
           } else {
