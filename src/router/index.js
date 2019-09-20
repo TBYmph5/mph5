@@ -9,7 +9,7 @@ export default new Router({
       name: 'index',
       component: index,
       redirect: '/hometab',
-      // redirect: '/bindphone',
+      // redirect: '/orderTicket',
       meta: {
         title: '上渚山奇幻谷',
       },
@@ -291,6 +291,16 @@ export default new Router({
         keepAlive: false
       }
     },
+    {
+      path: '/orderTicket',
+      name: 'orderTicket',
+      component: resolve => require(["@/pages/orderTicket"], resolve),
+      meta: {
+        title: '门票预约',
+        keepAlive: false
+      }
+    },
+
 
 
   ]
