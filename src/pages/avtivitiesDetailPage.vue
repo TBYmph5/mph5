@@ -437,11 +437,16 @@ export default {
       console.log("获取目标月有多少天dayNums:" + dayNums);
       let obj = {};
       let num = 0;
-      if (month + 1 > 11) {
+      // debugger
+      if (month + 1 >= 12) {
         nextYear = year + 1;
         dayNums = new Date(nextYear, nextMonth, 0).getDate();
       } else {
-        nextMonth = "0" + nextMonth;
+        if(nextMonth>=10){
+          nextMonth = nextMonth
+        }else{
+          nextMonth = "0" + nextMonth;
+        }
       }
       for (var j = -startWeek + 1; j <= dayNums; j++) {
         var tempWeek = -1;
@@ -538,10 +543,10 @@ export default {
         let that = this;
 
         for (let i = 0; i < dateArr.length; i++) {
-          console.log(
-            DATE_YEAR.toString() + "-" + month + "-" + day + " 00:00:00"
-          );
-          console.log(dateArr[i].dailyDay);
+          // console.log(
+          //   DATE_YEAR.toString() + "-" + month + "-" + day + " 00:00:00"
+          // );
+          // console.log(dateArr[i].dailyDay);
 
           if (
             dateArr[i].dailyDay ==

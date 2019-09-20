@@ -23,9 +23,9 @@ import { Swipe, SwipeItem } from 'vant';
 Vue.use(Swipe).use(SwipeItem);
 import VConsole from 'vconsole'
 
-const vConsole = new VConsole()
+// const vConsole = new VConsole()
 
-console.log(vConsole.version)
+// console.log(vConsole.version)
 /**
  * 图片压缩
  */
