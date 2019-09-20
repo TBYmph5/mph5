@@ -1,6 +1,5 @@
 <template>
   <div class="wrap">
-    <div class="header"></div>
     <div class='container'>
       <!-- 加载动画 -->
       <div class="loade-animate"
@@ -35,12 +34,12 @@
                     <div class='order-price'>
                       <span class='unit'>¥</span>{{item.price}}
                     </div>
-                    <!--<div class='order-state' > {{item.completed| judgeSate}}</div>-->
+                    <div class='order-state'> {{item.completed| judgeSate}}</div>
                   </div>
 
                 </div>
                 <div class='order-option-wrap'>
-                  <button @click="viewQRcode(item.id)">扫二维码</button>
+                  <button @click="viewQRcode(item.qrcode)">扫二维码</button>
                 </div>
                 <div class='circle-decoration left'></div>
                 <div class='circle-decoration right'></div>
@@ -63,6 +62,8 @@
              style="width:300px;height:300px;">
           <img :src="qrcodeImg"
                style="width:300px;height:300px;" />
+          <img :src="logo"
+               class="logo">
         </div>
       </van-popup>
       <div class="qrcodeCanvas"
@@ -93,7 +94,8 @@ export default {
       total: 0,
       hasRecord: true,
       show: false,
-      qrcodeImg: require('../assets/logo.png')
+      qrcodeImg: '',
+      logo: require('../assets/images/logo.png')
     }
   },
   filters: {
@@ -389,7 +391,17 @@ export default {
 .record-wrap {
   /* overflow-y: auto; */
 }
-.header{
-
+.qrcode {
+  position: relative;
+}
+.qrcode .logo {
+  width: 80px;
+  height: 80px;
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  margin: auto;
 }
 </style>
