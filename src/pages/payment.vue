@@ -202,7 +202,8 @@
           /**
            * 微信支付
            * */
-          let  paykey=this.$store.state.openId
+          let  paykey='11111'
+            // getStore('openId');
           http.post('/order/info/beginCharge_min/' + this.orderId + '/' + this.channel + '/'+paykey, {}).then(res => {
 // this.jsSdk(res.obj)
 

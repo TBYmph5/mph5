@@ -31,6 +31,7 @@
 
 <script>
   import http from '../api/public'
+  import {getStore, removeStore,setStore} from '@/utils/storage'
     export default {
         name: "bindphone",
       data(){
@@ -38,23 +39,30 @@
             countdownShow:true,
             countdown:60,
             phoneNumber:'17326033529',
-            verification:1
+            verification:''
           }
       },
       methods:{
 
         getCode: function () {
 
-          this.checkPhoneNumber(this.phoneNumber)
+         if(this.checkPhoneNumber(this.phoneNumber)) {
+           http.post('/customer/auth/sendLoginSms?phoneNumbers='+this.phoneNumber,{}).then(res=>{
+             console.log(res)
+             // this.verification=
+           })
+         }
 
         },
         // 绑定手机
         bindPhone(){
+
           // let that=this;
           let params={};
           params['phoneNumber']=this.phoneNumber;
           params['verificationCode']=this.verification;
-          http.post('/customer/login',params).then(res=>{
+          params['openId']=getStore('openId');
+          http.post('/customer/auth/login',params).then(res=>{
             this.$router.back(-1)
           })
           // wx:wx.request({

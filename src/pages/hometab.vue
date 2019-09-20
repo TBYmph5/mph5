@@ -35,7 +35,7 @@ import activitys from "@/components/homeTabs/activity";
 import recommended from "@/components/homeTabs/recommended";
 import http from "../api/public";
 import {Toast} from 'vant';
-
+import {getStore, removeStore,setStore} from '@/utils/storage'
 export default {
   name: "hometab",
   data() {
@@ -94,8 +94,13 @@ export default {
   filters: {},
   mounted() {
     console.log(this.$route.query.openId);
-    // Toast(this.$route.query.openId)
-    this.$store.commit("setopenId",this.$route.query.openId);
+
+
+    if(this.$route.query.openId !==''){
+      setStore('openId',this.$route.query.openId)
+    }
+    Toast(getStore('openId'));
+
     this.getConfigArray().then(val => {
       this.getBanner();
       this.getGuide();

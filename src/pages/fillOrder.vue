@@ -92,6 +92,7 @@
                     class="conatct-input"
                     placeholder-style="color:#BABABA;font-size:0.4rem;"
                     v-model="item.name"
+                    @blur="inputBlur"
                     bindinput="nameInput"
                   />
                 </div>
@@ -103,6 +104,7 @@
                     class="conatct-input"
                     placeholder-style="color:#BABABA;font-size:0.4rem;"
                     v-model="item.phone"
+                    @blur="inputBlur"
                     bindinput="phoneInput"
                   />
                 </div>
@@ -181,6 +183,7 @@
                     placeholder="请输入游玩人姓名"
                     class="conatct-input"
                     v-model="item.name"
+                    @blur="inputBlur"
                   />
                 </div>
                 <div class="conatct-item">
@@ -190,6 +193,7 @@
                     placeholder="请输入游玩人电话"
                     class="conatct-input"
                     v-model="item.phone"
+                    @blur="inputBlur"
 
                   />
                 </div>
@@ -204,7 +208,8 @@
                 <span class="iconfont icon-bitian"></span>
                 证件号码：
                 <input
-                  placeholder="请输入证件号码" class="conatct-input" v-model="item.idcard"/>
+                  placeholder="请输入证件号码" class="conatct-input" v-model="item.idcard"  @blur="inputBlur"/>
+
               </div>
               <!-- 保存联系人 -->
               <div class="saveContact" @click="saveContact(item)">保存新的联系人</div>
@@ -460,6 +465,9 @@
       this.timestampToTime();
     },
     methods: {
+      inputBlur () {
+        window.scrollTo(0, 0)
+      },
       timestampToTime(timestamp) {
         var t1 = moment(timestamp).format("YYYY-MM-DD");
         return t1;
