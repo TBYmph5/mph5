@@ -205,14 +205,15 @@
         let  paykey='11111'
           console.log('getStore',getStore('openId'))
           console.log('getStore',typeof (getStore('openId')))
-        if(getStore('openId')!=="undefined" || getStore('openId') !== null){
+        if(  getStore('openId') !== null &&  getStore('openId')!=="undefined"){
           /**
            * 小程序支付
           **/
           http.post('/order/info/beginCharge_min/' + this.orderId + '/' + this.channel + '/'+paykey, {}).then(res => {
-           console.log(res)
-            if(res.obj.code==''){
-              Toast.success('支付成功')
+           console.log(res,"支付结果")
+            if(res.msg=='ZERO_CHARGE_ID'){
+              Toast.success('下订单成功');
+               this.$router.push("/ordertab")
             }else{
               let path = '/pages/payment/index?key=' + res.obj + '&orderSnapshot=' + JSON.stringify(this.$store.state.orderSnapshot) + '&feeDetail=' + JSON.stringify(this.$store.state.feeDetail)+'&time='+this.$store.state.creatOrderTime+'&channel='+this.channel+'&orderId='+this.orderId;
               wx.miniProgram.redirectTo({url: path});
@@ -231,11 +232,12 @@
               alert('微信')
                 Toast.fail('请点击右上角选择原生浏览器打开并进行支付')
             }else{
-              alert('不在微信中')
-              console.log('不在微信中')
+              alert('不在微信中');
+              console.log('不在微信中');
                 http.post('/order/info/beginCharge_H5/' + this.orderId + '/' + this.channel, {}).then(res => {
+
                 console.log(res);
-                window.location.replace(res.obj)
+                // window.location.replace(res.obj)
               })
             }
           }

@@ -34,12 +34,12 @@
                     <div class='order-price'>
                       <span class='unit'>¥</span>{{item.price}}
                     </div>
-                    <div class='order-state'> {{item.completed| judgeSate}}</div>
+                    <!--<div class='order-state'> {{item.completed| judgeSate}}</div>-->
                   </div>
 
                 </div>
                 <div class='order-option-wrap'>
-                  <button @click="viewQRcode(item.qrcode)">扫二维码</button>
+                  <button @click="viewQRcode(item.checkCode)">扫二维码</button>
                 </div>
                 <div class='circle-decoration left'></div>
                 <div class='circle-decoration right'></div>
@@ -59,7 +59,7 @@
       </div>
       <van-popup v-model="show">
         <div class="qrcode"
-             style="width:300px;height:300px;">
+             style="width:300px;height:300px;overflow:hidden;">
           <img :src="qrcodeImg"
                style="width:300px;height:300px;" />
           <img :src="logo"
