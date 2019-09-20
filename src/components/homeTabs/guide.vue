@@ -53,7 +53,7 @@ export default {
 <style scoped>
 .guide-wrap {
   width: 100%;
-  height: 3.73rem;
+  height: auto;
   text-align: center;
   /* display: flex;
     flex-direction: row;
