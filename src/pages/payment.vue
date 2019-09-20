@@ -197,15 +197,13 @@
       pay() {
         if (this.channel !== '') {
           // if(this.prciePay>0){
-
-
         /**
          * 微信支付
          * */
         let  paykey='11111'
           console.log('getStore',getStore('openId'))
           console.log('getStore',typeof (getStore('openId')))
-        if(  getStore('openId') !== null &&  getStore('openId')!=="undefined"){
+        if(getStore('openId') !== null &&  getStore('openId')!=="undefined"){
           /**
            * 小程序支付
           **/
@@ -216,7 +214,7 @@
                this.$router.push("/ordertab")
             }else{
               let path = '/pages/payment/index?key=' + res.obj + '&orderSnapshot=' + JSON.stringify(this.$store.state.orderSnapshot) + '&feeDetail=' + JSON.stringify(this.$store.state.feeDetail)+'&time='+this.$store.state.creatOrderTime+'&channel='+this.channel+'&orderId='+this.orderId;
-              wx.miniProgram.redirectTo({url: path});
+              wx.miniProgram.redirectTo({url:path});
             }
 
           })
@@ -235,7 +233,6 @@
               alert('不在微信中');
               console.log('不在微信中');
                 http.post('/order/info/beginCharge_H5/' + this.orderId + '/' + this.channel, {}).then(res => {
-
                 console.log(res);
                 // window.location.replace(res.obj)
               })
