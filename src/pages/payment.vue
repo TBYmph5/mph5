@@ -202,29 +202,34 @@
         let  paykey='11111'
           console.log('getStore',getStore('openId'))
           console.log('getStore',typeof (getStore('openId')))
-        if(getStore('openId')!=="undefined"){
+        // if(getStore('openId')!=="undefined" || getStore('openId') !== null){
           /**
            * 小程序支付
           **/
-          http.post('/order/info/beginCharge_min/' + this.orderId + '/' + this.channel + '/'+paykey, {}).then(res => {
-            let path = '/pages/payment/index?key=' + res.obj + '&orderSnapshot=' + JSON.stringify(this.$store.state.orderSnapshot) + '&feeDetail=' + JSON.stringify(this.$store.state.feeDetail)+'&time='+this.$store.state.creatOrderTime+'&channel='+this.channel+'&orderId='+this.orderId;
-            // wx.miniProgram.redirectTo({url: path});
-          })
-        } else {
+        //   http.post('/order/info/beginCharge_min/' + this.orderId + '/' + this.channel + '/'+paykey, {}).then(res => {
+        //     let path = '/pages/payment/index?key=' + res.obj + '&orderSnapshot=' + JSON.stringify(this.$store.state.orderSnapshot) + '&feeDetail=' + JSON.stringify(this.$store.state.feeDetail)+'&time='+this.$store.state.creatOrderTime+'&channel='+this.channel+'&orderId='+this.orderId;
+        //     wx.miniProgram.redirectTo({url: path});
+        //   })
+        // } else {
         /**
         * H5支付
         */
           var ua = navigator.userAgent.toLowerCase();
+          console.log(ua,'ua')
           var isWeixin = ua.indexOf('micromessenger') != -1;
+          console.log(isWeixin,'isWeixin')
             if (isWeixin) {
+              alert('微信')
                 Toast.fail('请点击右上角选择原生浏览器打开并进行支付')
             }else{
+              alert('不在微信中')
+              console.log('不在微信中')
                 http.post('/order/info/beginCharge_H5/' + this.orderId + '/' + this.channel, {}).then(res => {
                 console.log(res);
                 window.location.replace(res.obj)
               })
             }
-          }
+          // }
         }
       },
       // 准备好微信sdk部分
