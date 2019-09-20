@@ -196,29 +196,33 @@
       },
       pay() {
         if (this.channel !== '') {
-
-
-
-          /**
-           * 微信支付
-           * */
-          let  paykey='11111'
-            // getStore('openId');
+        /**
+         * 微信支付
+         * */
+        let  paykey='11111'
+        if(getStore('openId')!=undefined || getStore('openId')!=''){
+          /** 
+           * 小程序支付
+          **/
           http.post('/order/info/beginCharge_min/' + this.orderId + '/' + this.channel + '/'+paykey, {}).then(res => {
-// this.jsSdk(res.obj)
-
             let path = '/pages/payment/index?key=' + res.obj + '&orderSnapshot=' + JSON.stringify(this.$store.state.orderSnapshot) + '&feeDetail=' + JSON.stringify(this.$store.state.feeDetail)+'&time='+this.$store.state.creatOrderTime+'&channel='+this.channel+'&orderId='+this.orderId;
             wx.miniProgram.redirectTo({url: path});
-
           })
-          /**
-           * H5支付
-           */
-          // http.post('/order/info/beginCharge_H5/' + this.orderId + '/' + this.channel, {}).then(res => {
-          //   console.log(res);
-          //   window.location.replace(res.obj)
-          // })
-
+        } else {
+        /**
+        * H5支付
+        */
+          var ua = navigator.userAgent.toLowerCase();
+          var isWeixin = ua.indexOf('micromessenger') != -1;
+            if (isWeixin) {
+                Toast.fail('请点击右上角选择原生浏览器打开并进行支付')
+            }else{
+                http.post('/order/info/beginCharge_H5/' + this.orderId + '/' + this.channel, {}).then(res => {
+                console.log(res);
+                window.location.replace(res.obj)
+              })
+            }
+          }
         }
       },
       // 准备好微信sdk部分

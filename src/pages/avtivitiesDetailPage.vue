@@ -190,7 +190,8 @@ export default {
       weekStr: ["日", "一", "二", "三", "四", "五", "六"],
       checkDate: [],
       PriceCalendarList: [],
-      chooseNumber: "1" //购买份数
+      chooseNumber: "1", //购买份数
+      amount:''
     };
   },
   mounted() {
@@ -297,11 +298,16 @@ export default {
                 Toast.fail("请选择门票日期");
                 return;
               } else {
+                if(this.amount == '暂无'){
+                  Toast.fail('请选择有价格的日期进行购买')
+                }else{
+                  this.$store.commit("setChooseGoodJson", a);
+                  this.$router.push({
+                    path: "/fillOrder"
+                  });
+                }
                 // parent.window.setChoose(a);
-                this.$store.commit("setChooseGoodJson", a);
-                this.$router.push({
-                  path: "/fillOrder"
-                });
+                
               }
             }
           } else {
@@ -525,6 +531,7 @@ export default {
                 index: i + 1
               }
             ];
+            
           }
         }
       } else if (this.type == 2) {
@@ -551,6 +558,8 @@ export default {
                 index: i
               }
             ];
+            // alert(that.checkDate,'that.checkDate')
+            that.amount = that.checkDate[0].amount
           }
         }
       }
@@ -711,6 +720,7 @@ export default {
           }
           this.checkDate = checkDateJson;
           console.log(this.checkDate);
+          this.amount = this.checkDate[0].amount
           break;
         }
       }
