@@ -454,10 +454,11 @@ export default {
         if (j > 10 || j == 10) {
           tempWeek = this.getWeek(year, nextMonth, j);
           var monthDay = year + "-" + nextMonth + "-" + j + " 00:00:00";
-          // console.log(year + "年" + nextMonth + "月" + j + "日" + "星期" + tempWeek);
+          console.log(year + "年" + nextMonth + "月" + j + "日" + "星期" + tempWeek);
         } else {
           var monthDay = year + "-" + nextMonth + "-" + "0" + j + " 00:00:00";
-          // console.log(year + "年" + nextMonth + "月" + '0' + j + "日" + "星期" + tempWeek);
+          console.log(year + "-" + nextMonth + "-" + j,'aaaaa')
+          console.log(year + "年" + nextMonth + "月" + '0' + j + "日" + "星期" + tempWeek);
         }
         var clazz = "";
         if (tempWeek == 0 || tempWeek == 6) clazz = "week";
@@ -468,6 +469,8 @@ export default {
         if (nextMonth < DATE_MONTH && year == DATE_YEAR)
           clazz = "unavailable " + clazz;
         if (year < DATE_YEAR) clazz = "unavailable " + clazz;
+        if(year + "-" + nextMonth + "-" + '0' + j == '2019-10-05') clazz = "special" + clazz;
+        
         else clazz = "" + clazz;
         /**如果当前日期已经选中，则变色 */
         var date = year + "-" + nextMonth + "-" + j;
@@ -1246,5 +1249,10 @@ export default {
 }
 /deep/ .van-overlay {
   z-index: 1000 !important;
+}
+.special{
+  color: red;
+  font-weight: 900;
+  font-family: fantasy;
 }
 </style>
