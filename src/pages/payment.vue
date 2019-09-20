@@ -203,7 +203,7 @@
         let  paykey='11111'
           console.log('getStore',getStore('openId'))
           console.log('getStore',typeof (getStore('openId')))
-        if(getStore('openId') !== null &&  getStore('openId')!=="undefined"){
+        // if(getStore('openId') !== null && getStore('openId')!=="undefined"){
           /**
            * 小程序支付
           **/
@@ -218,26 +218,27 @@
             }
 
           })
-        } else {
-        /**
-        * H5支付
-        */
-          var ua = navigator.userAgent.toLowerCase();
-          console.log(ua,'ua')
-          var isWeixin = ua.indexOf('micromessenger') != -1;
-          console.log(isWeixin,'isWeixin')
-            if (isWeixin) {
-              alert('微信')
-                Toast.fail('请点击右上角选择原生浏览器打开并进行支付')
-            }else{
-              alert('不在微信中');
-              console.log('不在微信中');
-                http.post('/order/info/beginCharge_H5/' + this.orderId + '/' + this.channel, {}).then(res => {
-                console.log(res);
-                // window.location.replace(res.obj)
-              })
-            }
-          }
+        // } else {
+        // /**
+        // * H5支付
+        // */
+        //   var ua = navigator.userAgent.toLowerCase();
+        //   console.log(ua,'ua');
+        //   debugger
+        //   var isWeixin = ua.indexOf('micromessenger') != -1;
+        //   console.log(isWeixin,'isWeixin');
+        //     if (isWeixin) {
+        //       alert('微信');
+        //         Toast.fail('请点击右上角选择原生浏览器打开并进行支付')
+        //     }else{
+        //       alert('不在微信中');
+        //       console.log('不在微信中');
+        //         http.post('/order/info/beginCharge_H5/' + this.orderId + '/' + this.channel, {}).then(res => {
+        //         console.log(res);
+        //         // window.location.replace(res.obj)
+        //       })
+        //     }
+        //   }
         }
         // }else {
         //   Toast.success('请点击右上角选择原生浏览器打开并进行支付')

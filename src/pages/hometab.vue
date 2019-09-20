@@ -97,7 +97,7 @@ export default {
     if(this.$route.query.openId !==''){
       setStore('openId',this.$route.query.openId)
     }
-    Toast(getStore('openId'));
+    // Toast(getStore('openId'));
     this.getConfigArray().then(val => {
       this.getBanner();
       this.getGuide();

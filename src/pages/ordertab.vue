@@ -61,9 +61,9 @@
         <div class="qrcode"
              style="width:300px;height:300px;overflow:hidden;">
           <img :src="qrcodeImg"
-               style="width:300px;height:300px;" />
-          <img :src="logo"
-               class="logo">
+               style="width:260px;height:260px;position:absolute;left:0;right:0;bottom:0;top:0;margin:auto;" />
+          <!--<img :src="logo"-->
+               <!--class="logo">-->
         </div>
       </van-popup>
       <div class="qrcodeCanvas"
@@ -118,11 +118,12 @@ export default {
       this.show = true
       document.getElementById("qrcodeDom").innerHTML = "";
       let qrcode = new QRCode(document.getElementById("qrcodeDom"), {
-        width: 300,
-        height: 300,
+        width: 260,
+        height: 260,
         text: code,
         colorDark: "#000",
-        colorLight: "#fff"
+        colorLight: "#fff",
+        correctLevel: QRCode.CorrectLevel.M
       });
       this.qrcodeImg = this.$refs["qrcodeCanvas"]
         .getElementsByTagName("canvas")[0]
