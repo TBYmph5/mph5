@@ -9,7 +9,8 @@ const state = {
 chooseGoodJson:{},
   feeDetail:{},
   orderSnapshot:{},
-  creatOrderTime: ''
+  creatOrderTime: '',
+  openId:''
 }
 
 const mutations = {
@@ -30,6 +31,9 @@ setChooseGoodJson(state, value){
   },
   setcreatorderTime(state, val) {
     state.creatOrderTime = val;
+  },
+  setopenId(state, val){
+    state.openId = val;
   }
 
 

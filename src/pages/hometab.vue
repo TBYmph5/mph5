@@ -34,6 +34,7 @@ import guide from "@/components/homeTabs/guide";
 import activitys from "@/components/homeTabs/activity";
 import recommended from "@/components/homeTabs/recommended";
 import http from "../api/public";
+import {Toast} from 'vant';
 
 export default {
   name: "hometab",
@@ -92,6 +93,9 @@ export default {
   },
   filters: {},
   mounted() {
+    console.log(this.$route.query.openId);
+    // Toast(this.$route.query.openId)
+    this.$store.commit("setopenId",this.$route.query.openId);
     this.getConfigArray().then(val => {
       this.getBanner();
       this.getGuide();
@@ -347,7 +351,7 @@ export default {
     },
     buyTicket(item){
       if(item.buy){
-        this.$router.push('/goodDetails?id=1161471317242769409')
+        this.$router.push('/goodDetails?id=1174575036284088322&name=活动门票')
       }
     }
   }

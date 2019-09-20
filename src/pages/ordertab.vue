@@ -1,5 +1,6 @@
 <template>
   <div class="wrap">
+    <div class="header"></div>
     <div class='container'>
       <!-- 加载动画 -->
       <div class="loade-animate"
@@ -34,7 +35,7 @@
                     <div class='order-price'>
                       <span class='unit'>¥</span>{{item.price}}
                     </div>
-                    <div class='order-state'> {{item.completed| judgeSate}}</div>
+                    <!--<div class='order-state' > {{item.completed| judgeSate}}</div>-->
                   </div>
 
                 </div>
@@ -387,5 +388,8 @@ export default {
 .container,
 .record-wrap {
   /* overflow-y: auto; */
+}
+.header{
+
 }
 </style>

@@ -931,7 +931,7 @@
         parmas['contactsJson'] = this.playerArray;
         parmas['productId'] = this.goodId;
         // parmas['quantity'] = this.chooseValenceArray.length;
-        parmas['other'] = '加个鸡腿';
+        parmas['other'] = '';
         parmas['price'] = this.priceOrder;
         //拼接商品list
         let productArray = [];
@@ -1024,20 +1024,20 @@
               //  let path = '/pages/payment/index?orderSnapshot=' + JSON.stringify(res.obj) + "feeDetail" + JSON.stringify(this.$store.state.feeDetail);
               //  wx.miniProgram.navigateTo({url: path});
               this.$store.commit('setcreatorderTime', moment(new Date()).valueOf());
-              if (this.priceOrder == 0) {
-                Toast.success('门票预定成功');
-                this.$router.push({
-                  path: '/orderTab',
-
-                })
-              } else {
+              // if (this.priceOrder == 0) {
+              //   Toast.success('门票预定成功');
+              //   this.$router.push({
+              //     path: '/orderTab',
+              //
+              //   })
+              // } else {
                 this.$router.push({
                   path: '/payment',
                   query: {
                     orderSnapshot: res.obj
                   }
                 })
-              }
+              // }
 
               // wx.navigateTo({
               // 	url: '/pages/paymentH5/index?orderId=' + res.obj + '&cookie=' + wx.getStorageSync("sessionid"),

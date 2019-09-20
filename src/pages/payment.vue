@@ -202,10 +202,11 @@
           /**
            * 微信支付
            * */
-          http.post('/order/info/beginCharge_min/' + this.orderId + '/' + this.channel + '/oJJM44zbmaGesSAwEtnjlUM0kuDc', {}).then(res => {
+          let  paykey=this.$store.state.openId
+          http.post('/order/info/beginCharge_min/' + this.orderId + '/' + this.channel + '/'+paykey, {}).then(res => {
 // this.jsSdk(res.obj)
 
-            let path = '/pages/payment/index?key=' + res.obj + '&orderSnapshot=' + JSON.stringify(this.$store.state.orderSnapshot) + '&feeDetail=' + JSON.stringify(this.$store.state.feeDetail)+'&time='+this.$store.state.creatOrderTime;
+            let path = '/pages/payment/index?key=' + res.obj + '&orderSnapshot=' + JSON.stringify(this.$store.state.orderSnapshot) + '&feeDetail=' + JSON.stringify(this.$store.state.feeDetail)+'&time='+this.$store.state.creatOrderTime+'&channel='+this.channel+'&orderId='+this.orderId;
             wx.miniProgram.redirectTo({url: path});
 
           })
