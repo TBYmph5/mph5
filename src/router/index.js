@@ -296,7 +296,7 @@ export default new Router({
       name: 'orderTicket',
       component: resolve => require(["@/pages/orderTicket"], resolve),
       meta: {
-        title: '门票预约',
+        title: '免费入园',
         keepAlive: false
       }
     },

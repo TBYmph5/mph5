@@ -134,13 +134,14 @@
       getList() { //获取联系人列表
         let that = this;
         http.get("/customer/contacts/list", {}).then(res => {
-          this.manList = res.obj;
-          console.log(this.manList);
-          this.loading = false;
-          if(this.manList.length>0){
-            this.hasRecord=true
+          that.manList = res.obj;
+          console.log(that.manList);
+          // debugger
+          that.loading = false;
+          if(that.manList.length>0){
+            that.hasRecord=true
           }else{
-            this.hasRecord=false
+            that.hasRecord=false
           }
         })
 

@@ -16,7 +16,7 @@
             <van-area :area-list="areaList" :columns-num="columnsNum" @confirm='sureArea' @cancel='cancelAreaChoose'/>
           </van-popup>
           <div class='input-wrap'>
-            <span class="iconfont icon-Magnifier" style="display: inline-block;" @click="getRecodes"></span>
+            <span class="iconfont icon-Magnifier" style="display: inline-block;" @click="getRecodesSearch"></span>
             <input placeholder='请输入您要查找的景区名称' v-model="keyWords">
 
           </div>
@@ -315,8 +315,8 @@
       if(this.$route.query.travelNumber){
         this.travelNumber=this.$route.query.travelNumber
       };
-      if(this.$route.query.keyWord){
-        this.keyWords=this.$route.query.keyWord
+      if(this.$route.query.keyWords){
+        this.keyWords=this.$route.query.keyWords
       }
       if(this.$route.query.travelDate){
         this.travelDate=this.$route.query.travelDate
@@ -619,7 +619,7 @@
        */
       sureMoreConditin() {
         var that = this;
-        that.getRecodes()
+        that.getRecodesSearch()
         this.moreaniStyle = false;　　　　 //设置动画效果为slidedown
         setTimeout(function () { //延时设置蒙层的隐藏，这个定时器的时间，就是slidedown在css动画里设置的时间，这样就能实现slidedown动画完成后，蒙层才消失的效果。不设置定时器会导致动画效果看不见
           that.moreConditionsShow = false;
@@ -639,6 +639,10 @@
       ,
       goBack() {
         this.$router.go(-1)
+      },
+      getRecodesSearch(){
+        this.goodShowArray=[]
+        this.getRecodes()
       },
       /**
        * 获取景区记录

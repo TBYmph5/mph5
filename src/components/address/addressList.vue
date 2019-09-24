@@ -8,6 +8,7 @@
     </div>
     <!-- 加载完内容 -->
     <div class="container-content" v-show="!loading">
+      <div class="record-wrap" v-if="hasRecord">
       <div class='flex_center'>
         <div v-for="(item,index ) in addressList" :key='index'>
           <div class='mainInfo'>
@@ -46,7 +47,14 @@
         <button @click="editInfo"   class=" submit-btn">新增地址</button>
 
       </div>
-
+      </div>
+      <div class="record-wrap" v-else>
+        <div class="no-records-wrap">
+          <div class="tips-wrap">
+            空空如也
+          </div>
+        </div>
+      </div>
       <van-toast id="van-toast" />
 
     </div>
@@ -65,7 +73,8 @@
           return{
             rightWidth:65,
             addressList:'', // 常用地址列表,
-            loading:true
+            loading:true,
+            hasRecord:true
           }
       },
       filters:{
@@ -154,11 +163,15 @@
         getList() { //获取联系人列表
           let that = this;
         http.get('/customer/address/list',{}).then(res=>{
-          if (res.obj.length>0) {
+
             that.addressList=res.obj ;//联系人列表赋值,
              that.loading=false
+            if(that.addressList.length>0){
+              that.hasRecord=true
+            }else{
+              that.hasRecord=false
+            }
 
-          }
         })
           // wx.request({
           //   url: 'https://www.supconit.net',

@@ -172,8 +172,12 @@
                 <!--<span class="iconfont icon-jian" @click="deleteThisPlayer(index)"></span>-->
               </div>
               <div class="conatct-item-wrap">
-                <div class="choose-from-contact-list" @click="chooseContacts(index)">
+                <div class="choose-from-contact-list" @click="chooseContacts(index)" v-if="hasContacts">
                   <img src="../assets/images/contactlist.png"/>
+                  联系人
+                </div>
+                <div class="choose-from-contact-list" v-else style="color: #BABABA;">
+                  <img src="../assets/images/nocontactlist.png"/>
                   联系人
                 </div>
                 <div class="conatct-item">
@@ -480,7 +484,7 @@
         http.get("/customer/contacts/list").then(res => {
           that.chooseContactList = res.obj;
           // debugger
-          if (that.hasContacts.length > 0) {
+          if (that.chooseContactList.length > 0) {
             that.hasContacts = true
           } else {
             that.hasContacts = false

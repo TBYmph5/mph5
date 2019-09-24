@@ -13,7 +13,7 @@
                     </span>
         <div class='input-wrap'>
 
-          <input placeholder='请输入您要查找的酒店名称'
+          <input placeholder='请输入您要查找的商品名称'
                  v-model="inputValue"/>
           <span class="iconfont icon-Magnifier" @click='goGlobalSearch'></span>
         </div>
