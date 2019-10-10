@@ -118,7 +118,7 @@
 
       getCurrentUserInfo() {
         http.get('/customer/info/getCurrentInfo').then(res => {
-         debugger
+          console.log(res,'reesssss')
           if(res.obj.avatar ==''){
             res.obj['avatar']='avtar.png'
           }
