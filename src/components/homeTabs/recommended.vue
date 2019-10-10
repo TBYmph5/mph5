@@ -1,13 +1,13 @@
 <template>
   <div style='margin-top:0.5rem;margin-bottom:1.6rem;'>
-  <div class='hot-activity '  v-for="(item,index) in recommendeds" :key="index">
-    <div class='item-title'>{{item.name}}</div>
+  <div class='hot-activity '  >
+    <div class='item-title'>{{config.title}}</div>
     <div class='tabs-content-wrap-hotel'>
       <div class='tabs-content'>
-        <div class='figure' v-for="(recommendedsitem,recommendedsindex) in item.hotHotel" :key='recommendedsindex'
+        <div class='figure' v-for="(recommendedsitem,recommendedsindex) in recommendeds" :key='recommendedsindex'
              @click="getQualificationDetail(recommendedsitem)">
           <div class='img-wrap'>
-            <img :src="qiniu+'/'+recommendedsitem.cover">
+            <img :src="qiniu+'/'+ recommendedsitem.banner">
           </div>
           <div class='figcaption'>
             <div class='good-name'>{{recommendedsitem.name}}</div>
@@ -36,10 +36,10 @@
       mounted(){
           let that=this;
           console.log(that.config)
-        that.config.forEach((item,index)=>{
-          that.getHotHotel(item)
-
-          })
+        // that.config.forEach((item,index)=>{
+          that.getHotHotel(that.config.search)
+        //
+        //   })
       },
       methods:{
         getQualificationDetail(item){
@@ -56,19 +56,10 @@
         /**
          * 获取推荐酒店
          */
-        getHotHotel(type){
+        getHotHotel(query){
           let arrayitem={};
-          switch (type) {
-            case '1':
-              arrayitem['name']='热门酒店';
-              break;
-            case '2':
-              arrayitem['name']='热门景区';
-              break;
-          }
-
           let that = this;
-          http.get('/search/aptitude?size=8&page=0&type='+type, '').then(res => {
+          http.get('/search/aptitude'+query,'').then(res => {
             // console.log(res.obj)
             let HotViewArray = res.obj.hits;
 
@@ -84,11 +75,10 @@
                 })
                 item['minPrice'] = Math.min.apply(null, dailPriceArray);
               })
-              item['cover'] = item.cover.split(',')[0];
-
+              item['banner'] = item.cover.split(',')[0];
+              that.recommendeds.push(item);
             });
-            arrayitem['hotHotel']= HotViewArray;
-            that.recommendeds.push(arrayitem);
+
           })
           console.log( that.recommendeds)
         },

@@ -23,6 +23,9 @@ Vue.use(Swipe).use(SwipeItem);
 // import VConsole from 'vconsole'
 // const vConsole = new VConsole()
 // console.log(vConsole.version)
+import VueAwesomeSwiper from 'vue-awesome-swiper'
+import './assets/swiper/swiper-4.1.0.min.css'
+Vue.use(VueAwesomeSwiper)
 /**
  * 图片压缩
  */

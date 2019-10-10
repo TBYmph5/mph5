@@ -9,23 +9,23 @@
     <div class v-for="(item,index) in configComponentArray" :key="index">
       <div :is="item.content" :config="item.config"></div>
     </div>
-    <div class="buyTickets">
-      <div class="TicketsTitle">
-        <div>热销门票</div>
-        <!-- <div>查看更多</div> -->
-      </div>
-      <div v-for="(item, index) in tickets" :key="index">
-        <div class="TicketsKinds">
-          <div class="TicketsLeft">
-            {{item.ticketsKind}}
-          </div>
-          <div class="TicketsRight">
-            <div class="nowMoney">￥{{item.nowMoney}}</div>
-            <div :class="item.buy ?'buy':'notbuy'" @click="buyTicket(item)">购买</div>
-          </div>
-        </div>
-      </div>
-    </div>
+    <!--<div class="buyTickets">-->
+      <!--<div class="TicketsTitle">-->
+        <!--<div>热销门票</div>-->
+        <!--&lt;!&ndash; <div>查看更多</div> &ndash;&gt;-->
+      <!--</div>-->
+      <!--<div v-for="(item, index) in tickets" :key="index">-->
+        <!--<div class="TicketsKinds">-->
+          <!--<div class="TicketsLeft">-->
+            <!--{{item.ticketsKind}}-->
+          <!--</div>-->
+          <!--<div class="TicketsRight">-->
+            <!--<div class="nowMoney">￥{{item.nowMoney}}</div>-->
+            <!--<div :class="item.buy ?'buy':'notbuy'" @click="buyTicket(item)">购买</div>-->
+          <!--</div>-->
+        <!--</div>-->
+      <!--</div>-->
+    <!--</div>-->
   </div>
 </template>
 <script>
@@ -99,10 +99,10 @@ export default {
     }
     // Toast(getStore('openId'));
     this.getConfigArray().then(val => {
-      this.getBanner();
-      this.getGuide();
-      this.getActivityOptimization();
-      this.getHotHotel();
+      // this.getBanner();
+      // this.getGuide();
+      // this.getActivityOptimization();
+      // this.getHotHotel();
     });
   },
   methods: {

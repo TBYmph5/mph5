@@ -5,52 +5,52 @@ import index from '@/pages/index'
 Vue.use(Router)
 export default new Router({
   routes: [{
-      path: '/',
-      name: 'index',
-      component: index,
-      redirect: '/hometab',
-      // redirect: '/orderTicket',
+    path: '/',
+    name: 'index',
+    component: index,
+    redirect: '/hometab',
+    // redirect: '/travelNotes',
+    meta: {
+      title: '上渚山奇幻谷',
+    },
+    children: [{
+      path: '/hometab',
+      name: 'hometab',
+      component: resolve => require(["@/pages/hometab"], resolve),
       meta: {
         title: '上渚山奇幻谷',
+        keepAlive: true
       },
-      children: [{
-          path: '/hometab',
-          name: 'hometab',
-          component: resolve => require(["@/pages/hometab"], resolve),
-          meta: {
-            title: '上渚山奇幻谷',
-            keepAlive: true
-          },
-        },
-        {
-          path: '/searchtab',
-          name: 'searchtab',
-          component: resolve => require(["@/pages/searchtab"], resolve),
-          meta: {
-            title: '上渚山奇幻谷',
-            keepAlive: false
-          },
-        },
-        {
-          path: '/ordertab',
-          name: 'ordertab',
-          component: resolve => require(["@/pages/ordertab"], resolve),
-          meta: {
-            title: '上渚山奇幻谷',
-            keepAlive: false
-          },
-        },
-        {
-          path: '/mytab',
-          name: 'mytab',
-          component: resolve => require(["@/pages/mytab"], resolve),
-          meta: {
-            title: '上渚山奇幻谷',
-            keepAlive: false
-          },
-        },
-      ]
     },
+      {
+        path: '/searchtab',
+        name: 'searchtab',
+        component: resolve => require(["@/pages/searchtab"], resolve),
+        meta: {
+          title: '上渚山奇幻谷',
+          keepAlive: false
+        },
+      },
+      {
+        path: '/ordertab',
+        name: 'ordertab',
+        component: resolve => require(["@/pages/ordertab"], resolve),
+        meta: {
+          title: '上渚山奇幻谷',
+          keepAlive: false
+        },
+      },
+      {
+        path: '/mytab',
+        name: 'mytab',
+        component: resolve => require(["@/pages/mytab"], resolve),
+        meta: {
+          title: '上渚山奇幻谷',
+          keepAlive: false
+        },
+      },
+    ]
+  },
     {
       path: '/bindphone',
       name: 'bindphone',
@@ -101,10 +101,10 @@ export default new Router({
       },
       redirect: '/myContacts/contactList',
       children: [{
-          path: '/myContacts/contactList',
-          name: 'contactList',
-          component: resolve => require(["@/components/contact/contactList"], resolve)
-        },
+        path: '/myContacts/contactList',
+        name: 'contactList',
+        component: resolve => require(["@/components/contact/contactList"], resolve)
+      },
         {
           path: '/myContacts/addContact',
           name: 'addContact',
@@ -124,10 +124,10 @@ export default new Router({
       },
       redirect: '/myAddress/addressList',
       children: [{
-          path: '/myAddress/addressList',
-          name: 'addressList',
-          component: resolve => require(["@/components/address/addressList"], resolve)
-        },
+        path: '/myAddress/addressList',
+        name: 'addressList',
+        component: resolve => require(["@/components/address/addressList"], resolve)
+      },
         {
           path: '/myAddress/addAdress',
           name: 'addAdress',
@@ -300,8 +300,87 @@ export default new Router({
         keepAlive: false
       }
     },
-
-
+    {
+      path: '/parking',
+      name: 'parking',
+      component: resolve => require(["@/pages/parking"], resolve),
+      meta: {
+        title: '找停车',
+        keepAlive: false
+      }
+    },
+    {
+      path: '/wc',
+      name: 'wc',
+      component: resolve => require(["@/pages/wc"], resolve),
+      meta: {
+        title: '找厕所',
+        keepAlive: false
+      }
+    },
+    {
+      path: '/travelNotes',
+      name: 'travelNotes',
+      component: resolve => require(["@/pages/travelGuide/travelNotes"], resolve),
+      meta: {
+        title: '游记攻略',
+        keepAlive: false
+      }
+    },
+    {
+      path: '/noteDetail',
+      name: 'noteDetail',
+      component: resolve => require(["@/pages/travelGuide/noteDetail"], resolve),
+      meta: {
+        title: '游记详情',
+        keepAlive: false
+      }
+    },
+    {
+      path: '/publishNote',
+      name: 'publishNote',
+      component: resolve => require(["@/pages/travelGuide/publishNote"], resolve),
+      meta: {
+        title: '发表游记',
+        keepAlive: false
+      }
+    },
+    {
+      path: '/information',
+      name: 'information',
+      component: resolve => require(["@/pages/dynamicInformation/information"], resolve),
+      meta: {
+        title: '资讯动态',
+        keepAlive: false
+      }
+    },
+    {
+      path: '/parkingFeeMenu',
+      name: 'parkingFeeMenu',
+      component: resolve => require(["@/pages/parkingFee/parkingFeeMenu"], resolve),
+      meta: {
+        title: '停车缴费',
+        keepAlive: false
+      }
+    },
+    {
+      path: '/bindingPlates',
+      name: 'bindingPlates',
+      component: resolve => require(["@/pages/parkingFee/bindingPlates"], resolve),
+      meta: {
+        title: '绑定车牌',
+        keepAlive: false
+      }
+    },
+    {
+      path: '/checkParkingFee',
+      name: 'checkParkingFee',
+      component: resolve => require(["@/pages/parkingFee/checkParkingFee"], resolve),
+      meta: {
+        title: '查询停车费',
+        keepAlive: false
+      }
+    },
 
   ]
 })

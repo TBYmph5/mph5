@@ -17,6 +17,7 @@ export default {
   },
   methods: {
     routerChange(item) {
+
       console.log(item,'item')
       if(item.type == 2){
         if(item.href != 'null'){
@@ -27,6 +28,12 @@ export default {
       }else if(item.type == 1){
         if(item.href != 'null'){
           this.$router.push(item.href)
+        }else{
+          Toast.fail('正在建设中')
+        }
+      }else if(item.type == 3){
+        if(item.href != 'null'){
+          wx.miniProgram.navigateTo({url:item.href});
         }else{
           Toast.fail('正在建设中')
         }

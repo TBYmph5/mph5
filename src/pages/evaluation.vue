@@ -54,11 +54,6 @@
                 </van-uploader>
               </div>
             </div>
-            <!--<div class="gallery-item" v-for="(item,nn) in postData" :key="nn">-->
-            <!--<img :src="item.content" alt="图片" class="imgPreview">-->
-            <!--<van-icon name="close" @click="delImg(nn)" class="delte"/>-->
-            <!--</div>-->
-            <!--<van-uploader v-model="fileList" multiple :max-count="4" :after-read="afterRead" :delete="deleteItem"/>-->
           </div>
         </div>
       </div>
