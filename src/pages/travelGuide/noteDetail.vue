@@ -14,21 +14,22 @@
       <div class="travel-note">
         <p class="travel-note-title">标题标题标题</p>
         <span class="play-spots">
-         <i>游玩地点1, </i>  <i>游玩地点1, </i>  <i>游玩地点1, </i>  <i>游玩地点1</i> <i>游玩地点1</i></span>
+         <i>游玩地点1</i>  <i>游玩地点1</i>  <i>游玩地点1</i>  <i>游玩地点1</i> <i>游玩</i></span>
         <div class="note">
-          奇幻广场奇幻广场奇幻广场奇幻广场奇幻广场奇 奇幻广场奇幻广场奇幻广场奇幻广场奇幻广场奇幻广 奇幻广场奇幻广场奇幻广场奇幻广场奇幻广场奇幻广 奇幻广场奇幻广场奇幻广场奇幻广场奇幻广场奇幻广 奇幻广场奇幻广场奇幻广场奇幻广场奇幻广场奇幻广 奇幻广场奇幻广场奇幻广场奇幻广场奇幻广场奇幻广 奇幻广场奇幻广场奇幻广场奇幻广场奇幻广场奇幻广 奇幻广场奇幻广场奇幻广场奇幻广场奇幻广场奇幻广 奇幻广场奇幻广场奇幻广场奇幻广场奇幻广场奇幻广 奇幻广场奇幻广场奇幻广场奇幻广场奇幻广场奇幻广 奇幻广场奇幻广场奇幻广场奇幻广场奇幻广场奇幻广 奇幻广场奇幻广场奇幻广场奇幻广场奇幻广场奇幻广 奇幻广场奇幻广场奇幻广场奇幻广场奇幻广场奇幻广 奇幻广场奇幻广场奇幻广场奇幻广场奇幻广场奇幻广 奇幻广场奇幻广场奇幻广场奇幻广场奇幻广场奇幻广 奇幻广场奇幻广场奇幻广场奇幻广场奇幻广场奇幻广 奇幻广场奇幻广场奇幻广场奇幻广场奇幻广场奇幻广 奇幻广场奇幻广场奇幻广场奇幻广场奇幻广场奇幻广 奇幻广场奇幻广场奇幻广场奇幻广场奇幻广场奇幻广 奇幻广场奇幻广场奇幻广场奇幻广场奇幻广场奇幻广幻广场奇幻广场奇幻广场奇幻广场奇幻广场奇幻广场奇幻广场奇幻广场奇幻广场奇幻广场奇幻广场奇幻广场奇幻广场奇幻广场奇幻广场奇幻广场奇幻广场奇幻广场奇幻广场奇幻广场奇幻广场奇幻广场奇幻广场奇幻广场奇幻广场奇幻广场奇幻广场奇幻广场奇幻广场奇幻广场奇幻广场奇幻广场奇幻广场奇幻广场奇幻广场奇幻广场奇幻广场奇幻广场奇幻广场奇幻广场奇幻广场奇幻广场奇幻广场奇幻广场奇幻广场奇幻广场奇幻广场奇幻
+          游记详情游记详情游记详情游记详情游记详情游记详情游记详情游记详情游记详情游记详情游记详情游记详情游记详情游记详情游记详情游记详情游记详情游记详情游记详情游记详情游记详情游记详情游记详情游记详情游记详情游记详情游记详情游记详情游记详情游记详情游记详情游记详情游记详情游记详情游记详情游记详情游记详情游记详情游记详情游记详情游记详情游记详情游记详情游记详情游记详情游记详情游记详情游记详情游记详情游记详情游记详情游记详情游记详情游记详情游记详情游记详情游记详情游记详情游记详情游记详情游记详情游记详情游记详情游记详情游记详情
         </div>
-        <div class="view-number">Na ya na 发表于2019-10-07</div>
-        <div class="view-number" style="margin-top: 0.2rem">
-          <span class="view-item"> <i class="view-icon see-icon"></i> 111人浏览</span>
-          <span class="view-item"><i class="view-icon zan-icon"></i>111人点赞 </span>
-        </div>
+        <div class="view-number">Na ya na 发表于2019-10-07    <span class="view-item"> <i class="view-icon see-icon"></i> 浏览量：38</span></div>
       </div>
     </div>
     <!--操作-->
     <div class="option-wrap">
-      <span>评论</span>
-      <span>点赞</span>
+      <div class="option-item">
+        <span><i class="option-icon"></i>18</span>
+      </div>
+      <div class="option-item">
+        <span><i class="option-icon"></i>36</span>
+      </div>
+
     </div>
   </div>
   </div>
@@ -83,7 +84,8 @@
   .travel-note-title {
     font-size: 0.426rem;
     font-weight: bold;
-    color: rgba(51, 51, 51, 1);
+    color: #333;
+    letter-spacing: 1px;
     margin-bottom: 0.36rem;
   }
 
@@ -96,30 +98,35 @@
     box-sizing: border-box;
   }
 
+
   .play-spots {
     font-size: 0.36rem;
     font-weight: 400;
     color: rgba(102, 102, 102, 1);
+    margin-bottom: 0.4rem;
   }
 
   .play-spots i {
     display: inline-block;
     font-style: normal;
-    margin-right: 0.1rem;
     line-height: 0.6rem;
+    color:#469AFF;
+    font-size: 0.32rem;
+    padding: 0 0.2rem;
   }
 
   .note {
-    text-indent: 0.3rem;
+    text-indent: 0.5rem;
     line-height: 0.8rem;
-    font-size: 0.35rem;
-    color: rgba(51, 51, 51, 1);
+    font-size: 0.34rem;
+letter-spacing: 1px;
+    color:rgba(102,102,102,1);
   }
 
   .view-number {
     font-size: 0.32rem;
     font-weight: 400;
-    color: rgba(102, 102, 102, 1);
+    color: #666;
     margin-top: 0.5rem;
   }
 
@@ -129,6 +136,8 @@
     line-height: 0.48rem;
     min-width: 0.8rem;
     padding: 0 0.2rem 0 0;
+    float: right;
+    color:#333;
   }
 
   .view-number {
@@ -143,11 +152,7 @@
     height: 0.48rem;
     background: url("../../assets/images/see.png") center no-repeat;
     background-size: 100% 100%;
-  }
-
-  .view-number span .view-icon.zan-icon {
-    background: url("../../assets/images/focus.png") center no-repeat;
-    background-size: 100% 100%;
+    margin-right: 0.2rem;
   }
 
   .option-wrap {
@@ -156,10 +161,10 @@
     position: fixed;
     bottom: 0;
     left: 0;
-    box-shadow: 0px -1px 2px 0px rgba(88, 88, 88, 0.28);
+    box-shadow: 0px -1px 1px 0px rgba(88, 88, 88, 0.1);
     background: #fff;
   }
-  .option-wrap span{
+  .option-wrap .option-item{
     width: 50%;
     height: 1.173rem;
     line-height: 1.173rem;
@@ -167,10 +172,32 @@
     font-size: 0.36rem;
     color: #333333;
    text-align: center;
+
   }
-  .option-wrap span:last-child{
-    background: #00AA4D;
-    color:#fff;
+  .option-wrap .option-item span{
+    padding: 0 0.3rem;
+    height: 0.53rem;
+    line-height: 0.53rem;
+    width: 1rem;
+    display: inline-block;
+    position: relative;
+  }
+  .option-wrap .option-item span i{
+    position: absolute;
+    margin: auto;
+    top:0;
+    bottom: 0;
+    left: 0;
+    display: inline-block;
+    width: 0.53rem;
+    height: 0.53rem;
+    background: url("../../assets/images/youjizan.png") center no-repeat;
+    background-size: 100% 100%;
+    float: left;
+  }
+  .option-wrap .option-item:nth-child(2) span i{
+    background: url("../../assets/images/notepinglun.png") center no-repeat;
+    background-size: 100% 100%;
   }
   .travel-note-content-wrap{
     width: 100%;
@@ -181,4 +208,5 @@
     -moz-box-sizing: border-box;
     box-sizing: border-box;
   }
+
 </style>

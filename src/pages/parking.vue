@@ -24,18 +24,18 @@
               <img src="https://image.supconit.net/parking.jpg" alt preview="1"/>
             </div>
             <div class="park_flex">
-            <div class="fee-table">
-              <div class="row">
-                <div class="cell">收费标准</div>
-                <div class="cell"><i class="fee-mark">4元</i> <em>起</em> /小时</div>
-              </div>
-              <div class="row  remaining-row">
-                <div class="cell">剩余车位</div>
-                <div class="cell remaining-number">215</div>
+              <div class="fee-table">
+                <div class="row">
+                  <div class="cell">收费标准</div>
+                  <div class="cell"><i class="fee-mark">{{money}}元</i> <em>起</em> /小时</div>
+                </div>
+                <div class="row  remaining-row">
+                  <div class="cell">剩余车位</div>
+                  <div class="cell remaining-number">215</div>
+                </div>
               </div>
             </div>
-              </div>
-            </div>
+          </div>
         </div>
       </div>
     </div>
@@ -58,6 +58,7 @@
         lat: 0,
         golng: 0,
         golat: 0,
+        address:'',
         originName: "起点",
         destinationName: "终点",
         loaded: false,
@@ -69,8 +70,10 @@
           {name: "高德地图", key: 1},
           {name: "百度地图", key: 2},
           {name: "腾讯地图", key: 3}
-        ]
-      };
+        ],
+
+      }
+        ;
     },
     mounted() {
       this.center();
@@ -136,38 +139,48 @@
         }
       },
       Navigation() {
-        this.show = true;
+
+        let guideObject= {
+          amapY: this.golng,
+            name: this.name,
+            address: this.address,
+            amapX: this.golat,
+            type: 'wc'
+
+        }
+        console.log(guideObject,'一道');
+        wx.miniProgram.navigateTo({url: '/pages/map/index?a=' + JSON.stringify(guideObject)})
       },
       center() {
         let self = this;
-        let mapObj = new AMap.Map("surrounding");
-        mapObj.plugin("AMap.Geolocation", function () {
-          let geolocation = new AMap.Geolocation({
-            enableHighAccuracy: true, //是否使用高精度定位，默认:true
-            timeout: 10000, //超过10秒后停止定位，默认：无穷大
-            maximumAge: 0, //定位结果缓存0毫秒，默认：0
-            convert: true, //自动偏移坐标，偏移后的坐标为高德坐标，默认：true
-            showButton: true, //显示定位按钮，默认：true
-            buttonPosition: "LB", //定位按钮停靠位置，默认：'LB'，左下角
-            buttonOffset: new AMap.Pixel(10, 20), //定位按钮与设置的停靠位置的偏移量，默认：Pixel(10, 20)
-            showMarker: false, //定位成功后在定位到的位置显示点标记，默认：true
-            showCircle: false, //定位成功后用圆圈表示定位精度范围，默认：true
-            panToLocation: true, //定位成功后将定位到的位置作为地图中心点，默认：true
-            zoomToAccuracy: true //定位成功后调整地图视野范围使定位位置及精度范围视野内可见，默认：false
-          });
-          mapObj.addControl(geolocation);
-          // geolocation.getCurrentPosition();
-          geolocation.getCurrentPosition(function (status, result) {
-            console.log(status, "status");
-            console.log(result, "result");
-            console.log(result, "Amap");
-            self.lng = Number(result.position.lng);
-            self.lat = Number(result.position.lat);
-            // alert(self.lng, "11111");
-            // alert(self.lat, "2222");
+      //   let mapObj = new AMap.Map("surrounding");
+      //   mapObj.plugin("AMap.Geolocation", function () {
+      //     let geolocation = new AMap.Geolocation({
+      //       enableHighAccuracy: true, //是否使用高精度定位，默认:true
+      //       timeout: 10000, //超过10秒后停止定位，默认：无穷大
+      //       maximumAge: 0, //定位结果缓存0毫秒，默认：0
+      //       convert: true, //自动偏移坐标，偏移后的坐标为高德坐标，默认：true
+      //       showButton: true, //显示定位按钮，默认：true
+      //       buttonPosition: "LB", //定位按钮停靠位置，默认：'LB'，左下角
+      //       buttonOffset: new AMap.Pixel(10, 20), //定位按钮与设置的停靠位置的偏移量，默认：Pixel(10, 20)
+      //       showMarker: false, //定位成功后在定位到的位置显示点标记，默认：true
+      //       showCircle: false, //定位成功后用圆圈表示定位精度范围，默认：true
+      //       panToLocation: true, //定位成功后将定位到的位置作为地图中心点，默认：true
+      //       zoomToAccuracy: true //定位成功后调整地图视野范围使定位位置及精度范围视野内可见，默认：false
+      //     });
+      //     mapObj.addControl(geolocation);
+      //     // geolocation.getCurrentPosition();
+      //     geolocation.getCurrentPosition(function (status, result) {
+      //       console.log(status, "status");
+      //       console.log(result, "result");
+      //       console.log(result, "Amap");
+      //       self.lng = Number(result.position.lng);
+      //       self.lat = Number(result.position.lat);
+      //       // alert(self.lng, "11111");
+      //       // alert(self.lat, "2222");
             self.searchMap();
-          });
-        });
+      //     });
+      //   });
       },
       searchMap() {
         let self = this;
@@ -199,34 +212,39 @@
         var allmarkers = [
           {
             icon: icon,
-            position: [118.455993, 31.65752],
+            position: [120.015449,30.516792],
             name: "景区停车场",
+            address: '景区停车场',
             money: "5",
             car: "20",
             index: 0
           },
-          // {
-          //   icon: icon,
-          //   position: [118.458264,31.649141],
-          //   name: "采石矶高端停车场2",
-          //   money: "5",
-          //   car: "205",
-          //   index: 1
-          // },
-          // {
-          //   icon: icon,
-          //   position: [118.463886,31.651443],
-          //   name: "采石矶高端停车场3",
-          //   money: "5",
-          //   car: "202",
-          //   index: 2
-          // }
+          {
+            icon: icon,
+            position: [120.015573,30.516824],
+            name: "上渚山奇幻谷景区停车场2",
+            address: '上渚山奇幻谷景区停车场2',
+            money: "2",
+            car: "205",
+            index: 1
+          },
+          {
+            icon: icon,
+            position: [120.01745,30.51644],
+            name:"田博园景区停车场3",
+            address: '田博园景区停车场3',
+            money: "3",
+            car: "202",
+            index: 2
+          }
         ];
+
         var infoWindow = new AMap.InfoWindow({
           offset: new AMap.Pixel(5, -30)
         });
         // 添加一些分布不均的点到地图上,地图上添加三个点标记，作为参照
         for (var i = 0, marker; i < allmarkers.length; i++) {
+
           var marker = new AMap.Marker({
             position: allmarkers[i]["position"],
             icon: icon,
@@ -236,6 +254,7 @@
           marker.car = allmarkers[i].car;
           marker.position = allmarkers[i]["position"];
           marker.money = allmarkers[i].money;
+          marker.address=allmarkers[i].address
           marker.on("click", markerClick);
           marker.emit("click", {target: marker});
           self.markers.push(marker);
@@ -256,13 +275,16 @@
         map.setFitView();
       },
       showInfo(e) {
+        console.log(e,'站台')
         // alert(e.target)
         this.name = e.target.content;
         this.money = e.target.money;
         this.car = e.target.car;
         this.golng = e.target.position[0];
         this.golat = e.target.position[1];
+        this.address=e.target.address;
         // this.currentDotIdx = idx;
+
       }
     }
   };
@@ -452,35 +474,41 @@
   .guanguang {
     height: 100%;
   }
-  .fee-table{
+
+  .fee-table {
     display: table;
     height: 2.13rem;
     width: 5rem;
-   margin-top: 0.15rem;
+    margin-top: 0.15rem;
   }
-  .fee-table .row{
+
+  .fee-table .row {
     display: table-row;
 
   }
-  .fee-table .cell{
+
+  .fee-table .cell {
     display: table-cell;
   }
-  .fee-mark{
-    font-size:0.48rem;
-    font-weight:500;
-    color:rgba(255,147,19,1);
+
+  .fee-mark {
+    font-size: 0.48rem;
+    font-weight: 500;
+    color: rgba(255, 147, 19, 1);
     font-style: normal;
   }
-  .fee-mark .row .cell:first-child{
-    color:rgba(66,73,82,1);
-  }
-  .fee-mark .row  .cell em{
-    color:rgba(146,146,146,1);
+
+  .fee-mark .row .cell:first-child {
+    color: rgba(66, 73, 82, 1);
   }
 
-  .remaining-number{
-    font-size:0.48rem;
-    font-weight:500;
-    color:rgba(102,102,102,1);
+  .fee-mark .row .cell em {
+    color: rgba(146, 146, 146, 1);
+  }
+
+  .remaining-number {
+    font-size: 0.48rem;
+    font-weight: 500;
+    color: rgba(102, 102, 102, 1);
   }
 </style>

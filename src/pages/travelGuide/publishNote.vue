@@ -4,10 +4,12 @@
       <div class="page">
         <!-- 热门景点 -->
         <div class="hot-spot">
+          <div class="part-name">游记标题</div>
+          <van-field v-model="value" placeholder="请输入游记标题" />
+        </div>
+        <div class="hot-spot">
           <div class="part-name">游玩景点</div>
-          <div class="hot-div-wrap">
-            <div class="hot-spot-item " :class="item.active?'active':''" v-for='(item,index) in hotSpotArray' :key='index'   @click="lightSpot(index)" >{{item.label}}</div>
-          </div>
+          <van-field v-model="value" placeholder="请输入最让你心动的几个景点，用逗号隔开" />
         </div>
         <!-- 评论 -->
         <div class="comment-area">
@@ -44,13 +46,7 @@
         name: "publishNote",
       data(){
           return{
-            hotSpotArray:[
-              { label: '寻梦湖', active: false },
-              { label: '九曲花街',active:false },
-              { label: '紫藤长廊', active: false },
-              { label: '樱花草甸', active: false  },
-              { label: '户外探险基地', active: false  },
-            ],
+            value:'',
             comment:'',
             wordsNumber:0,
             postData:[]
@@ -60,21 +56,7 @@
         submitComment(){
 
         },
-        /**
-         * 游玩景点标签
-         */
-        lightSpot(index){
-          var that=this;
-          let currenthotSpotArray = that.hotSpotArray;
-          currenthotSpotArray.forEach(function(item,ind){
-            if (ind==index){
-              item.active=true
-            }else{
-              item.active =false
-            };
-            that.hotSpotArray=currenthotSpotArray;
-          })
-        },
+
         delImg(index) {
           // 删除指定下标的图片对象
           if (isNaN(index) || index >= this.postData.length) {
@@ -141,7 +123,6 @@
   }
   .hot-spot{
     width: 100%;
-    height:3.79rem;
     background:#fff;
     margin-bottom: 0.26rem;
     padding: 0.49rem  0 0 0.4rem;
@@ -218,6 +199,7 @@
     text-indent: 0.26rem;
     font-size: 0.373rem;
     box-sizing: border-box;
+    border-color: rgba(243,243,243,1);
 
   }
   .words-number{
@@ -282,7 +264,7 @@
     font-size:0.4rem;
     color:rgba(255,255,255,1);
     letter-spacing: 1px;
-    margin-top:2.4rem;
+    margin-top:1.6rem;
   }
   .delet-icon{
     width: 0.36rem;
@@ -366,7 +348,7 @@
   }
   .submit-btn{
     display: block;
-    margin: 2.4rem auto  0;
+    margin: 1.8rem auto  0;
   }
 
 </style>
