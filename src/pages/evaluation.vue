@@ -48,7 +48,7 @@
                   <img :src="item.content" alt="图片" class="imgPreview">
                   <span @click="delImg(nn)" class="delte iconfont  icon-lajitong"/>
                 </div>
-                <van-uploader :after-read="afterRead" :accept="'image/*'" v-show="postData.length<4">
+                <van-uploader :after-read="afterRead" :accept="'image/*'" v-show="postData.length<9">
                   <span class="iconfont icon-xiangji">  <i>添加图片</i></span>
 
                 </van-uploader>

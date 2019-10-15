@@ -9,7 +9,7 @@ export default new Router({
     name: 'index',
     component: index,
     redirect: '/hometab',
-    // redirect: '/travelNotes',
+    // redirect: '/avtivities',
     meta: {
       title: '上渚山奇幻谷',
     },

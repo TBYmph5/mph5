@@ -208,7 +208,11 @@
       };
     },
     mounted() {
-      // this.id = parent.window.qualificationId;
+      console.log(this.$route.query.openId);
+      debugger
+      if(this.$route.query.openId !==undefined){
+        setStore('openId',this.$route.query.openId)
+      }
       this.optionsId = this.$route.query.id;
       this.type = 2;
       this.getInfo(this.optionsId);
@@ -912,7 +916,7 @@
 
   .introduce {
     width: 8.7rem;
-    height: 3.58rem;
+    height: 4.58rem;
     margin: 0 auto;
    background: #E4A538;
     background-repeat: no-repeat;
@@ -940,11 +944,7 @@
     text-align: justify;
     margin-top: .15rem;
     width: 100%;
-    height: 2.1rem;
-    display: -webkit-box;
-    -webkit-box-orient: vertical;
-    -webkit-line-clamp: 4;
-    overflow: hidden;
+
   }
 
   /* .MerContent {
@@ -1331,7 +1331,7 @@
   }
   .introduce-dasheBorder{
     width:8.5rem;
-    height:3.38rem;
+    height:4.38rem;
     border:1px dashed rgba(243,243,243,1);
     border-radius:10px;
     margin: 0.1rem;

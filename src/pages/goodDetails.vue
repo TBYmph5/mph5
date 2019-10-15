@@ -19,7 +19,13 @@ height: 100%;"></iframe>
       }
     },
     mounted() {
-document.title=this.$route.query.name
+      if(this.$route.query.name){
+        document.title=this.$route.query.name
+      }
+      if(this.$route.query.openId !==undefined){
+        setStore('openId',this.$route.query.openId)
+      }
+
       // 将数据绑定到window下面，提供给外部调用
       // window['qualificationId'] = this.qualificationId;
       window['goodId'] = this.goodId;
@@ -88,7 +94,8 @@ document.title=this.$route.query.name
         })
       },
       setObj(Json){
-        this.qualificationObj=Json
+        this.qualificationObj=Json;
+        document.title=Json.productList[0].name
       },
       goMap(){
         wx.miniProgram.navigateTo({url:'/pages/map/index?a='+ JSON.stringify(this.qualificationObj)})
