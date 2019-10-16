@@ -169,7 +169,7 @@
 <script>
   import {Toast} from "vant";
   import http from "../api/public";
-
+  import {getStore, removeStore,setStore} from '@/utils/storage'
   var DATE_YEAR = new Date().getFullYear();
   var DATE_MONTH = new Date().getMonth() + 1;
   var DATE_DAY = new Date().getDate();
@@ -209,7 +209,6 @@
     },
     mounted() {
       console.log(this.$route.query.openId);
-      debugger
       if(this.$route.query.openId !==undefined){
         setStore('openId',this.$route.query.openId)
       }

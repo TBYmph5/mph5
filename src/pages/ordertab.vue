@@ -115,7 +115,7 @@ export default {
   },
   methods: {
     viewQRcode (code) {
-      this.show = true
+      this.show = true;
       document.getElementById("qrcodeDom").innerHTML = "";
       let qrcode = new QRCode(document.getElementById("qrcodeDom"), {
         width: 260,
@@ -136,7 +136,7 @@ export default {
      * 滚动加载
      */
     loadMoreAllOrder () {
-      let that = this
+      let that = this;
       setTimeout(() => {
         http.post('/order/info/page?current=' + that.allOrderPages + '&size=8', {}).then(res => {
           if (res.success) {
@@ -159,7 +159,7 @@ export default {
             })
             that.allOrderRecods = that.allOrderRecods.concat(recodesArray);
             //页数递增
-            that.allOrderPages = that.allOrderPages + 1
+            that.allOrderPages = that.allOrderPages + 1;
             //加载状态结束
             that.listLoading = false;
             //数据全部加载完成

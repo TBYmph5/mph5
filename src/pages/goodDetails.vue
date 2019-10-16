@@ -10,6 +10,7 @@ height: 100%;"></iframe>
 </template>
 
 <script>
+  import {getStore, removeStore,setStore} from '@/utils/storage'
   export default {
     name: "qualificationDetails",
     data() {
@@ -19,11 +20,12 @@ height: 100%;"></iframe>
       }
     },
     mounted() {
-      if(this.$route.query.name){
-        document.title=this.$route.query.name
-      }
+      // if(this.$route.query.name){
+      //   document.title=this.$route.query.name
+      // }
       if(this.$route.query.openId !==undefined){
-        setStore('openId',this.$route.query.openId)
+        setStore('openId',this.$route.query.openId);
+          document.title='景交车'
       }
 
       // 将数据绑定到window下面，提供给外部调用

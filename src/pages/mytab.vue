@@ -4,14 +4,19 @@
     <div class="container">
       <div class='user-info-wrap'>
         <div class='user-info-content'>
-          <span class='username'>{{userInfo.nickName}}</span>
-          <div class='user-introduction'>
-           暂无个人简介
-          </div>
+          <span class='username' v-if="userInfo.nickName!==''">{{userInfo.nickName}}</span>
+          <span class='username' v-else>{{userInfo.phone}}</span>
+          <!--<div class='user-introduction'>-->
+          <!--暂无个人简介-->
+          <!--</div>-->
           <div class='avtar'>
             <div class='avtar-content'>
               <img :src='qiNiu+"/"+ userInfo.avatar'>
             </div>
+          </div>
+          <!--二维码-->
+          <div class="erweima-wrap">
+            <span @click="checkQrCode">二维码</span>
           </div>
           <!-- 用户积分信息 -->
           <div class='user-gender-wrap'>
@@ -59,12 +64,28 @@
 
 
     </div>
+    <!--二维码-->
+    <van-popup v-model="Qrshow">
+      <div class="qrcode"
+           style="width:300px;height:300px;overflow:hidden;">
+        <img :src="qrcodeImg"
+             style="width:260px;height:260px;position:absolute;left:0;right:0;bottom:0;top:0;margin:auto;"/>
+        <!--<img :src="logo"-->
+        <!--class="logo">-->
+      </div>
+    </van-popup>
+    <div class="qrcodeCanvas"
+         id="qrcodeDom"
+         ref="qrcodeCanvas"
+         v-show="false">
+    </div>
+
   </div>
 </template>
 
 <script>
   import http from '../api/public'
-
+  import QRCode from "qrcodejs2";
   export default {
     name: "mytab",
     data() {
@@ -73,11 +94,15 @@
         userInfo: {},
         activeName: [],
         border: false,
-        qiNiu: this.$store.state.qiNiuLink
+        qiNiu: this.$store.state.qiNiuLink,
+        qrcodeImg: '',
+        goodId:'1174575036284088322',
+        Qrshow:false,
       }
     },
     mounted() {
-      this.getCurrentUserInfo()
+      this.getCurrentUserInfo();
+      this.getCurrentUserThisGoodOrder();
     },
     methods: {
       myOrders() {
@@ -113,18 +138,46 @@
         this.$router.push({
           path: '/integral'
         })
-
       },
-
       getCurrentUserInfo() {
         http.get('/customer/info/getCurrentInfo').then(res => {
-          console.log(res,'reesssss')
-          if(res.obj.avatar ==''){
-            res.obj['avatar']='avtar.png'
+          console.log(res, 'reesssss')
+          if (res.obj.avatar == '') {
+            res.obj['avatar'] = 'avtar.png'
           }
           this.userInfo = res.obj;
         })
-      }
+      },
+      /**
+       *根据商品Id 获取用户这个商品的用户订单
+       */
+      getCurrentUserThisGoodOrder() {
+        let parmas={};
+        parmas['productId']=this.goodId
+        http.post('/order/info/page?current=1&size=8', parmas).then(res => {
+          let orderArray = res.obj.records[0];
+          this.viewQRcode(orderArray.checkCode);
+        })
+
+      },
+      checkQrCode(){
+        this.Qrshow=true
+      },
+      viewQRcode(code) {
+        this.show = true;
+        document.getElementById("qrcodeDom").innerHTML = "";
+        let qrcode = new QRCode(document.getElementById("qrcodeDom"), {
+          width: 260,
+          height: 260,
+          text: code,
+          colorDark: "#000",
+          colorLight: "#fff",
+          correctLevel: QRCode.CorrectLevel.M
+        });
+        this.qrcodeImg = this.$refs["qrcodeCanvas"]
+          .getElementsByTagName("canvas")[0]
+          .toDataURL("image/png");
+      },
     }
   }
 </script>
@@ -142,19 +195,20 @@
 
   .user-info-wrap {
     width: 100%;
-    height: 5.73rem;
+    height: 6.4rem;
     background: rgba(64, 158, 255, 1);
     overflow: hidden;
   }
 
   .user-info-content {
-    width: 92%;
-    height: 3.73rem;
-    background: rgba(255, 255, 255, 1);
+    width: 9.2rem;
+    height: 5.5rem;
+    background: url("../assets/images/unionCard.png") center no-repeat;
+    background-size: 100% 100%;
     box-shadow: 0px 0.06rem 0.2rem 0px rgba(182, 182, 182, 0.5);
     border-radius: 0.21rem;
     margin: 0.53rem auto 0;
-    padding: 0.26rem 0.37rem;
+    padding: 1rem 0.37rem;
     border: 1px solid transparent;
     box-sizing: border-box;
     position: relative;
@@ -165,8 +219,9 @@
     height: 0.66rem;
     font-size: 0.48rem;
     /* font-weight:bold; */
-    color: rgba(48, 49, 51, 1);
+    color: #fff;
     margin-bottom: 0.13rem;
+    text-indent: 3rem;
   }
 
   .user-introduction {
@@ -187,8 +242,8 @@
     position: absolute;
     background: rgba(92, 172, 255, 1);
     border-radius: 50%;
-    right: 0.67rem;
-    top: 0.26rem;
+    left: 0.3rem;
+    top: 0.4rem;
   }
 
   .avtar .avtar-content {
@@ -208,7 +263,7 @@
     height: 1.33rem;
     width: 8.46rem;
     margin: 0.4rem auto 0;
-    border-top: 1px solid rgba(235, 238, 245, 1);
+    border-top: 1px dashed rgba(235, 238, 245, 0.5);
     text-align: center;
   }
 
@@ -223,7 +278,7 @@
     content: '';
     width: 1px;
     height: 0.66rem;
-    background: rgba(235, 238, 245, 1);
+    background: rgba(235, 238, 245, 0.5);
     position: absolute;
     top: 0.33rem;
     right: 0;
@@ -236,7 +291,7 @@
   .user-gender-wrap .user-gender-item {
     font-size: 0.34rem;
     font-weight: bold;
-    color: rgba(102, 102, 102, 1);
+    color: #fff;
     line-height: 0.8rem;
   }
 
@@ -382,8 +437,39 @@
   .sub-menu {
     text-indent: 0.8rem;
   }
-  .user-menu-wrap .van-cell__left-icon, .van-cell__right-icon{
-    line-height:1.33rem !important; ;
+
+  .user-menu-wrap .van-cell__left-icon, .van-cell__right-icon {
+    line-height: 1.33rem !important;;
   }
 
+  .erweima-wrap {
+    height: 1.5rem;
+    width: 100%;
+    position: relative;
+  }
+
+  .erweima-wrap span {
+    display: inline-block;
+    width: 1.97rem;
+    height: 0.58rem;
+
+    line-height: 0.58rem;
+    background: rgba(64, 158, 255, 1);
+    -webkit-box-shadow: 0px 0.026rem 0.08rem 0px rgba(64, 158, 255, 0.6);
+    box-shadow: 0px 0.026rem 0.08rem 0px rgba(64, 158, 255, 0.6);
+    border-radius: 0.29rem;
+    text-align: center;
+    display: inline-block;
+    font-size: 0.32rem;
+    font-weight: 400;
+    color: rgba(255, 255, 255, 1);
+    margin-left: 0.4rem;
+    padding: 0;
+    outline: none;
+    border: none;
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    letter-spacing: 2px;
+  }
 </style>
