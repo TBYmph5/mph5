@@ -377,6 +377,7 @@
   .see > img {
     width: 0.48rem;
     height: 0.48rem;
+    margin-right: 0.1rem;
   }
 
   .see > view {
@@ -399,6 +400,7 @@
   .like > img {
     width: 0.48rem;
     height: 0.48rem;
+    margin-right: 0.1rem;
   }
 
   .like > view {

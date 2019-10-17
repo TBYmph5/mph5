@@ -27,12 +27,15 @@
               <div class="fee-table">
                 <div class="row">
                   <div class="cell">收费标准</div>
-                  <div class="cell"><i class="fee-mark">{{money}}元</i> <em>起</em> /小时</div>
+                  <div class="cell" @click="goChargeStandard"><i class="fee-mark">详情</i></div>
+                  <!--{{money}}元</i> <em>起</em> /小时-->
                 </div>
-                <div class="row  remaining-row">
-                  <div class="cell">剩余车位</div>
-                  <div class="cell remaining-number">215</div>
-                </div>
+                <!--<div class="row  remaining-row">-->
+                  <!--<div class="cell">-->
+                    <!--&lt;!&ndash;剩余车位&ndash;&gt;-->
+                  <!--</div>-->
+                  <!--<div class="cell remaining-number"></div>-->
+                <!--</div>-->
               </div>
             </div>
           </div>
@@ -212,27 +215,9 @@
         var allmarkers = [
           {
             icon: icon,
-            position: [120.015449,30.516792],
-            name: "景区停车场",
-            address: '景区停车场',
-            money: "5",
-            car: "20",
-            index: 0
-          },
-          {
-            icon: icon,
-            position: [120.015573,30.516824],
-            name: "上渚山奇幻谷景区停车场2",
-            address: '上渚山奇幻谷景区停车场2',
-            money: "2",
-            car: "205",
-            index: 1
-          },
-          {
-            icon: icon,
             position: [120.01745,30.51644],
-            name:"田博园景区停车场3",
-            address: '田博园景区停车场3',
+            name:"田博园景区停车场",
+            address: '田博园景区停车场',
             money: "3",
             car: "202",
             index: 2
@@ -285,6 +270,11 @@
         this.address=e.target.address;
         // this.currentDotIdx = idx;
 
+      },
+      goChargeStandard(){
+        this.$router.push({
+          path:'/goChargeStandard'
+        })
       }
     }
   };
@@ -478,7 +468,7 @@
   .fee-table {
     display: table;
     height: 2.13rem;
-    width: 5rem;
+    width:3rem;
     margin-top: 0.15rem;
   }
 
@@ -492,10 +482,11 @@
   }
 
   .fee-mark {
-    font-size: 0.48rem;
+    font-size: 0.37rem;
     font-weight: 500;
     color: rgba(255, 147, 19, 1);
     font-style: normal;
+    text-decoration: underline;
   }
 
   .fee-mark .row .cell:first-child {

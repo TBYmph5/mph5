@@ -245,9 +245,9 @@
     width: 100%;
     height: auto;
   }
-  .note-words{
-    text-indent: 0.4rem;
-  }
+  /*.note-words{*/
+    /*text-indent: 0.4rem;*/
+  /*}*/
   p{
     color: #333;
     letter-spacing: 1px;

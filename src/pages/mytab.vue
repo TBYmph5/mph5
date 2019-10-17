@@ -15,9 +15,8 @@
             </div>
           </div>
           <!--二维码-->
-          <div class="erweima-wrap">
-            <!--<span @click="checkQrCode">二维码</span>-->
-          </div>
+          <!--<div class="erweima-wrap" v-if="qrcodeImg!==''">-->
+          <!--</div>-->
           <!-- 用户积分信息 -->
           <!--<div class='user-gender-wrap'>-->
             <!--<div class='user-gender-item'>-->
@@ -156,7 +155,10 @@
         parmas['productId']=this.goodId
         http.post('/order/info/page?current=1&size=8', parmas).then(res => {
           let orderArray = res.obj.records[0];
-          this.viewQRcode(orderArray.checkCode);
+          if(res.obj.records.length>0){
+            this.viewQRcode(orderArray.checkCode);
+          }
+
         })
 
       },
@@ -196,19 +198,19 @@
   .user-info-wrap {
     width: 100%;
     height: 6.4rem;
-    background: rgba(64, 158, 255, 1);
+    /*background: rgba(64, 158, 255, 1);*/
     overflow: hidden;
   }
 
   .user-info-content {
     width: 9.2rem;
-    height: 5.5rem;
+    height:5.09rem;
     background: url("../assets/images/unionCard.png") center no-repeat;
     background-size: 100% 100%;
     box-shadow: 0px 0.06rem 0.2rem 0px rgba(182, 182, 182, 0.5);
     border-radius: 0.21rem;
     margin: 0.53rem auto 0;
-    padding: 1rem 0.37rem;
+    padding: 2.6rem 0.37rem 0;
     border: 1px solid transparent;
     box-sizing: border-box;
     position: relative;
@@ -221,7 +223,8 @@
     /* font-weight:bold; */
     color: #fff;
     margin-bottom: 0.13rem;
-    text-indent: 3rem;
+    text-align: center;
+    /*text-indent: 3rem;*/
   }
 
   .user-introduction {
@@ -240,16 +243,18 @@
     width: 1.6rem;
     height: 1.6rem;
     position: absolute;
-    background: rgba(92, 172, 255, 1);
+    background: #71BB67;
     border-radius: 50%;
-    left: 0.3rem;
-    top: 0.4rem;
+    left: 0;
+    right: 0;
+    margin: auto;
+    top: 0.69rem;
   }
 
   .avtar .avtar-content {
-    width: 1.4rem;
-    height: 1.4rem;
-    margin: 0.1rem;
+    width: 1.5rem;
+    height: 1.5rem;
+    margin: 0.05rem;
     border-radius: 50%;
     overflow: hidden;
   }
@@ -443,33 +448,14 @@
   }
 
   .erweima-wrap {
-    height: 1.5rem;
-    width: 100%;
-    position: relative;
-  }
-
-  .erweima-wrap span {
-    display: inline-block;
-    width: 1.97rem;
-    height: 0.58rem;
-
-    line-height: 0.58rem;
-    background: rgba(64, 158, 255, 1);
-    -webkit-box-shadow: 0px 0.026rem 0.08rem 0px rgba(64, 158, 255, 0.6);
-    box-shadow: 0px 0.026rem 0.08rem 0px rgba(64, 158, 255, 0.6);
-    border-radius: 0.29rem;
-    text-align: center;
-    display: inline-block;
-    font-size: 0.32rem;
-    font-weight: 400;
-    color: rgba(255, 255, 255, 1);
-    margin-left: 0.4rem;
-    padding: 0;
-    outline: none;
-    border: none;
+    height: 1.02rem;
+    width: 1.02rem;
     position: absolute;
-    bottom: 0;
-    right: 0;
-    letter-spacing: 2px;
+    top:0.44rem;
+    right: 0.6rem;
+    background: url("../assets/images/erweima.png")center no-repeat;
+    background-size: 100% 100%;
   }
+
+
 </style>

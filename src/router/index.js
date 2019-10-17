@@ -8,8 +8,8 @@ export default new Router({
     path: '/',
     name: 'index',
     component: index,
-    // redirect: '/hometab',
-    redirect: '/travelNotes',
+    redirect: '/hometab',
+    // redirect: '/travelNotes',
     meta: {
       title: '上渚山奇幻谷',
     },
@@ -381,6 +381,16 @@ export default new Router({
         keepAlive: false
       }
     },
+    {
+      path: '/goChargeStandard',
+      name: 'goChargeStandard',
+      component: resolve => require(["@/pages/parkingFee/goChargeStandard"], resolve),
+      meta: {
+        title: '停车收费详情',
+        keepAlive: true
+      }
+    },
+
 
   ]
 })

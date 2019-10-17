@@ -3,18 +3,18 @@
   <!--pages/consult/consult.wxml-->
   <div class="page">
     <div class="consult-list">
-      <div class="item van-hairline--top-bottom" v-for="(item,index) in list" :key="index">
+      <div class="item van-hairline--top-bottom" v-for="(item,index) in list" :key="index" @click="goDetail(item)">
         <img class="cover" :src="item.cover">
         <van-row>
           <van-col span="18">
             <div class="name">{{item.name}}</div>
           </van-col>
-          <van-col span="3">
-            <div class="div"><img class="icon" src="../../assets/images/see.png">{{item.view}}</div>
-          </van-col>
-          <van-col span="3">
-            <div class="focus"><img class="icon" src="../../assets/images/focus.png">{{item.focus}}</div>
-          </van-col>
+          <!--<van-col span="3">-->
+            <!--<div class="div"><img class="icon" src="../../assets/images/see.png">{{item.view}}</div>-->
+          <!--</van-col>-->
+          <!--<van-col span="3">-->
+            <!--<div class="focus"><img class="icon" src="../../assets/images/focus.png">{{item.focus}}</div>-->
+          <!--</van-col>-->
         </van-row>
         <div class="describe van-multi-ellipsis--l3">{{item.describe}}</div>
       </div>
@@ -31,21 +31,28 @@
           return{
             list:[
               {
-                name:'采石矶正式开园',
-                view:23,
+                name:'上渚山奇幻谷首届稻草人节来啦！',
+                view:725,
                 focus:18,
-                cover:'https://images.unsplash.com/photo-1551334787-21e6bd3ab135?w=640',
-                describe:'奇幻广场奇幻广场奇幻广场奇幻广场奇幻广场奇幻广场奇幻广场奇幻广场奇幻广场奇幻广场奇幻广场奇幻广场奇幻广'
+                cover:'https://image.supconit.net/%E7%A8%BB%E8%8D%89%E4%BA%BA.jpg',
+                describe:'带孩子亲近自然！上渚山奇幻谷首届稻草人节强势来袭！',
+                src:'https://mp.weixin.qq.com/s/FtdlIuHZOoFOS17LEghB1w'
               },
               {
-                name: '采石矶正式开园',
+                name: '终于等来了奇幻彩色跑开始的这一天！',
                 view: 23,
                 focus: 18,
-                cover: 'https://images.unsplash.com/photo-1551334787-21e6bd3ab135?w=640',
-                describe: '奇幻广场奇幻广场奇幻广场奇幻广场奇幻广场奇幻广场奇幻广场奇幻广场奇幻广场奇幻广场奇幻广场奇幻广场奇幻广'
+                cover: 'https://image.supconit.net/%E5%BD%A9%E8%89%B2%E8%B7%91.jpg',
+                describe: '嗨翻天！首届奇幻彩色跑酷炫开炮，每个人都是最靓的仔！',
+                src:'https://mp.weixin.qq.com/s/fO75THAdy3PRLYjD1bhUMg'
               }
             ]
           }
+      },
+      methods:{
+        goDetail(item){
+          window.location.href=item.src
+        }
       }
     }
 </script>

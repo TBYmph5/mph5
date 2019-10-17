@@ -10,6 +10,7 @@ height: 100%;"></iframe>
 </template>
 
 <script>
+
   import {getStore, removeStore,setStore} from '@/utils/storage'
   export default {
     name: "qualificationDetails",
@@ -81,7 +82,15 @@ height: 100%;"></iframe>
        * 路由返回
        */
       routerGoBack(){
-        this.$router.go(-1)
+        debugger
+        if( this.$route.query.name=='景交车'){
+          this.$router.push({
+            path:'/'
+          })
+        }else{
+          this.$router.go(-1)
+        }
+
       },
       /**
        * 获取图片
