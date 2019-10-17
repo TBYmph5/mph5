@@ -16,20 +16,20 @@
           </div>
           <!--二维码-->
           <div class="erweima-wrap">
-            <span @click="checkQrCode">二维码</span>
+            <!--<span @click="checkQrCode">二维码</span>-->
           </div>
           <!-- 用户积分信息 -->
-          <div class='user-gender-wrap'>
-            <div class='user-gender-item'>
-              <span class='gender-content'>0</span> 优惠券
-            </div>
-            <div class='user-gender-item'>
-              <span class='gender-content'>0</span> 积分
-            </div>
-            <div class='user-gender-item'>
-              <span class='gender-content'>V1</span> 会员等级
-            </div>
-          </div>
+          <!--<div class='user-gender-wrap'>-->
+            <!--<div class='user-gender-item'>-->
+              <!--<span class='gender-content'>0</span> 优惠券-->
+            <!--</div>-->
+            <!--<div class='user-gender-item'>-->
+              <!--<span class='gender-content'>0</span> 积分-->
+            <!--</div>-->
+            <!--<div class='user-gender-item'>-->
+              <!--<span class='gender-content'>V1</span> 会员等级-->
+            <!--</div>-->
+          <!--</div>-->
         </div>
       </div>
       <!-- 用户模块菜单 -->
