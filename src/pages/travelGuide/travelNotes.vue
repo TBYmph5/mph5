@@ -82,7 +82,7 @@
 
                   'https://image.supconit.net/TBYgonglve1-1.png'
                 ],
-                banner:'https://image.supconit.net/TBYgonglve1-1.png',
+                banner:'https://image.supconit.net/%E6%94%BB%E7%95%A5.png',
                 noteDiscribe:'田博园园区位于下渚湖街道的上渚山奇幻谷，周边有多条交通路线可以到达园区。如果开着私家车来游玩的游客，只要在任意地图app上搜索德清田博园，只需要跟着导航就能轻松到达田博园啦。',
                 seeTime: '24',
                 LikeTime: '9',
@@ -328,7 +328,7 @@
   }
 
   .scieceImage > img {
-    width: auto;
+    width: 100%;
     height: 100%;
     border-radius: 0.26rem;
   }
