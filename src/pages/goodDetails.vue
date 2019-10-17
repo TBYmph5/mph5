@@ -82,14 +82,16 @@ height: 100%;"></iframe>
        * 路由返回
        */
       routerGoBack(){
-        debugger
-        if( this.$route.query.name=='景交车'){
-          this.$router.push({
-            path:'/'
-          })
-        }else{
-          this.$router.go(-1)
-        }
+
+        // if( this.$route.query.name=='景交车'){
+        this.$router.push({
+          path: '/',
+
+        })
+          // wx.miniProgram.navigateTo({url:'/pages/center/index?url=goodDetails&id=1183922079506939905'})
+        // }else{
+        //   this.$router.go(-1)
+        // }
 
       },
       /**

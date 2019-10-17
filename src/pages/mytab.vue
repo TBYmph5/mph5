@@ -15,8 +15,8 @@
             </div>
           </div>
           <!--二维码-->
-          <!--<div class="erweima-wrap" v-if="qrcodeImg!==''">-->
-          <!--</div>-->
+          <div class="erweima-wrap" v-if="qrcodeImg!==''" @click="checkQrCode">
+          </div>
           <!-- 用户积分信息 -->
           <!--<div class='user-gender-wrap'>-->
             <!--<div class='user-gender-item'>-->
@@ -95,7 +95,7 @@
         border: false,
         qiNiu: this.$store.state.qiNiuLink,
         qrcodeImg: '',
-        goodId:'1174575036284088322',
+        goodId:'1184754390184067073',
         Qrshow:false,
       }
     },
