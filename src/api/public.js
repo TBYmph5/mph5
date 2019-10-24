@@ -7,7 +7,8 @@ import router from '../router/index'
 
 
 // 设置通用host 前缀
-const HOST = '/api'
+// const HOST = '/api'
+const HOST = ''
 var token = ''
 let http = axios.create({
   // baseURL: '',
