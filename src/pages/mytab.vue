@@ -205,7 +205,7 @@
   .user-info-content {
     width: 9.2rem;
     height:5.09rem;
-    background: url("../assets/images/unionCard.png") center no-repeat;
+    background: url("https://image.supconit.net/union%20Card.png") center no-repeat;
     background-size: 100% 100%;
     box-shadow: 0px 0.06rem 0.2rem 0px rgba(182, 182, 182, 0.5);
     border-radius: 0.21rem;

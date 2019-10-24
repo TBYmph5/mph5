@@ -722,3 +722,10 @@ padding:0.053rem 0.13rem 0.06rem 0 !important;
 .amap-logo,.amap-copyright{
   display: none !important;
 }
+.note p{
+  width: 100% !important;
+}
+.note p img{
+  width: 100% !important;
+  height: auto;
+}

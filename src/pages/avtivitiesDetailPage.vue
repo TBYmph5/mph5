@@ -915,7 +915,7 @@
 
   .introduce {
     width: 8.7rem;
-    height: 4.58rem;
+    height: 6rem;
     margin: 0 auto;
    background: #E4A538;
     background-repeat: no-repeat;
@@ -1330,7 +1330,7 @@
   }
   .introduce-dasheBorder{
     width:8.5rem;
-    height:4.38rem;
+    height:5.8rem;
     border:1px dashed rgba(243,243,243,1);
     border-radius:10px;
     margin: 0.1rem;
@@ -1375,6 +1375,6 @@
     border:none;
     outline: none;
     display: block;
-    margin: 2.5rem auto 0;
+    margin: 2rem auto 0;
   }
 </style>

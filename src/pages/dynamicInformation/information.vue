@@ -37,6 +37,7 @@
                 cover:'https://image.supconit.net/%E7%A8%BB%E8%8D%89%E4%BA%BA.jpg',
                 describe:'带孩子亲近自然！上渚山奇幻谷首届稻草人节强势来袭！',
                 src:'https://mp.weixin.qq.com/s/FtdlIuHZOoFOS17LEghB1w'
+                // src:'http://www.deqing.gov.cn/jrdq/tpxw/20190906/i2488794.html'
               },
               {
                 name: '终于等来了奇幻彩色跑开始的这一天！',

@@ -5,37 +5,33 @@
         <!--轮播图开始-->
         <div class="swiper-container">
           <van-swipe :autoplay="3000" indicator-color="white">
-            <van-swipe-item v-for="(item,index) in note.img" :key="index">
+            <van-swipe-item v-for="(item,index) in  imgs" :key="index">
               <img :src="item" alt="">
             </van-swipe-item>
           </van-swipe>
         </div>
         <!--轮播图结束-->
         <div class="travel-note">
-          <p class="travel-note-title">{{note.name}}</p>
+          <p class="travel-note-title">{{note.title}}</p>
           <span class="play-spots">
-         <i v-for="(item,index ) in playSpot" :key="index">{{item}}</i>
+         <i>{{note.abstracts}}</i>
         </span>
-          <div class="note" v-for="(noteDetailItem,index) in noteArray">
-            <p v-if="noteDetailItem.words.title!==''">{{noteDetailItem.words.title}}</p>
-            <div class="note-words" v-if="noteDetailItem.words.discribe!==''"> {{noteDetailItem.words.discribe}}</div>
-            <div class="img-array" v-if="noteDetailItem.notesImgs.length>0" v-for="(imgItem,ingIndex) in noteDetailItem.notesImgs" :key="ingIndex">
-              <img :src="imgItem" alt="" >
-            </div>
+          <div class="note" v-html="note.content">
 
 
           </div>
-          <div class="view-number">Na ya na 发表于2019-10-07 <span class="view-item"> <i class="view-icon see-icon"></i> 浏览量：{{note.seeTime}}</span>
+          <div class="view-number">{{note.author}} 发表于{{note.date}} <span class="view-item"> <i
+            class="view-icon see-icon"></i> 浏览量：{{note.visit}}</span>
           </div>
         </div>
       </div>
       <!--操作-->
       <div class="option-wrap">
-        <div class="option-item">
-          <span><i class="option-icon"></i>{{note.LikeTime}}</span>
+        <div class="option-item" @click="likeIt">
+          <span :class="like? 'active':''"><i class="option-icon" ></i>{{note.like}}</span>
         </div>
         <div class="option-item">
-          <span><i class="option-icon"></i>{{note.commentTime}}</span>
+          <span><i class="option-icon"></i>{{note.comment}}</span>
         </div>
 
       </div>
@@ -44,28 +40,80 @@
 </template>
 
 <script>
+  import http from '../../api/public'
+  import {getStore, removeStore, setStore} from '@/utils/storage'
+
   export default {
     name: "noteDetail",
     data() {
       return {
         note: {},
         playSpot: [],
-        noteArray:[]
+        noteArray: [],
+        userName: '',
+        like: false,
+        imgs:[]
 
       }
     },
     mounted() {
-      this.note = JSON.parse(this.$route.query.noteDetail);
-      this.noteArray= this.note.notes;
+      this.getUserInfo()
 
-      let spotArray = []
-      this.note.notes.forEach((item) => {
-        if (item.words.title !== '') {
-          let index = item.words.title.indexOf('—');
-          spotArray.push(item.words.title.slice(0, index))
+    },
+    methods: {
+      getUserInfo(){
+        http.get('/customer/info/getCurrentInfo').then(res => {
+          if (res.obj.nickName !== '') {
+            this.userName = res.obj.nickName
+          } else {
+            this.userName = res.obj.phone
+          }
+          this.getNoteDetail()
+        })
+      },
+      getNoteDetail() {
+          let params = {}
+          params['noteId'] = this.$route.query.noteId;
+          params['openId'] = getStore('openId');
+          params['username'] = this.userName
+          http.post('/App/wechat/getNoteById', params).then(result => {
+            let imgList=[]
+            // switch (result.data.category) {
+            //   case '出行':
+            //     result.data['banner'] = 'https://image.supconit.net/%E6%94%BB%E7%95%A5.png'
+            //     break
+            //   default :
+            //     result.data['banner'] = 'http://112.15.110.18:9999/Consult/informationRelease/image?md5=73cabe2affca04681257d20fb6c331dc';
+            //     break
+            // }
+            this.like=result.like;
+            this.note = result.data;
+
+            result.logos.forEach(item=>{
+              this.imgs.push(item)
+            })
+
+
+        })
+
+      },
+      likeIt() {
+        let parmas = {};
+        parmas['noteId'] = this.$route.query.noteId;
+        parmas['openId'] = getStore('openId');
+        parmas['username'] = this.userName;
+
+        if (!this.like) {
+          parmas['like'] = 1
+        } else {
+          parmas['like'] =0
         }
-      })
-      this.playSpot = spotArray
+        http.post('/App/wechat/updateUserAction', parmas).then(res => {
+          this.getNoteDetail();
+
+        })
+      }
+
     }
   }
 </script>
@@ -213,7 +261,8 @@
     display: inline-block;
     width: 0.53rem;
     height: 0.53rem;
-    background: url("../../assets/images/youjizan.png") center no-repeat;
+    background: url("../../assets/images/notAvtive-noteLike.png") center no-repeat;
+
     background-size: 100% 100%;
     float: left;
   }
@@ -232,26 +281,40 @@
     -moz-box-sizing: border-box;
     box-sizing: border-box;
   }
-.img-array{
-  width: 100%;
-  height: auto;
-  padding: 0 0.4rem;
-  -webkit-box-sizing: border-box;
-  -moz-box-sizing: border-box;
-  box-sizing: border-box;
-  border: 1px solid transparent;
-}
-  .img-array img{
+
+  .img-array {
+    width: 100%;
+    height: auto;
+    padding: 0 0.4rem;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    border: 1px solid transparent;
+  }
+
+  .img-array img {
     width: 100%;
     height: auto;
   }
+
   /*.note-words{*/
-    /*text-indent: 0.4rem;*/
+  /*text-indent: 0.4rem;*/
   /*}*/
-  p{
+  p {
     color: #333;
     letter-spacing: 1px;
     font-size: 0.37rem;
     font-weight: bold;
   }
+
+  .note {
+    min-height: 8rem;
+    width: 100% !important;
+
+  }
+  .option-wrap .option-item span.active i{
+    background: url("../../assets/images/youjizan.png") center no-repeat;
+    background-size: 100% 100%;
+  }
+
 </style>
