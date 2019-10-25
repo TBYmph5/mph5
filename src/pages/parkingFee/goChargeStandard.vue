@@ -44,25 +44,24 @@
   .wrap{
     width: 100%;
     height: 100%;
-    padding: 0.4rem ;
+    padding: 30px;
     -webkit-box-sizing: border-box;
     -moz-box-sizing: border-box;
     box-sizing: border-box;
   }
   .pagetitle{
     width:100% ;
-    line-height: 1rem;
-    font-size:0.4rem;
+    font-size:15px;
     font-weight:bold;
     color:rgba(51,51,51,1);
     text-align: center;
 
   }
 .table{
-  width: 9rem;
+  width: 94%;
   /*height: 5rem;*/
   height: auto;
-  margin: 0.5rem auto;
+  margin: 30px auto;
   display: table;
   border: 0.5px solid rgba(153,153,153,0.1)
 }
@@ -72,8 +71,8 @@
   }
   .cell{
     display: table-cell;
-    line-height: 0.8rem;
-    height: 0.8rem;
+    line-height: 30px;
+    height:30px;
     border: 0.5px solid rgba(153,153,153,0.1);
     text-align: center;
 

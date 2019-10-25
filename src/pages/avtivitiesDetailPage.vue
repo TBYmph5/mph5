@@ -520,7 +520,7 @@
         }
         for (var a = 0; a < dateArr.length; a++) {
           for (var b = 0; b < this.PriceCalendarList.length; b++) {
-            if (dateArr[a].dailyDay == this.PriceCalendarList[b].dailyDate) {
+            if (dateArr[a].dailyDay == this.PriceCalendarList[b].dailyDate && this.PriceCalendarList[b].inventory>0 ) {
               dateArr[a].amount = "￥" + this.PriceCalendarList[b].price;
             }
           }
