@@ -44,7 +44,7 @@
   .wrap{
     width: 100%;
     height: 100%;
-    padding: 30px;
+    padding: 30px 20px;
     -webkit-box-sizing: border-box;
     -moz-box-sizing: border-box;
     box-sizing: border-box;
@@ -58,7 +58,7 @@
 
   }
 .table{
-  width: 94%;
+  width: 100%;
   /*height: 5rem;*/
   height: auto;
   margin: 30px auto;
