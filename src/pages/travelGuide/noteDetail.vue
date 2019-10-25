@@ -27,8 +27,8 @@
       </div>
       <!--操作-->
       <div class="option-wrap">
-        <div class="option-item" @click="likeIt">
-          <span :class="like? 'active':''"><i class="option-icon"></i>{{note.like}}</span>
+        <div class="option-item">
+          <span><i class="option-icon"></i>{{note.LikeTime}}</span>
         </div>
         <div class="option-item">
           <span><i class="option-icon"></i>{{note.comment}}</span>
@@ -52,7 +52,7 @@
         noteArray: [],
         userName: '',
         like: false,
-        imgs: []
+        imgs:[]
 
       }
     },
@@ -61,7 +61,7 @@
 
     },
     methods: {
-      getUserInfo() {
+      getUserInfo(){
         http.get('/customer/info/getCurrentInfo').then(res => {
           if (res.obj.nickName !== '') {
             this.userName = res.obj.nickName
@@ -72,26 +72,26 @@
         })
       },
       getNoteDetail() {
-        let params = {}
-        params['noteId'] = this.$route.query.noteId;
-        params['openId'] = getStore('openId');
-        params['username'] = this.userName
-        http.post('/App/wechat/getNoteById', params).then(result => {
-          let imgList = []
-          // switch (result.data.category) {
-          //   case '出行':
-          //     result.data['banner'] = 'https://image.supconit.net/%E6%94%BB%E7%95%A5.png'
-          //     break
-          //   default :
-          //     result.data['banner'] = 'http://112.15.110.18:9999/Consult/informationRelease/image?md5=73cabe2affca04681257d20fb6c331dc';
-          //     break
-          // }
-          this.like = result.like;
-          this.note = result.data;
+          let params = {}
+          params['noteId'] = this.$route.query.noteId;
+          params['openId'] = getStore('openId');
+          params['username'] = this.userName
+          http.post('/App/wechat/getNoteById', params).then(result => {
+            let imgList=[]
+            // switch (result.data.category) {
+            //   case '出行':
+            //     result.data['banner'] = 'https://image.supconit.net/%E6%94%BB%E7%95%A5.png'
+            //     break
+            //   default :
+            //     result.data['banner'] = 'http://112.15.110.18:9999/Consult/informationRelease/image?md5=73cabe2affca04681257d20fb6c331dc';
+            //     break
+            // }
+            this.like=result.like;
+            this.note = result.data;
 
-          result.logos.forEach(item => {
-            this.imgs.push(item)
-          })
+            result.logos.forEach(item=>{
+              this.imgs.push(item)
+            })
 
 
         })
@@ -106,7 +106,7 @@
         if (!this.like) {
           parmas['like'] = 1
         } else {
-          parmas['like'] = 0
+          parmas['like'] =0
         }
         http.post('/App/wechat/updateUserAction', parmas).then(res => {
           this.getNoteDetail();
@@ -261,8 +261,7 @@
     display: inline-block;
     width: 0.53rem;
     height: 0.53rem;
-    background: url("../../assets/images/notAvtive-noteLike.png") center no-repeat;
-
+    background: url("../../assets/images/youjizan.png") center no-repeat;
     background-size: 100% 100%;
     float: left;
   }
@@ -281,41 +280,26 @@
     -moz-box-sizing: border-box;
     box-sizing: border-box;
   }
-
-  .img-array {
-    width: 100%;
-    height: auto;
-    padding: 0 0.4rem;
-    -webkit-box-sizing: border-box;
-    -moz-box-sizing: border-box;
-    box-sizing: border-box;
-    border: 1px solid transparent;
-  }
-
-  .img-array img {
+.img-array{
+  width: 100%;
+  height: auto;
+  padding: 0 0.4rem;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  border: 1px solid transparent;
+}
+  .img-array img{
     width: 100%;
     height: auto;
   }
-
   /*.note-words{*/
-  /*text-indent: 0.4rem;*/
+    /*text-indent: 0.4rem;*/
   /*}*/
-  p {
+  p{
     color: #333;
     letter-spacing: 1px;
     font-size: 0.37rem;
     font-weight: bold;
   }
-
-  .note {
-    min-height: 8rem;
-    width: 100% !important;
-
-  }
-
-  .option-wrap .option-item span.active i {
-    background: url("../../assets/images/youjizan.png") center no-repeat;
-    background-size: 100% 100%;
-  }
-
 </style>
