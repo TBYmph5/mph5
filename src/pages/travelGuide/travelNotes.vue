@@ -87,7 +87,7 @@
     },
     filters: {
       formmatterTimer: function (value) {
-        return moment(new Date(value)).format("YYYY-MM-DD")
+        return moment(value).format("YYYY-MM-DD")
 
       }
     },
