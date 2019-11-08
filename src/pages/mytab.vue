@@ -139,12 +139,13 @@
         })
       },
       getCurrentUserInfo() {
+        let that=this;
         http.get('/customer/info/getCurrentInfo').then(res => {
           console.log(res, 'reesssss')
           if (res.obj.avatar == '') {
             res.obj['avatar'] = 'avtar.png'
           }
-          this.userInfo = res.obj;
+          that.userInfo = res.obj;
         })
       },
       /**
@@ -192,7 +193,7 @@
   }
 
   .container {
-    /* background: #000; */
+     /*background: #000;*/
   }
 
   .user-info-wrap {
@@ -423,7 +424,7 @@
 
   .sub-menu {
     line-height: 1.33rem;
-    height: 1.33rem;
+    height: 1.33rem ;
     span-indent: 0.53rem;
   }
 
@@ -441,6 +442,7 @@
 
   .sub-menu {
     text-indent: 0.8rem;
+    line-height: 1.13rem !important;
   }
 
   .user-menu-wrap .van-cell__left-icon, .van-cell__right-icon {

@@ -6,25 +6,28 @@
     <!--<guide :guideItemArray="guideItemArray"></guide>-->
     <!--<activitys :activityOptimization="activityOptimization"></activitys>-->
     <!--<recommended :hotHotel="hotHotel"></recommended>-->
-    <div class v-for="(item,index) in configComponentArray" :key="index">
-      <div :is="item.content" :config="item.config"></div>
+    <div class
+         v-for="(item,index) in configComponentArray"
+         :key="index">
+      <div :is="item.content"
+           :config="item.config"></div>
     </div>
     <!--<div class="buyTickets">-->
-      <!--<div class="TicketsTitle">-->
-        <!--<div>热销门票</div>-->
-        <!--&lt;!&ndash; <div>查看更多</div> &ndash;&gt;-->
-      <!--</div>-->
-      <!--<div v-for="(item, index) in tickets" :key="index">-->
-        <!--<div class="TicketsKinds">-->
-          <!--<div class="TicketsLeft">-->
-            <!--{{item.ticketsKind}}-->
-          <!--</div>-->
-          <!--<div class="TicketsRight">-->
-            <!--<div class="nowMoney">￥{{item.nowMoney}}</div>-->
-            <!--<div :class="item.buy ?'buy':'notbuy'" @click="buyTicket(item)">购买</div>-->
-          <!--</div>-->
-        <!--</div>-->
-      <!--</div>-->
+    <!--<div class="TicketsTitle">-->
+    <!--<div>热销门票</div>-->
+    <!--&lt;!&ndash; <div>查看更多</div> &ndash;&gt;-->
+    <!--</div>-->
+    <!--<div v-for="(item, index) in tickets" :key="index">-->
+    <!--<div class="TicketsKinds">-->
+    <!--<div class="TicketsLeft">-->
+    <!--{{item.ticketsKind}}-->
+    <!--</div>-->
+    <!--<div class="TicketsRight">-->
+    <!--<div class="nowMoney">￥{{item.nowMoney}}</div>-->
+    <!--<div :class="item.buy ?'buy':'notbuy'" @click="buyTicket(item)">购买</div>-->
+    <!--</div>-->
+    <!--</div>-->
+    <!--</div>-->
     <!--</div>-->
   </div>
 </template>
@@ -34,11 +37,11 @@ import guide from "@/components/homeTabs/guide";
 import activitys from "@/components/homeTabs/activity";
 import recommended from "@/components/homeTabs/recommended";
 import http from "../api/public";
-import {Toast} from 'vant';
-import {getStore, removeStore,setStore} from '@/utils/storage'
+import { Toast } from 'vant';
+import { getStore, removeStore, setStore } from '@/utils/storage'
 export default {
   name: "hometab",
-  data() {
+  data () {
     return {
       componentsArray: [
         { content: gallery, key: "gallery", prop: "imgUrls" },
@@ -56,31 +59,31 @@ export default {
           ticketsKind: "活动门票",
           time: "预定一小时后可用",
           nowMoney: "0",
-          buy:true,
+          buy: true,
         },
         {
           ticketsKind: "园区门票",
           time: "预定一小时后可用",
           nowMoney: "价格待定",
-          buy:false,
+          buy: false,
         },
         {
           ticketsKind: "园区通票",
           time: "预定一小时后可用",
           nowMoney: "价格待定",
-          buy:false,
+          buy: false,
         },
         {
           ticketsKind: "户外公园通票",
           time: "预定一小时后可用",
           nowMoney: "价格待定",
-          buy:false,
+          buy: false,
         },
         {
           ticketsKind: "年卡",
           time: "预定一小时后可用",
           nowMoney: "价格待定",
-          buy:false,
+          buy: false,
         }
       ]
     };
@@ -92,26 +95,26 @@ export default {
     recommended
   },
   filters: {},
-  mounted() {
-    console.log(this.$route.query.openId);
-    if(this.$route.query.openId !==''){
-      setStore('openId',this.$route.query.openId);
-
+  mounted () {
+    // let vm = this
+    if (this.$route.query.openId !== '') {
+      setStore('openId', this.$route.query.openId);
+      http.post("/customer/loginByOpenId", this.$route.query.openId)
+      // .then(res=>{
+      // http.post("/customer/loginByOpenId", 'oJJM4446KKJQ_TwvC8PoiMe_rcYc').then(res => {
+      //   if (res.status) {
+      //     Toast.success(res.message)
+      //   } else {
+      //     Toast.fail(res.message)
+      //   }
+      // })
     }
-    // Toast(getStore('openId'));
-    this.getConfigArray().then(val => {
-      // this.getBanner();
-      // this.getGuide();
-      // this.getActivityOptimization();
-      // this.getHotHotel();
-    });
+    this.getConfigArray()
   },
   methods: {
-    getConfigArray() {
+    getConfigArray () {
       http.get("/maintenance/component-config/list", "").then(res => {
-        console.log(res);
         let a = res.obj[0].config;
-        console.log(JSON.parse(a), "aaaaa ");
         let configList = res.obj;
         let needComponentArray = [];
         configList.forEach(item => {
@@ -122,7 +125,6 @@ export default {
           );
           matchedComponent[0].config = JSON.parse(item["config"]);
           needComponentArray.push(matchedComponent[0]);
-          console.log(needComponentArray);
           this.configComponentArray = needComponentArray;
           return Promise.resolve(/* 这里是需要返回的数据*/);
         });
@@ -244,7 +246,7 @@ export default {
     /**
      * 获取轮播
      */
-    getBanner() {
+    getBanner () {
       http.get("/maintenance/banner/list").then(res => {
         var imgArray = res.obj;
         this.imgUrls = imgArray;
@@ -253,7 +255,7 @@ export default {
     /**
      * 获取guide
      */
-    getGuide() {
+    getGuide () {
       this.guideItemArray = [
         {
           div: "HOT",
@@ -287,10 +289,9 @@ export default {
         }
       ];
     },
-    getActivityOptimization() {
+    getActivityOptimization () {
       let that = this;
       http.get("/shop/activity/page4C?size=4&&page=0", "").then(res => {
-        console.log(res.obj.records);
         // this.activityOptimization = res.obj.records;
         let activititesArray = res.obj.records;
         let activityContactArray = [];
@@ -298,7 +299,6 @@ export default {
           http
             .get("/search/aptitude/byActivityId/" + item.id)
             .then(responce => {
-              console.log(responce);
               let ActivityItem = {};
               ActivityItem["name"] = item.name;
               ActivityItem["productList"] = responce.obj;
@@ -309,11 +309,9 @@ export default {
                   let todayTimeStamp = new Date(
                     new Date().setHours(0, 0, 0, 0)
                   ).getTime();
-                  console.log(todayTimeStamp, "今日时间戳");
-                  let todayPriceItem = priceList.filter(function(item, index) {
+                  let todayPriceItem = priceList.filter(function (item, index) {
                     return parseInt(item.dailyDate) == todayTimeStamp;
                   });
-                  console.log(todayPriceItem, "今日价态");
                   if (todayPriceItem.length > 0) {
                     item["minPrice"] = todayPriceItem[0].price;
                   }
@@ -323,13 +321,12 @@ export default {
             });
         });
         that.activityOptimization = activityContactArray;
-        console.log(that.activityOptimization);
       });
     },
     /**
      * 获取推荐酒店
      */
-    getHotHotel() {
+    getHotHotel () {
       let that = this;
       http.get("/search/aptitudeHotel?size=4&&page=0", "").then(res => {
         // console.log(res.obj)
@@ -352,8 +349,8 @@ export default {
         // console.log(this.hothotel)
       });
     },
-    buyTicket(item){
-      if(item.buy){
+    buyTicket (item) {
+      if (item.buy) {
         this.$router.push('/goodDetails?id=1174575036284088322&name=活动门票')
       }
     }
@@ -425,54 +422,56 @@ iframe {
 }
 .TicketsRight {
   width: 50%;
-  position:relative;
+  position: relative;
 }
 .TicketsRight > div {
   display: inline-block;
 }
-.nowMoney{
-  font-size:0.48rem;
-  font-family:PingFang SC;
-  font-weight:500;
-  color:rgba(251,90,79,1);line-height: 1.706rem;
+.nowMoney {
+  font-size: 0.48rem;
+  font-family: PingFang SC;
+  font-weight: 500;
+  color: rgba(251, 90, 79, 1);
+  line-height: 1.706rem;
 }
-.beforeMoney{
-  font-size:0.226rem;
-  font-family:PingFang SC;
-  font-weight:400;
-  text-decoration:line-through;
-  color:rgba(153,153,153,1);line-height: 1.706rem;
+.beforeMoney {
+  font-size: 0.226rem;
+  font-family: PingFang SC;
+  font-weight: 400;
+  text-decoration: line-through;
+  color: rgba(153, 153, 153, 1);
+  line-height: 1.706rem;
   position: relative;
   margin-left: 0.213rem;
 }
-.buy{
-  width:1.226rem;
-  height:0.613rem;
-  background:rgba(251,90,79,1);
-  border-radius:4px;
+.buy {
+  width: 1.226rem;
+  height: 0.613rem;
+  background: rgba(251, 90, 79, 1);
+  border-radius: 4px;
   position: absolute;
   top: 0.546rem;
   right: 0;
   line-height: 0.613rem;
-  font-size:0.32rem;
-  font-family:PingFang SC;
-  font-weight:400;
-  color:rgba(255,255,255,1);
+  font-size: 0.32rem;
+  font-family: PingFang SC;
+  font-weight: 400;
+  color: rgba(255, 255, 255, 1);
   text-align: center;
 }
-.notbuy{
-  width:1.226rem;
-  height:0.613rem;
-  background:rgba(153, 153, 153, 1);
-  border-radius:4px;
+.notbuy {
+  width: 1.226rem;
+  height: 0.613rem;
+  background: rgba(153, 153, 153, 1);
+  border-radius: 4px;
   position: absolute;
   top: 0.546rem;
   right: 0;
   line-height: 0.613rem;
-  font-size:0.32rem;
-  font-family:PingFang SC;
-  font-weight:400;
-  color:rgba(255,255,255,1);
+  font-size: 0.32rem;
+  font-family: PingFang SC;
+  font-weight: 400;
+  color: rgba(255, 255, 255, 1);
   text-align: center;
 }
 </style>

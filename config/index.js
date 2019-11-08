@@ -10,42 +10,6 @@ module.exports = {
     assetsSubDirectory: 'static',
     assetsPublicPath: '/',
     proxyTable: {
-      // '/customer': {
-      //   target: "http://www.supconit.net",
-      //   changeOrigin: true,
-      //   pathRewrite: {}
-      // },
-      // '/maintenance': {
-      //   target: "http://www.supconit.net",
-      //   changeOrigin: true,
-      //   pathRewrite: {}
-      // },
-      // '/search': {
-      //   target: "http://www.supconit.net",
-      //   changeOrigin: true,
-      //   pathRewrite: {}
-      // },
-      // '/order': {
-      //   target: "http://www.supconit.net",
-      //   changeOrigin: true,
-      //   pathRewrite: {}
-      // },
-      // '/shop': {
-      //   target: "http://www.supconit.net",
-      //   changeOrigin: true,
-      //   pathRewrite: {}
-      // },
-      // '/runtime': {
-      //   target: "http://www.supconit.net",
-      //   changeOrigin: true,
-      //   pathRewrite: {}
-      // },
-      // '/api': {
-      //   target: "http://www.supconit.net",
-      //   changeOrigin: true,
-      //   pathRewrite: {}
-      // },
-      // https://valleymagic.cn
       '*': {
         target: "https://valleymagic.cn",
         changeOrigin: true,

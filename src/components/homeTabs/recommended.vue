@@ -1,6 +1,6 @@
 <template>
-  <div style='margin-top:0.5rem;margin-bottom:1.6rem;'>
-  <div class='hot-activity '  >
+  <div>
+  <div class='hot-activity '>
     <div class='item-title'>{{config.title}}</div>
     <div class='tabs-content-wrap-hotel'>
       <div class='tabs-content'>
