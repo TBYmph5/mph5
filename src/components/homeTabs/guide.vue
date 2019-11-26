@@ -48,6 +48,20 @@ export default {
           Toast.fail('正在建设中')
         }
       }
+      // switch (item.type) {
+      //   case "hot":
+      //     this.$router.push({
+      //       path: "/avtivitiesDetailPage"
+      //     });
+      //     break;
+      //   default:
+      //     this.$router.push({
+      //       path: "/classificationQueryResult",
+      //       query: {
+      //         type: item.type
+      //       }
+      //     });
+      // }
     }
   },
   mounted () {
@@ -91,8 +105,5 @@ export default {
   width: 1.06rem;
   height: 1.06rem;
   margin-bottom: 0.16rem;
-  -webkit-border-radius: 50%;
-  -moz-border-radius: 50%;
-  border-radius: 50%;
 }
 </style>

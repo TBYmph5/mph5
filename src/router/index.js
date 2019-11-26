@@ -360,6 +360,16 @@ export default new Router({
       }
     },
     {
+      path: '/informationDetail',
+      name: 'informationDetail',
+      component: resolve =>
+        require(['@/pages/dynamicInformation/informationDetail'], resolve),
+      meta: {
+        title: '资讯动态详情',
+        keepAlive: false
+      }
+    },
+    {
       path: '/parkingFeeMenu',
       name: 'parkingFeeMenu',
       component: resolve =>

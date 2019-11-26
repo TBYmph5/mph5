@@ -6,7 +6,7 @@ Vue.use(Toast)
 import router from '../router/index'
 
 // 设置通用host 前缀
-// const HOST = '/api'
+// const HOST = '/valleymagic'
 const HOST = ''
 var token = ''
 let http = axios.create({
@@ -16,7 +16,7 @@ let http = axios.create({
     'Content-Type': 'application/json; charset=utf-8'
   },
   transformRequest: [
-    function(data) {
+    function (data) {
       // TODO data transform
       // encode && distinct
       // let newData = ''
@@ -128,7 +128,7 @@ var fetch = (method, url, params) =>
  * @param {获取新令牌} getNewToken Function
  * @param {获取已有令牌} getCacheToken Function
  */
-function initToken(timeout, cacheToken, getNewToken) {
+function initToken (timeout, cacheToken, getNewToken) {
   if (Object.prototype.toString.call(getNewToken).slice(8, -1) != 'Function') {
     throw new Error('getTokenFunction error')
   }

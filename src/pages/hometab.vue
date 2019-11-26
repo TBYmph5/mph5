@@ -96,20 +96,26 @@ export default {
   },
   filters: {},
   mounted () {
-    // let vm = this
+    let vm = this
     if (this.$route.query.openId !== '') {
       setStore('openId', this.$route.query.openId);
-      http.post("/customer/loginByOpenId", this.$route.query.openId)
-      // .then(res=>{
-      // http.post("/customer/loginByOpenId", 'oJJM4446KKJQ_TwvC8PoiMe_rcYc').then(res => {
-      //   if (res.status) {
-      //     Toast.success(res.message)
-      //   } else {
-      //     Toast.fail(res.message)
-      //   }
-      // })
+      // alert('openId:', this.$route.query.openId)
     }
-    this.getConfigArray()
+    http.post("/customer/loginByOpenId", this.$route.query.openId).then(res => {
+      // alert('登录成功！', res)
+      this.getConfigArray()
+    }).catch(err => {
+      // alert('登录失败！', err)
+      this.getConfigArray()
+    })
+
+    // Toast(getStore('openId'));
+    // this.getConfigArray().then(val => {
+    // this.getBanner();
+    // this.getGuide();
+    // this.getActivityOptimization();
+    // this.getHotHotel();
+    // });
   },
   methods: {
     getConfigArray () {
